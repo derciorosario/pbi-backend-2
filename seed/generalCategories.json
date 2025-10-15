@@ -1,0 +1,1329 @@
+[
+  {
+  "type": "job",
+  "categories": [
+    {
+      "name": "Professionals",
+      "subcategories": [
+        {
+          "name": "Administrative",
+          "subsubcategories": [
+            "Personal Assistant",
+            "Office Admin",
+            "Secretary",
+            "Data Entry",
+            "Virtual Assistant",
+            "Operations Support"
+          ]
+        },
+        {
+          "name": "Technology",
+          "subsubcategories": [
+            "Web Developer - Frontend",
+            "Backend Developer",
+            "Full-stack Developer",
+            "UI/UX Designer",
+            "Product Manager",
+            "Quality Assurance Engineer",
+            "Mobile App Developer",
+            "System Analyst",
+            "IT Specialist"
+          ]
+        },
+        {
+          "name": "Accounting",
+          "subsubcategories": [
+            "Auditor",
+            "Tax Consultant",
+            "Bookkeeper",
+            "Forensic Accountant",
+            "Financial Analyst",
+            "Corporate Accountant",
+            "Risk & Compliance Officer"
+          ]
+        },
+        {
+          "name": "Engineering",
+          "subsubcategories": [
+            "Civil",
+            "Mechanical",
+            "Electrical",
+            "Chemical",
+            "Software",
+            "Environmental",
+            "Infrastructure & Construction",
+            "Automobile",
+            "Petroleum"
+          ]
+        },
+        {
+          "name": "Project Management",
+          "subsubcategories": [
+            "Agile PM",
+            "Construction PM",
+            "IT PM",
+            "Development PM",
+            "Research PM",
+            "Change Management Specialist"
+          ]
+        },
+        {
+          "name": "IT Professional",
+          "subsubcategories": [
+            "Network Engineer",
+            "Cybersecurity",
+            "Database Admin",
+            "Cloud Engineer",
+            "System Architect"
+          ]
+        },
+        {
+          "name": "Legal",
+          "subsubcategories": [
+            "Corporate Lawyer",
+            "Contract Specialist",
+            "Compliance Officer",
+            "Civil / Criminal Lawyer",
+            "Intellectual Property Lawyer",
+            "Human Rights Lawyer",
+            "Legal Researcher"
+          ]
+        },
+        {
+          "name": "Consulting",
+          "subsubcategories": [
+            "Business Consultant",
+            "Strategy Consultant",
+            "Management Consultant",
+            "Technology Consultant",
+            "Sustainability Consultant",
+            "Policy & Governance Consultant"
+          ]
+        },
+        {
+          "name": "Human Resources",
+          "subsubcategories": [
+            "Recruiter",
+            "HR Business Partner",
+            "Training Specialist",
+            "Talent Acquisition",
+            "Compensation & Benefits Analyst",
+            "HR Tech Specialist"
+          ]
+        },
+        {
+          "name": "Marketing & Advertising",
+          "subsubcategories": [
+            "Digital Marketer",
+            "Brand Strategist",
+            "Public Relations Specialist",
+            "Market Research Analyst",
+            "Corporate Communications Officer",
+            "Copywriter / Content Creator",
+            "Marketing & Strategy"
+          ]
+        },
+        {
+          "name": "Healthcare",
+          "subsubcategories": [
+            "Medical Doctor",
+            "Nurse",
+            "Pharmacist",
+            "Lab Scientist",
+            "Public Health Specialist",
+            "Psychologist / Therapist",
+            "Physiotherapist"
+          ]
+        },
+        {
+          "name": "Education & Research",
+          "subsubcategories": [
+            "Teacher",
+            "University Lecturer",
+            "Education Technologist (EdTech)",
+            "Academic Researcher",
+            "Curriculum Developer",
+            "Trainer / Coach"
+          ]
+        },
+        {
+          "name": "Creative & Design",
+          "subsubcategories": [
+            "Graphic Designer",
+            "Animator",
+            "Video Editor",
+            "Photographer",
+            "Illustrator / Digital Artist",
+            "Fashion Designer",
+            "Interior Designer"
+          ]
+        },
+        {
+          "name": "Science & Environment",
+          "subsubcategories": [
+            "Biologist / Chemist / Physicist",
+            "Environmental Scientist",
+            "Climate Change Specialist",
+            "Renewable Energy Expert",
+            "Agricultural Scientist",
+            "Data Scientist (Applied Science)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Freelancers",
+      "subcategories": [
+        {
+          "name": "Writing & Translation",
+          "subsubcategories": [
+            "Copywriter",
+            "Content Writer",
+            "Technical Writer",
+            "Editor & Proofreader",
+            "Ghostwriter",
+            "Translator",
+            "Transcriber"
+          ]
+        },
+        {
+          "name": "Design & Creative",
+          "subsubcategories": [
+            "Graphic Designer",
+            "UI/UX Designer",
+            "Illustrator",
+            "Animator (2D/3D)",
+            "Video Editor",
+            "Photographer",
+            "Logo & Branding Designer",
+            "Interior Designer",
+            "Fashion & Textile Designer"
+          ]
+        },
+        {
+          "name": "Sales & Marketing",
+          "subsubcategories": [
+            "Digital Marketing Specialist (SEO, SEM, PPC, Email)",
+            "Social Media Manager",
+            "Ads Manager",
+            "Influencer Marketing Specialist",
+            "Content Marketing Specialist",
+            "Affiliate Marketing Expert",
+            "Market Research Analyst"
+          ]
+        },
+        {
+          "name": "Admin Support",
+          "subsubcategories": [
+            "Virtual Assistant",
+            "Data Entry Clerk",
+            "Travel & Event Coordinator",
+            "Operations Assistant"
+          ]
+        },
+        {
+          "name": "Customer Service",
+          "subsubcategories": [
+            "Customer Support Representative",
+            "Technical Support Agent",
+            "Help Desk Specialist",
+            "Community Manager",
+            "Client Success Manager"
+          ]
+        },
+        {
+          "name": "Tech & IT",
+          "subsubcategories": [
+            "Web Developer (Frontend, Backend, Full Stack)",
+            "Mobile App Developer",
+            "Software Developer",
+            "QA Tester",
+            "Game Developer",
+            "Data Scientist / Analyst",
+            "Machine Learning / AI Developer",
+            "Cloud Computing Specialist",
+            "Cybersecurity Analyst",
+            "DevOps Engineer"
+          ]
+        },
+        {
+          "name": "Legal & Consulting",
+          "subsubcategories": [
+            "Legal Advisor",
+            "Contract Drafting & Review",
+            "Business Consultant",
+            "Strategy Consultant",
+            "Policy & Governance Consultant",
+            "HR Consultant",
+            "Tech Consultant",
+            "Fashion Consultant"
+          ]
+        },
+        {
+          "name": "Finance & Business",
+          "subsubcategories": [
+            "Accountant",
+            "Bookkeeper",
+            "Financial Analyst",
+            "Tax Specialist",
+            "Investment Researcher",
+            "Business Plan Writer",
+            "Virtual CFO"
+          ]
+        },
+        {
+          "name": "Education & Training",
+          "subsubcategories": [
+            "Online Tutor",
+            "Language Teacher",
+            "Corporate Trainer",
+            "Curriculum Developer",
+            "eLearning Specialist",
+            "Career Coach"
+          ]
+        },
+        {
+          "name": "Health & Wellness",
+          "subsubcategories": [
+            "Fitness Coach",
+            "Personal Trainer",
+            "Nutritionist",
+            "Diet Consultant",
+            "Mental Health Coach",
+            "Therapist",
+            "Yoga Instructor",
+            "Mindfulness Instructor",
+            "Wellness Blogger"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Students",
+      "subcategories": [
+        {
+          "name": "Undergraduate",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Graduate",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Postgraduate",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Doctoral",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Vocational/Technical",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Student Entrepreneur",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Freelancer Student",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Executives",
+      "subcategories": [
+        {
+          "name": "C-Level Executives (C-Suite)",
+          "subsubcategories": [
+            "Chief Executive Officer (CEO)",
+            "Chief Operating Officer (COO)",
+            "Chief Financial Officer (CFO)",
+            "Chief Technology Officer (CTO)",
+            "Chief Marketing Officer (CMO)",
+            "Chief Human Resources Officer (CHRO)",
+            "Chief Information Officer (CIO)",
+            "Chief Strategy Officer (CSO)"
+          ]
+        },
+        {
+          "name": "Vice Presidents",
+          "subsubcategories": [
+            "Executive Vice President (EVP)",
+            "Senior Vice President (SVP)",
+            "Vice President (VP)"
+          ]
+        },
+        {
+          "name": "Directors",
+          "subsubcategories": [
+            "Global Managing Director",
+            "Regional Managing Director",
+            "Managing Director",
+            "Executive Director",
+            "Non-Executive Director",
+            "Independent Director",
+            "Associate Director",
+            "Assistant Director"
+          ]
+        },
+        {
+          "name": "Managers",
+          "subsubcategories": [
+            "General Manager (GM)",
+            "Operations Manager",
+            "Project Manager",
+            "Product Manager",
+            "Marketing Manager",
+            "Sales Manager",
+            "Finance Manager",
+            "Human Resources (HR) Manager",
+            "IT / Technology Manager",
+            "Supply Chain / Logistics Manager",
+            "Customer Service Manager",
+            "Business Development Manager"
+          ]
+        },
+        {
+          "name": "Other Executive Roles",
+          "subsubcategories": [
+            "General Counsel / Chief Legal Officer",
+            "Chief Innovation Officer",
+            "Chief Risk Officer",
+            "Chief Compliance Officer"
+          ]
+        }
+      ]
+    }
+  ]
+ },
+  {
+  "type": "event",
+  "categories": [
+    {
+      "name": "Business & Professional",
+      "subcategories": [
+        "Conferences",
+        "Trade Shows",
+        "Networking Events",
+        "Seminars",
+        "Workshops",
+        "Product Launches",
+        "Job Fairs",
+        "Startup Pitches"
+      ]
+    },
+    {
+      "name": "Educational & Training",
+      "subcategories": [
+        "Lectures",
+        "Webinars",
+        "Training Programs",
+        "Bootcamps",
+        "Classes",
+        "Panel Discussions",
+        "Academic Conferences",
+        "Graduation Ceremonies"
+      ]
+    },
+    {
+      "name": "Entertainment & Cultural",
+      "subcategories": [
+        "Concerts",
+        "Festivals",
+        "Theater Shows",
+        "Movie Screenings",
+        "Comedy Shows",
+        "Art Exhibitions",
+        "Cultural Performances"
+      ]
+    },
+    {
+      "name": "Sports & Fitness",
+      "subcategories": [
+        "Tournaments",
+        "Marathons",
+        "Yoga Classes",
+        "Fitness Bootcamps",
+        "Esports Competitions",
+        "Team Sports Matches"
+      ]
+    },
+    {
+      "name": "Social & Community",
+      "subcategories": [
+        "Meetups",
+        "Parties",
+        "Reunions",
+        "Picnics",
+        "Community Fairs",
+        "Fundraisers",
+        "Volunteering Activities"
+      ]
+    },
+    {
+      "name": "Religious & Spiritual",
+      "subcategories": [
+        "Church Services",
+        "Prayer Meetings",
+        "Pilgrimages",
+        "Gospel Concerts",
+        "Retreats",
+        "Meditation Sessions",
+        "Religious Festivals"
+      ]
+    },
+    {
+      "name": "Political & Government",
+      "subcategories": [
+        "Campaign Rallies",
+        "Debates",
+        "Parliamentary Sessions",
+        "Civic Engagement Programs",
+        "Town Halls",
+        "Government Summits"
+      ]
+    },
+    {
+      "name": "Charity & Non-Profit",
+      "subcategories": [
+        "Fundraising Galas",
+        "Awareness Campaigns",
+        "Donation Drives",
+        "Volunteer Events",
+        "NGO Conferences"
+      ]
+    },
+    {
+      "name": "Health & Wellness",
+      "subcategories": [
+        "Health Fairs",
+        "Blood Donation Drives",
+        "Medical Conferences",
+        "Therapy Sessions",
+        "Wellness Retreats",
+        "Mental Health Workshops"
+      ]
+    },
+    {
+      "name": "Technology & Innovation",
+      "subcategories": [
+        "Hackathons",
+        "Developer Meetups",
+        "Startup Competitions",
+        "Tech Expos",
+        "AI/Cloud Conferences"
+      ]
+    },
+    {
+      "name": "Family & Personal Events",
+      "subcategories": [
+        "Weddings",
+        "Engagements",
+        "Birthdays",
+        "Baby Showers",
+        "Funerals/Memorials",
+        "Anniversaries",
+        "Naming Ceremonies"
+      ]
+    },
+    {
+      "name": "Food & Drink Events",
+      "subcategories": [
+        "Food Festivals",
+        "Wine Tastings",
+        "Cooking Classes",
+        "Farmers Markets",
+        "Restaurant Openings"
+      ]
+    },
+    {
+      "name": "Travel & Adventure Events",
+      "subcategories": [
+        "Tours",
+        "Camping Trips",
+        "Hiking Expeditions",
+        "Cruise Gatherings",
+        "Travel Fairs"
+      ]
+    },
+    {
+      "name": "Virtual / Online Events",
+      "subcategories": [
+        "Online Webinars",
+        "Virtual Conferences",
+        "Online Networking",
+        "Livestreamed Concerts",
+        "Online Workshops"
+      ]
+    }
+  ]
+}
+,
+  {
+  "type": "product",
+  "categories": [
+    {
+      "name": "Electronics & Technology",
+      "subcategories": [
+        "Mobile Phones",
+        "Laptops",
+        "Tablets",
+        "Televisions",
+        "Cameras",
+        "Audio Equipment",
+        "Smart Home Devices",
+        "Wearables",
+        "Gaming Consoles",
+        "Computer Accessories"
+      ]
+    },
+    {
+      "name": "Fashion & Apparel",
+      "subcategories": [
+        "Men’s Clothing",
+        "Women’s Clothing",
+        "Kids’ Clothing",
+        "Shoes",
+        "Bags",
+        "Jewelry",
+        "Watches",
+        "Sunglasses",
+        "Accessories"
+      ]
+    },
+    {
+      "name": "Home & Living",
+      "subcategories": [
+        "Furniture",
+        "Kitchenware",
+        "Bedding",
+        "Home Decor",
+        "Lighting",
+        "Storage Solutions",
+        "Cleaning Supplies",
+        "Appliances"
+      ]
+    },
+    {
+      "name": "Beauty & Personal Care",
+      "subcategories": [
+        "Skincare",
+        "Haircare",
+        "Makeup",
+        "Perfumes",
+        "Grooming Kits",
+        "Hygiene Products",
+        "Spa & Wellness Products"
+      ]
+    },
+    {
+      "name": "Food & Beverages",
+      "subcategories": [
+        "Groceries",
+        "Snacks",
+        "Beverages",
+        "Packaged Foods",
+        "Fresh Produce",
+        "Dairy Products",
+        "Alcoholic Drinks",
+        "Organic Foods"
+      ]
+    },
+    {
+      "name": "Health & Wellness",
+      "subcategories": [
+        "Supplements",
+        "Medical Equipment",
+        "Fitness Equipment",
+        "First Aid",
+        "Health Monitoring Devices",
+        "Personal Care"
+      ]
+    },
+    {
+      "name": "Sports & Outdoors",
+      "subcategories": [
+        "Sporting Goods",
+        "Exercise Equipment",
+        "Camping Gear",
+        "Hiking Gear",
+        "Bicycles",
+        "Outdoor Games"
+      ]
+    },
+    {
+      "name": "Automotive",
+      "subcategories": [
+        "Cars",
+        "Motorcycles",
+        "Auto Parts",
+        "Car Accessories",
+        "Tires",
+        "Oils & Fluids",
+        "Tools & Equipment"
+      ]
+    },
+    {
+      "name": "Baby & Kids",
+      "subcategories": [
+        "Baby Clothing",
+        "Diapers",
+        "Toys",
+        "Strollers",
+        "Baby Food",
+        "Learning Materials",
+        "Kids’ Furniture"
+      ]
+    }
+  ]
+}
+,
+ 
+{
+  "type": "service",
+  "categories": [
+    {
+      "name": "Business & Professional Services",
+      "subcategories": [
+        "Virtual Assistance",
+        "Consulting",
+        "Project Management",
+        "Accounting & Bookkeeping",
+        "Legal Services",
+        "HR & Recruitment",
+        "Business Coaching"
+      ]
+    },
+    {
+      "name": "Creative & Design Services",
+      "subcategories": [
+        "Graphic Design",
+        "Logo Design",
+        "Web Design",
+        "UX/UI",
+        "Animation",
+        "Video Editing",
+        "Photography",
+        "Interior Design"
+      ]
+    },
+    {
+      "name": "Technology & IT Services",
+      "subcategories": [
+        "Software Development",
+        "App Development",
+        "Web Development",
+        "Cloud Services",
+        "Cybersecurity",
+        "IT Support",
+        "Data Science",
+        "AI/ML Services"
+      ]
+    },
+    {
+      "name": "Marketing & Advertising Services",
+      "subcategories": [
+        "Social Media Management",
+        "SEO",
+        "Content Marketing",
+        "Paid Ads (Google/Facebook)",
+        "Email Marketing",
+        "Branding",
+        "Public Relations"
+      ]
+    },
+    {
+      "name": "Writing & Translation Services",
+      "subcategories": [
+        "Copywriting",
+        "Blogging",
+        "Technical Writing",
+        "Resume Writing",
+        "Translations",
+        "Transcriptions",
+        "Proofreading",
+        "Script Writing"
+      ]
+    },
+    {
+      "name": "Education & Training Services",
+      "subcategories": [
+        "Tutoring",
+        "Online Courses",
+        "Coaching",
+        "Corporate Training",
+        "Workshops",
+        "Exam Prep",
+        "Language Learning"
+      ]
+    },
+    {
+      "name": "Health & Wellness Services",
+      "subcategories": [
+        "Personal Training",
+        "Nutrition Coaching",
+        "Therapy & Counseling",
+        "Yoga/Meditation Classes",
+        "Spa & Massage",
+        "Telemedicine"
+      ]
+    },
+    {
+      "name": "Home & Maintenance Services",
+      "subcategories": [
+        "Plumbing",
+        "Electrical Work",
+        "Cleaning",
+        "Pest Control",
+        "Gardening",
+        "Carpentry",
+        "Appliance Repair",
+        "Moving & Relocation"
+      ]
+    },
+    {
+      "name": "Events & Entertainment Services",
+      "subcategories": [
+        "Event Planning",
+        "Catering",
+        "DJ Services",
+        "Live Bands",
+        "Photography & Videography",
+        "Decoration",
+        "MC/Hosting"
+      ]
+    }
+  ]
+}
+,
+ 
+{
+  "type": "tourism",
+  "categories": [
+    {
+      "name": "Tourist Guides & Services",
+      "subcategories": [
+        {
+          "name": "Local Guides",
+          "subsubcategories": [
+            "City Tours",
+            "Cultural Tours",
+            "Historical Tours"
+          ]
+        },
+        {
+          "name": "Specialist Guides",
+          "subsubcategories": [
+            "Wildlife & Safari Guides",
+            "Eco-Tourism & Nature Guides",
+            "Adventure & Sports Guides",
+            "Art & Heritage Guides"
+          ]
+        },
+        {
+          "name": "Digital/Audio Guides",
+          "subsubcategories": [
+            "Mobile Apps",
+            "Audio Tours",
+            "Virtual Tours"
+          ]
+        },
+        {
+          "name": "Tour Operators & Agencies",
+          "subsubcategories": [
+            "Package Tours",
+            "Customized Trips",
+            "Group Tours",
+            "Travel Planners"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tourist Attractions",
+      "subcategories": [
+        {
+          "name": "Natural Attractions",
+          "subsubcategories": [
+            "Mountains",
+            "Beaches",
+            "Waterfalls",
+            "Lakes & Rivers",
+            "National Parks & Reserves"
+          ]
+        },
+        {
+          "name": "Cultural Attractions",
+          "subsubcategories": [
+            "Museums & Art Galleries",
+            "UNESCO Heritage Sites",
+            "Temples, Churches, Mosques, Shrines",
+            "Castles, Forts, Palaces"
+          ]
+        },
+        {
+          "name": "Recreational Attractions",
+          "subsubcategories": [
+            "Theme Parks",
+            "Zoos & Aquariums",
+            "Botanical Gardens",
+            "Golf Courses"
+          ]
+        },
+        {
+          "name": "Adventure/Activity-Based Attractions",
+          "subsubcategories": [
+            "Hiking Trails",
+            "Safari Parks",
+            "Diving & Snorkeling Sites",
+            "Ski Resorts",
+            "Desert Tours"
+          ]
+        },
+        {
+          "name": "Events & Festivals",
+          "subsubcategories": [
+            "Music Festivals",
+            "Cultural Celebrations",
+            "Food & Wine Festivals",
+            "Sports Events (Olympics, Football, Marathons)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Accommodation",
+      "subcategories": [
+        {
+          "name": "Hotels",
+          "subsubcategories": [
+            "Luxury Hotels (5-star, resorts)",
+            "Mid-Range / Boutique Hotels",
+            "Budget Hotels / Motels",
+            "Business Hotels"
+          ]
+        },
+        {
+          "name": "Resorts",
+          "subsubcategories": [
+            "Beach Resorts",
+            "Mountain Resorts",
+            "Spa & Wellness Resorts",
+            "Eco-Resorts"
+          ]
+        },
+        {
+          "name": "Guesthouses & B&Bs"
+        },
+        {
+          "name": "Hostels",
+          "subsubcategories": [
+            "Backpacker Hostels",
+            "Youth Hostels"
+          ]
+        },
+        {
+          "name": "Vacation Rentals",
+          "subsubcategories": [
+            "Airbnb",
+            "Villas",
+            "Serviced Apartments"
+          ]
+        },
+        {
+          "name": "Camping & Glamping",
+          "subsubcategories": [
+            "Tent Camps",
+            "RVs & Caravans",
+            "Luxury Camping (Glamping)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transportation",
+      "subcategories": [
+        {
+          "name": "Air Travel",
+          "subsubcategories": [
+            "International Airlines",
+            "Domestic Airlines",
+            "Charter Flights"
+          ]
+        },
+        {
+          "name": "Land Travel",
+          "subsubcategories": [
+            "Buses & Coaches",
+            "Car Rentals",
+            "Motorbike & Scooter Rentals",
+            "Train Services"
+          ]
+        },
+        {
+          "name": "Water Travel",
+          "subsubcategories": [
+            "Ferries",
+            "Cruise Ships",
+            "Private Yachts & Boat Tours"
+          ]
+        },
+        {
+          "name": "Local Transport",
+          "subsubcategories": [
+            "Taxis",
+            "Ride-hailing (Uber, Bolt, etc.)",
+            "E-scooters",
+            "Bicycles",
+            "Trams/Metro"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Food & Restaurants",
+      "subcategories": [
+        "Fine Dining (luxury restaurants, Michelin-starred)",
+        "Casual Dining (cafés, bistros, family restaurants)",
+        "Street Food (food trucks, local markets, traditional food vendors)",
+        "Themed Dining (cultural restaurants, dinner shows, medieval dining, revolving restaurants)",
+        {
+          "name": "Food Tours & Tastings",
+          "subsubcategories": [
+            "Wine Tasting",
+            "Brewery Tours",
+            "Food & Market Tours"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tourist Entertainment",
+      "subcategories": [
+        {
+          "name": "Cultural Entertainment",
+          "subsubcategories": [
+            "Dance Shows",
+            "Traditional Music Concerts",
+            "Theatre & Opera"
+          ]
+        },
+        {
+          "name": "Nightlife",
+          "subsubcategories": [
+            "Nightclubs",
+            "Bars & Lounges",
+            "Casinos"
+          ]
+        },
+        {
+          "name": "Sports & Adventure Entertainment",
+          "subsubcategories": [
+            "Stadiums & Arenas",
+            "Extreme Sports Parks",
+            "Adventure Parks"
+          ]
+        },
+        {
+          "name": "Shopping & Leisure",
+          "subsubcategories": [
+            "Malls",
+            "Craft Markets",
+            "Souvenir Shops"
+          ]
+        },
+        {
+          "name": "Wellness & Leisure",
+          "subsubcategories": [
+            "Spas & Massage Centers",
+            "Yoga & Meditation Retreats",
+            "Wellness Resorts"
+          ]
+        }
+      ]
+    }
+  ]
+}
+,
+  
+  {
+  "type": "opportunity",
+  "categories": [
+    {
+      "name": "Scholarships",
+      "subcategories": [
+        {
+          "name": "Undergraduate Scholarships",
+          "subsubcategories": [
+            "Fully-Funded Scholarships",
+            "Partial-Funded Scholarships"
+          ]
+        },
+        {
+          "name": "Postgraduate Scholarships",
+          "subsubcategories": [
+            "Masters Scholarships"
+          ]
+        },
+        {
+          "name": "Exchange Programs",
+          "subsubcategories": [
+            "Student Exchange Programs",
+            "Erasmus & Cultural Exchange"
+          ]
+        },
+        {
+          "name": "Fellowships",
+          "subsubcategories": [
+            "Academic Fellowships",
+            "Research Fellowships",
+            "Leadership Fellowships"
+          ]
+        },
+        {
+          "name": "Professional Training",
+          "subsubcategories": [
+            "Leadership Development",
+            "Technical & Vocational Training",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Online Courses",
+          "subsubcategories": [
+            "MOOCs (Coursera, edX, Udemy, etc.)",
+            "Certification Programs",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Skill Bootcamps",
+          "subsubcategories": [
+            "Coding",
+            "Digital Marketing",
+            "Design",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Workshops & Masterclasses",
+          "subsubcategories": [
+            "Soft Skills Training (communication, leadership)",
+            "Hard Skills Training (IT, engineering, finance)",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Exhibition and Conferences",
+          "subsubcategories": [
+            "Startups",
+            "AfCFTA",
+            "Trade Fairs",
+            "Conferences"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Grants",
+      "subcategories": [
+        {
+          "name": "Research Grants"
+        },
+        {
+          "name": "Business Grants"
+        },
+        {
+          "name": "NGO/Nonprofit Grants"
+        },
+        {
+          "name": "Competitions",
+          "subsubcategories": [
+            "Hackathons",
+            "Business Pitch Competitions",
+            "Art & Creative Contests"
+          ]
+        },
+        {
+          "name": "Innovation & Startup Funding",
+          "subsubcategories": [
+            "Seed Funding",
+            "Venture Capital Opportunities",
+            "Accelerator Programs",
+            "PhD & Research Grants"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Volunteering & Exchange",
+      "subcategories": [
+        {
+          "name": "Local Volunteering",
+          "subsubcategories": [
+            "Community Projects",
+            "Nonprofit Organizations"
+          ]
+        },
+        {
+          "name": "International Volunteering",
+          "subsubcategories": [
+            "Humanitarian Work",
+            "Peace Corps & International NGOs"
+          ]
+        },
+        {
+          "name": "Cultural Exchange Programs",
+          "subsubcategories": [
+            "Youth Exchange",
+            "Work & Travel Programs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mentorship & Leadership",
+      "subcategories": [
+        {
+          "name": "Mentorship Programs",
+          "subsubcategories": [
+            "Career Mentorship",
+            "Business Mentorship"
+          ]
+        },
+        {
+          "name": "Leadership Programs",
+          "subsubcategories": [
+            "Youth Leadership Initiatives",
+            "Women in Leadership Programs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Investment Funds / Investors",
+      "subcategories": [
+        {
+          "name": "Eligibility",
+          "subsubcategories": [
+            "Age",
+            "Gender",
+            "Region",
+            "Nationality",
+            "Educational Qualification",
+            "Experience"
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+]

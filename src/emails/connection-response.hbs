@@ -1,0 +1,27 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  Connection Request {{#if accepted}}Accepted✅{{else}}Declined❌{{/if}}
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, <strong>{{responderName}}</strong> has {{#if accepted}}accepted{{else}}declined{{/if}} your connection request on <strong>{{BRAND.name}}</strong>.
+</p>
+
+{{#if accepted}}
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  You can now message each other and view more details about your connection.
+</p>
+
+{{> button href=profileLink label="View Profile"}}
+{{else}}
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Don't worry - there are plenty of other potential connections on the platform.
+</p>
+{{/if}}
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You can view all your connections in your network section.
+</p>

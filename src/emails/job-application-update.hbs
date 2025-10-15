@@ -1,0 +1,44 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  Job Application Update 📋
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, there's an update on your job application for <strong>{{jobTitle}}</strong>.
+</p>
+
+<div style="margin:16px 0;padding:12px;border-radius:8px;color:{{BRAND.text}};
+  {{#if accepted}}
+    background:#d4edda;border:1px solid #c3e6cb;
+  {{else}}
+    background:#f8d7da;border:1px solid #f5c6cb;
+  {{/if}}">
+  <p style="margin:0;font-weight:500;">
+    {{#if accepted}}
+      🎉 Congratulations! Your application has been accepted!
+    {{else}}
+      Thank you for your interest. Unfortunately, your application was not selected this time.
+    {{/if}}
+  </p>
+  {{#if message}}
+  <p style="margin:8px 0;font-style:italic;">"{{message}}"</p>
+  {{/if}}
+</div>
+
+{{#if accepted}}
+  {{> button href=link label="View Job Details"}}
+  <p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+    Please contact the employer directly to discuss next steps.
+  </p>
+{{else}}
+  <p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+    Don't be discouraged! Keep applying to other opportunities that match your skills.
+  </p>
+{{/if}}
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You're receiving this because you applied for a job on {{BRAND.name}}.
+</p>

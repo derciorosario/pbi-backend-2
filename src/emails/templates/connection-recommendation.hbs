@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People You May Want to Connect With</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f2ef;font-family:Arial,sans-serif;line-height:1.5;color:#333;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td align="center" style="padding:20px 10px;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+          
+          <!-- HEADER -->
+          <tr>
+            <td>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #ddd;">
+                <tr>
+                  <td align="left" style="padding:16px;">
+                    <h1 style="font-size:16px;margin:0;color:#0a66c2;">54Links Match Alert</h1>
+                  </td>
+                  <td align="right" style="padding:16px;font-size:13px;color:#666;">
+                    4 new matches
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CONTENT -->
+          <tr>
+            <td style="padding:20px;">
+              <p style="margin:0 0 15px;">Hello {{name}},</p>
+              <p style="margin:0 0 20px;">Based on your profile and network, here are people you may want to connect with:</p>
+
+              {{#each recommendations}}
+              <!-- Recommendation Item -->
+              <a href="{{link}}" style="text-decoration:none;color:inherit;display:block;border-radius:6px;margin-bottom:15px;padding:10px;border:0px solid #eee;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <!-- Avatar -->
+                    <td valign="top" width="48" style="width:48px;height:48px;border-radius:4px;overflow:hidden;text-align:center;font-weight:bold;color:#666;">
+                      {{#if avatarUrl}}
+                        <img src="{{avatarUrl}}" alt="{{name}}" width="48" height="48" style="display:block;width:48px;height:48px;object-fit:cover;border-radius:4px;">
+                      {{else}}
+                        {{name.[0]}}
+                      {{/if}}
+                    </td>
+                    <td width="12" style="width:12px;"></td>
+                    
+                    <!-- Info -->
+                    <td valign="top" style="font-size:14px;">
+                      <div style="margin-bottom:4px;">
+                        <strong style="color:#0a66c2;">{{name}}</strong>
+                        <span style="display:inline-block;background:#e8f0fe;color:#0a66c2;padding:2px 6px;border-radius:10px;font-size:12px;margin-left:6px;">{{matchPercentage}}% Match</span>
+                      </div>
+                      {{#if professionalTitle}}
+                      <div style="color:#555;font-size:13px;margin-bottom:5px;">{{professionalTitle}}</div>
+                      {{/if}}
+                      {{#if categories.length}}
+                      <div>
+                        {{#each categories}}
+                          <span style="display:inline-block;background:#f0f0f0;border-radius:12px;padding:2px 8px;font-size:12px;margin:2px 5px 2px 0;">{{this}}</span>
+                        {{/each}}
+                      </div>
+                      {{/if}}
+                    </td>
+                  </tr>
+                </table>
+              </a>
+              {{/each}}
+
+              <!-- Button -->
+              <div style="text-align:center;margin:30px 0 10px;">
+                <a href="{{baseUrl}}/people" style="display:inline-block;background:#0a66c2;color:#ffffff;padding:10px 20px;border-radius:20px;font-size:14px;text-decoration:none;">See all connections</a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="border-top:1px solid #ddd;padding:15px;font-size:12px;color:#666;text-align:center;">
+              <p style="margin:0 0 5px;">You’re receiving this email because you enabled connection recommendations.</p>
+              <p style="margin:0 0 5px;"><a href="{{baseUrl}}/settings" style="color:#0a66c2;">Update preferences</a></p>
+              <p style="margin:0;">&copy; 2025 54Links. All rights reserved.</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

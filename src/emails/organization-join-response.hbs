@@ -1,0 +1,36 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  {{#if accepted}}
+    Organization Join Request Approved! 🎉
+  {{else}}
+    Organization Join Request Update
+  {{/if}}
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}},
+  {{#if accepted}}
+    Great news! Your request to join <strong>{{organizationName}}</strong> has been approved.
+  {{else}}
+    We regret to inform you that your request to join <strong>{{organizationName}}</strong> has not been approved at this time.
+  {{/if}}
+</p>
+
+{{#if accepted}}
+<div style="margin:16px 0;padding:12px;background:#d4edda;border-radius:8px;color:#155724;">
+  <p style="margin:0;">You are now officially a member of the organization and have been added to their staff list. You can update your profile to reflect this membership.</p>
+</div>
+
+{{> button href=profileLink label="View Profile"}}
+{{else}}
+<div style="margin:16px 0;padding:12px;background:#f8d7da;border-radius:8px;color:#721c24;">
+  <p style="margin:0;">You may reach out to the organization directly if you have any questions.</p>
+</div>
+{{/if}}
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  If you don't know this organization or believe this was sent in error, you can safely ignore this email.
+</p>

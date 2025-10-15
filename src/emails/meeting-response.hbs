@@ -1,0 +1,56 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  Meeting Request {{#if accepted}}Accepted✅{{else}}Declined❌{{/if}}
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, <strong>{{responderName}}</strong> has {{#if accepted}}accepted{{else}}declined{{/if}} your meeting request for "<strong>{{title}}</strong>" on <strong>{{BRAND.name}}</strong>.
+</p>
+
+{{#if accepted}}
+<div style="margin:16px 0;padding:16px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <h3 style="margin:0 0 8px 0;font-size:16px;">Confirmed Meeting Details</h3>
+  <p style="margin:0 0 8px 0;"><strong>Date:</strong> {{formatDate scheduledAt}}</p>
+  <p style="margin:0 0 8px 0;"><strong>Time:</strong> {{formatTime scheduledAt}} ({{timezone}})</p>
+  <p style="margin:0 0 8px 0;"><strong>Duration:</strong> {{duration}} minutes</p>
+  <p style="margin:0 0 8px 0;"><strong>Mode:</strong> {{mode}}</p>
+  
+  {{#if location}}
+  <p style="margin:0 0 8px 0;"><strong>Location:</strong> {{location}}</p>
+  {{/if}}
+  
+  {{#if link}}
+  <p style="margin:0 0 8px 0;"><strong>Meeting Link:</strong> <a href="{{link}}" style="color:{{BRAND.primary}};">{{link}}</a></p>
+  {{/if}}
+  
+  {{#if agenda}}
+  <p style="margin:8px 0 0 0;"><strong>Agenda:</strong></p>
+  <p style="margin:4px 0 0 0;font-style:italic;">{{agenda}}</p>
+  {{/if}}
+</div>
+
+{{> button href=meetingDetailsLink label="View Meeting Details"}}
+
+<p style="margin:12px 0 0 0;color:{{BRAND.muted}};">
+  This meeting has been added to your upcoming meetings list.
+</p>
+{{else}}
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  {{#if rejectionReason}}
+  <strong>Reason:</strong> "{{rejectionReason}}"
+  {{else}}
+  No specific reason was provided.
+  {{/if}}
+</p>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  You can try to reschedule for a different time or reach out via messages.
+</p>
+{{/if}}
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You can view all your meetings in your calendar section.
+</p>

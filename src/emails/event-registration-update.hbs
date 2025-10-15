@@ -1,0 +1,31 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  Event Registration Update 📝
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, there's an update on your registration for <strong>{{eventTitle}}</strong>.
+</p>
+
+<div style="margin:16px 0;padding:12px;border-radius:8px;color:{{BRAND.text}};background:{{BRAND.bg}};border:1px solid {{BRAND.border}};">
+  <p style="margin:0;font-weight:500;">
+    {{#if message}}
+      {{message}}
+    {{else}}
+      Your registration status is now: <strong>{{status}}</strong>.
+    {{/if}}
+  </p>
+</div>
+
+{{> button href=link label="View My Registrations"}}
+
+<p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+  You can review the latest status and details in your registrations dashboard.
+</p>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You're receiving this because you registered for an event on {{BRAND.name}}.
+</p>

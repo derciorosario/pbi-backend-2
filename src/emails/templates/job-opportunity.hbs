@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Opportunities For You</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f2ef;font-family:Arial,sans-serif;line-height:1.5;color:#333;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td align="center" style="padding:20px 10px;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;background:#ffffff;border-radius:8px;overflow:hidden;">
+
+          <!-- HEADER -->
+          <tr>
+            <td align="center" bgcolor="#0a66c2" style="padding:20px;">
+              <h1 style="margin:0;font-size:18px;color:#ffffff;">54Links Job Opportunities Alert</h1>
+            </td>
+          </tr>
+
+          <!-- CONTENT -->
+          <tr>
+            <td style="padding:20px;background-color:#f9f9f9;">
+              <p style="margin:0 0 15px;">Hello {{name}},</p>
+              <p style="margin:0 0 20px;">We've found some job opportunities that might interest you:</p>
+
+              {{#each jobs}}
+              <!-- Job Card -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;background:#ffffff;border:1px solid #eee;border-radius:6px;">
+                <tr>
+                  <td style="padding:15px;font-size:14px;">
+
+                    <!-- Job Title -->
+                    <div style="font-weight:bold;margin-bottom:5px;color:#0a66c2;font-size:16px;">
+                      {{title}}
+                      <span style="font-size:12px;color:#0a66c2;background-color:#e8f0fe;padding:2px 6px;border-radius:10px;margin-left:5px;">{{matchPercentage}}% Match</span>
+                    </div>
+
+                    <!-- Company -->
+                    <div style="font-weight:bold;margin-bottom:5px;">{{company}}</div>
+
+                    <!-- Location -->
+                    <div style="font-size:13px;color:#666;margin-bottom:10px;">{{location}}</div>
+
+                    <!-- Meta -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
+                      <tr>
+                        {{#if createdBy.avatarUrl}}
+                        <td valign="middle" style="padding-right:6px;">
+                          <img src="{{createdBy.avatarUrl}}" alt="{{createdBy.name}}" width="20" height="20" style="display:block;border-radius:50%;">
+                        </td>
+                        {{/if}}
+                        <td valign="middle" style="font-size:12px;color:#666;">
+                          Posted by {{createdBy.name}} • {{createdAt}}
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- Description -->
+                    <div style="margin-bottom:10px;font-size:13px;line-height:1.4;color:#333;">
+                      {{description}}
+                    </div>
+
+                    <!-- Button -->
+                    <a href="{{link}}" style="display:inline-block;padding:8px 15px;background-color:#0a66c2;color:#ffffff;text-decoration:none;border-radius:20px;font-size:13px;">View Job</a>
+
+                  </td>
+                </tr>
+              </table>
+              {{/each}}
+
+              <p style="margin:20px 0 0;">Don't miss out on these opportunities! Check them out today.</p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding:15px;font-size:12px;color:#666;text-align:center;border-top:1px solid #ddd;">
+              <p style="margin:0 0 5px;">You're receiving this email because you've enabled job opportunity notifications in your settings.</p>
+              <p style="margin:0 0 5px;"><a href="{{baseUrl}}/settings" style="color:#0a66c2;">Update preferences</a></p>
+              <p style="margin:0;">&copy; 2025 54Links. All rights reserved.</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

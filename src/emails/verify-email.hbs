@@ -1,0 +1,22 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  Welcome{{#if name}}, {{name}}{{/if}}! 👋
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Thanks for joining <strong>{{BRAND.name}}</strong>. Please verify your email to activate your account and finish your setup.
+</p>
+
+{{> button href=link label="Verify Email"}}
+
+<p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+  This link expires in {{expiresInHours}} hours. If the button doesn’t work, copy and paste this URL:
+  <br/><span style="word-break:break-all;color:{{BRAND.text}};font-size:12px;">{{link}}</span>
+</p>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  Security tip: If this wasn’t you, please ignore this email or contact <a href="mailto:{{BRAND.supportEmail}}">{{BRAND.supportEmail}}</a>.
+</p>

@@ -1,0 +1,122 @@
+[
+    {
+      "name": "Agriculture & Agribusiness",
+      "categories": [
+        {
+          "name": "Crop Production"
+        },
+        {
+          "name": "Livestock & Fisheries"
+        },
+        {
+          "name": "Agro-processing"
+        }
+      ]
+    },
+    {
+      "name": "Mining & Quarrying",
+      "categories": [
+        {
+          "name": "Oil & Gas Extraction"
+        },
+        {
+          "name": "Minerals & Metals"
+        },
+        {
+          "name": "Quarry Products"
+        }
+      ]
+    },
+    {
+      "name": "Manufacturing",
+      "categories": [
+        { "name": "Food & Beverages" },
+        { "name": "Textiles & Apparel" },
+        { "name": "Chemicals & Pharmaceuticals" },
+        { "name": "Automotive & Machinery" },
+        { "name": "Electronics & Electricals" }
+      ]
+    },
+    {
+      "name": "Construction & Real Estate",
+      "categories": [
+        { "name": "Residential & Commercial Construction" },
+        { "name": "Civil Engineering & Infrastructure" },
+        { "name": "Real Estate Development" }
+      ]
+    },
+    {
+      "name": "Energy & Utilities",
+      "categories": [
+        { "name": "Renewable Energy (Solar, Wind, Hydro)" },
+        { "name": "Power Generation & Distribution" },
+        { "name": "Water Supply & Waste Management" }
+      ]
+    },
+    {
+      "name": "Transport & Logistics",
+      "categories": [
+        { "name": "Road, Rail, Air, and Sea Transport" },
+        { "name": "Warehousing & Supply Chain Management" },
+        { "name": "Courier & Delivery Services" }
+      ]
+    },
+    {
+      "name": "Information & Communication Technology (ICT)",
+      "categories": [
+        { "name": "Software & App Development" },
+        { "name": "Telecommunications" },
+        { "name": "IT Services & Cloud Solutions" }
+      ]
+    },
+    {
+      "name": "Financial Services",
+      "categories": [
+        { "name": "Banking" },
+        { "name": "Insurance" },
+        { "name": "Investment & Capital Markets" },
+        { "name": "Fintech" }
+      ]
+    },
+    {
+      "name": "Healthcare & Life Sciences",
+      "categories": [
+        { "name": "Hospitals & Clinics" },
+        { "name": "Pharmaceuticals & Biotech" },
+        { "name": "Medical Equipment" }
+      ]
+    },
+    {
+      "name": "Education & Training",
+      "categories": [
+        { "name": "Schools & Universities" },
+        { "name": "Vocational & Technical Training" },
+        { "name": "E-learning Platforms" }
+      ]
+    },
+    {
+      "name": "Hospitality & Tourism",
+      "categories": [
+        { "name": "Hotels & Resorts" },
+        { "name": "Travel Agencies" },
+        { "name": "Events & Entertainment" }
+      ]
+    },
+    {
+      "name": "Retail & Consumer Goods",
+      "categories": [
+        { "name": "Wholesale & Retail Trade" },
+        { "name": "E-commerce" },
+        { "name": "Fast-Moving Consumer Goods (FMCG)" }
+      ]
+    },
+    {
+      "name": "Creative & Cultural Industries",
+      "categories": [
+        { "name": "Media & Broadcasting" },
+        { "name": "Arts & Entertainment" },
+        { "name": "Fashion & Design" }
+      ]
+    }
+]
+

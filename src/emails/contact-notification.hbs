@@ -1,0 +1,57 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  New Contact Form Submission 📧
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi Admin, you have received a new contact form submission via your website.
+</p>
+
+<div style="margin:16px 0;padding:16px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0 0 12px 0;font-weight:500;">Contact Details:</p>
+
+  <p style="margin:4px 0;"><strong>Name:</strong> {{contact.fullName}}</p>
+  <p style="margin:4px 0;"><strong>Email:</strong> <a href="mailto:{{contact.email}}" style="color:{{BRAND.primary}};">{{contact.email}}</a></p>
+  {{#if contact.phone}}
+  <p style="margin:4px 0;"><strong>Phone:</strong> {{contact.phone}}</p>
+  {{/if}}
+  <p style="margin:4px 0;"><strong>Reason:</strong> {{contact.contactReason}}</p>
+
+  {{#if contact.companyName}}
+  <p style="margin:4px 0;"><strong>Company:</strong> {{contact.companyName}}</p>
+  {{/if}}
+
+  {{#if contact.website}}
+  <p style="margin:4px 0;"><strong>Website:</strong> <a href="{{contact.website}}" style="color:{{BRAND.primary}};" target="_blank">{{contact.website}}</a></p>
+  {{/if}}
+
+  {{#if contact.attachment}}
+  <p style="margin:4px 0;"><strong>Attachment:</strong> <a href="{{contact.attachment.url}}" style="color:{{BRAND.primary}};" target="_blank">{{contact.attachment.name}}</a></p>
+  {{/if}}
+
+  <p style="margin:12px 0 4px 0;"><strong>Message:</strong></p>
+  <div style="margin:8px 0;padding:12px;background:{{BRAND.cardBg}};border-radius:6px;border-left:4px solid {{BRAND.primary}};">
+    <p style="margin:0;font-style:italic;">"{{contact.message}}"</p>
+  </div>
+
+  <p style="margin:8px 0 4px 0;font-size:12px;color:{{BRAND.muted}};">
+    Submitted: {{contact.submittedAt}}
+  </p>
+</div>
+
+<div style="margin:16px 0;padding:12px;background:#e8f5e8;border-radius:8px;border-left:4px solid #10b981;">
+  <p style="margin:0;color:#059669;font-weight:500;">💡 Quick Actions:</p>
+  <p style="margin:4px 0;color:#059669;font-size:14px;">
+    • Reply directly to: <a href="mailto:{{contact.email}}" style="color:#10b981;">{{contact.email}}</a><br>
+    {{#if contact.website}}• Visit their website: <a href="{{contact.website}}" style="color:#10b981;" target="_blank">{{contact.website}}</a><br>{{/if}}
+    {{#if contact.attachment}}• Download attachment: <a href="{{contact.attachment.url}}" style="color:#10b981;" target="_blank">{{contact.attachment.name}}</a><br>{{/if}}
+    • Mark as responded in your admin panel
+  </p>
+</div>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You're receiving this because someone submitted a contact form on your website. You can manage all contact submissions in your admin dashboard.
+</p>

@@ -1,0 +1,11 @@
+{{! Current year helper not built-in; pass from context or just render JS year in code }}
+{{!-- We’ll let the server pass year; if absent, just show brand --}}
+<div style="padding:18px 6px;color:{{BRAND.muted}};font-size:12px;line-height:18px;text-align:center;">
+  © {{year}} {{BRAND.name}}. All rights reserved. •
+  <a href="{{BRAND.website}}" style="color:{{BRAND.muted}};text-decoration:underline;">
+    {{BRAND.website}}
+  </a><br/>
+  Need help? <a href="mailto:{{BRAND.supportEmail}}" style="color:{{BRAND.muted}};text-decoration:underline;">
+    {{BRAND.supportEmail}}
+  </a>
+</div>

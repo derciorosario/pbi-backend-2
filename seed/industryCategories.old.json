@@ -1,0 +1,401 @@
+[
+    {
+      "name": "Agriculture",
+      "categories": [
+      {
+          "name": "Crop Production",
+          "subcategories": [
+            { "name": "Cereal Crops", "subsubs": ["Rice", "Maize", "Wheat", "Millet", "Barley"] },
+            { "name": "Cash Crops", "subsubs": ["Cotton", "Coffee", "Cocoa", "Tea", "Tobacco"] },
+            { "name": "Horticulture", "subsubs": ["Fruits", "Vegetables", "Spices", "Nuts"] },
+            { "name": "Plantation Crops", "subsubs": ["Palm Oil", "Rubber", "Sugarcane"] },
+            { "name": "Floriculture", "subsubs": ["Flowers", "Ornamental Plants"] }
+          ]
+        },
+        {
+          "name": "Animal Husbandry (Livestock)",
+          "subcategories": [
+            { "name": "Cattle", "subsubs": ["Dairy", "Beef"] },
+            { "name": "Poultry", "subsubs": ["Chicken", "Turkey", "Duck"] },
+            { "name": "Goats & Sheep" },
+            { "name": "Pigs" },
+            { "name": "Rabbits" },
+            { "name": "Fish Farming (Aquaculture)" }
+          ]
+        },
+        {
+          "name": "Agro-Forestry & Forestry",
+          "subcategories": [
+            { "name": "Timber Production" },
+            { "name": "Bamboo Farming" },
+            { "name": "Medicinal Plants" },
+            { "name": "Plantation Forestry" },
+            { "name": "Non-Timber Products", "subsubs": ["Honey", "Gum", "Resin"] }
+          ]
+        },
+        {
+          "name": "Fisheries & Aquaculture",
+          "subcategories": [
+            { "name": "Inland Fisheries" },
+            { "name": "Marine Fisheries" },
+            { "name": "Fish Hatcheries" },
+            { "name": "Shrimp & Prawn Farming" },
+            { "name": "Aquaponics" }
+          ]
+        },
+        {
+          "name": "Agribusiness & Agro-Processing",
+          "subcategories": [
+            { "name": "Food Processing" },
+            { "name": "Packaging & Distribution" },
+            { "name": "Cold Chain & Storage" },
+            { "name": "Export & Trade of Agricultural Products" }
+          ]
+        },
+        {
+          "name": "Agricultural Technology (AgriTech)",
+          "subcategories": [
+            { "name": "Precision Farming" },
+            { "name": "Smart Irrigation" },
+            { "name": "Drone Technology" },
+            { "name": "Hydroponics & Aeroponics" },
+            { "name": "Biotechnology", "subsubs": ["GM Crops", "Tissue Culture"] }
+          ]
+        },
+        {
+          "name": "Agro-Ecology & Sustainable Farming",
+          "subcategories": [
+            { "name": "Organic Farming" },
+            { "name": "Permaculture" },
+            { "name": "Regenerative Agriculture" },
+            { "name": "Conservation Agriculture" },
+            { "name": "Climate-Smart Agriculture" }
+          ]
+        },
+        {
+          "name": "Others",
+          "subcategories": [
+            { "name": "Apiculture (Beekeeping)" },
+            { "name": "Sericulture (Silk Farming)" },
+            { "name": "Mushroom Farming" },
+            { "name": "Snail Farming" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mining & Quarry",
+      "categories": [
+        {
+          "name": "Mineral Mining",
+          "subcategories": [
+            { "name": "Metallic Minerals", "subsubs": ["Gold Mining", "Silver Mining", "Copper Mining", "Iron Ore Mining", "Bauxite (Aluminum) Mining", "Lead & Zinc Mining", "Nickel Mining", "Uranium Mining"] },
+            { "name": "Non-Metallic Minerals", "subsubs": ["Phosphate Mining", "Potash Mining", "Gypsum Mining", "Salt Mining", "Limestone Mining", "Clay Mining"] }
+          ]
+        },
+        {
+          "name": "Coal Mining",
+          "subcategories": [
+            { "name": "Surface (Open-Pit / Strip Mining)" },
+            { "name": "Underground Mining" }
+          ]
+        },
+        {
+          "name": "Oil & Gas Extraction",
+          "subcategories": [
+            { "name": "Crude Petroleum Exploration & Drilling" },
+            { "name": "Natural Gas Extraction" },
+            { "name": "Oil Sands & Shale Extraction" }
+          ]
+        },
+        {
+          "name": "Quarrying",
+          "subcategories": [
+            { "name": "Stone Quarrying", "subsubs": ["Granite", "Marble", "Sandstone", "Limestone"] },
+            { "name": "Gravel & Sand Extraction" },
+            { "name": "Slate Quarrying" },
+            { "name": "Dimension Stone Production" }
+          ]
+        },
+        {
+          "name": "Specialized Mining Activities",
+          "subcategories": [
+            { "name": "Gemstone Mining", "subsubs": ["Diamonds", "Emeralds", "Sapphires", "Rubies"] },
+            { "name": "Rare Earth Minerals Mining" },
+            { "name": "Mineral Exploration & Drilling Services" },
+            { "name": "Mine Support Services", "subsubs": ["Blasting", "Ventilation", "Equipment Services"] }
+          ]
+        }
+    ]    
+    },
+    {"name":"Oil & Gas",
+      "categories":[
+            {
+          "name": "Upstream (Exploration & Production)",
+          "subcategories": [
+            { "name": "Geological & Geophysical Exploration" },
+            { "name": "Drilling Operations", "subsubs": ["Onshore", "Offshore"] },
+            { "name": "Well Engineering & Completion" },
+            { "name": "Reservoir Engineering" },
+            { "name": "Production Operations (Crude Oil & Natural Gas)" }
+          ]
+        },
+        {
+          "name": "Midstream (Transportation & Storage)",
+          "subcategories": [
+            { "name": "Pipeline Transportation", "subsubs": ["Crude Oil", "Refined Products", "Natural Gas"] },
+            { "name": "LNG Transportation" },
+            { "name": "Oil & Gas Terminals" },
+            { "name": "Storage Facilities", "subsubs": ["Tanks", "Caverns", "LNG Storage"] },
+            { "name": "Shipping & Tanker Operations" }
+          ]
+        },
+        {
+          "name": "Downstream (Refining & Distribution)",
+          "subcategories": [
+            { "name": "Refining", "subsubs": ["Petrol", "Diesel", "Kerosene", "Jet Fuel", "Lubricants"] },
+            { "name": "Petrochemicals", "subsubs": ["Plastics", "Fertilizers", "Synthetic Rubber"] },
+            { "name": "Gas Processing", "subsubs": ["LPG", "LNG", "Compressed Natural Gas"] },
+            { "name": "Distribution & Marketing", "subsubs": ["Fuel Stations", "Wholesale Supply"] }
+          ]
+        },
+        {
+          "name": "Oilfield Services & Support",
+          "subcategories": [
+            { "name": "Seismic Survey & Data Analysis" },
+            { "name": "Drilling Services & Equipment" },
+            { "name": "Oilfield Equipment Manufacturing" },
+            { "name": "Engineering, Procurement & Construction (EPC)" },
+            { "name": "Maintenance, Repair & Operations (MRO)" }
+          ]
+        },
+        {
+          "name": "Alternative & Emerging Segments",
+          "subcategories": [
+            { "name": "Biofuels", "subsubs": ["Biodiesel", "Ethanol"] },
+            { "name": "Hydrogen Energy", "subsubs": ["Blue Hydrogen", "Green Hydrogen"] },
+            { "name": "Carbon Capture & Storage (CCS)" },
+            { "name": "Renewable Integration with Oil & Gas" }
+          ]
+        }
+    ]
+  },
+    {
+      "name": "Manufacturing & Construction",
+      "categories": [
+        {
+          "name": "Manufacturing",
+          "subcategories": [
+            { "name": "Automobiles" },
+            { "name": "Textiles" },
+            { "name": "Food & Beverage" },
+            { "name": "Electronics" },
+            { "name": "Chemicals" },
+            { "name": "Machinery" },
+            { "name": "Other Industrial Manufacturing" }
+          ]
+        },
+        {
+          "name": "Construction",
+          "subcategories": [
+            { "name": "Residential" },
+            { "name": "Commercial" },
+            { "name": "Infrastructure" }
+          ]
+        },
+        {
+          "name": "Utilities",
+          "subcategories": [
+            { "name": "Electricity" },
+            { "name": "Water Supply" },
+            { "name": "Waste Management" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "categories": [
+        {
+          "name": "Retail & Wholesale Trade",
+          "subcategories": [
+            { "name": "Retail Shops" },
+            { "name": "Wholesale Suppliers" },
+            { "name": "E-commerce Retail" }
+          ]
+        },
+        {
+          "name": "Transportation & Logistics",
+          "subcategories": [
+            { "name": "Road Transport" },
+            { "name": "Rail Transport" },
+            { "name": "Air Transport" },
+            { "name": "Maritime Shipping" },
+            { "name": "Warehousing & Distribution" }
+          ]
+        },
+        {
+          "name": "Financial Services",
+          "subcategories": [
+            { "name": "Banking" },
+            { "name": "Insurance" },
+            { "name": "Investments" }
+          ]
+        },
+        {
+          "name": "Real Estate & Property Development",
+          "subcategories": [
+            { "name": "Residential Real Estate" },
+            { "name": "Commercial Real Estate" },
+            { "name": "Property Management" }
+          ]
+        },
+        {
+          "name": "Hospitality & Tourism",
+          "subcategories": [
+            { "name": "Hotels & Resorts" },
+            { "name": "Restaurants & Catering" },
+            { "name": "Tour Operators" },
+            { "name": "Travel Agencies" }
+          ]
+        },
+        {
+          "name": "Healthcare & Pharmaceuticals",
+          "subcategories": [
+            { "name": "Hospitals & Clinics" },
+            { "name": "Pharmaceutical Manufacturing" },
+            { "name": "Medical Equipment Suppliers" }
+          ]
+        },
+        {
+          "name": "Education & Training",
+          "subcategories": [
+            { "name": "Primary & Secondary Schools" },
+            { "name": "Universities & Colleges" },
+            { "name": "Vocational Training" }
+          ]
+        },
+        {
+          "name": "Media, Entertainment & Sports",
+          "subcategories": [
+            { "name": "Broadcast Media" },
+            { "name": "Film & Music Production" },
+            { "name": "Sports Clubs & Events" }
+          ]
+        },
+        {
+          "name": "Professional Services",
+          "subcategories": [
+            { "name": "Legal Services" },
+            { "name": "Accounting Services" },
+            { "name": "Consulting Services" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Knowledge & Technology",
+      "categories": [
+        {
+          "name": "Information Technology",
+          "subcategories": [
+            { "name": "Software Development" },
+            { "name": "Hardware Manufacturing" },
+            { "name": "Cloud Computing" },
+            { "name": "Cybersecurity" }
+          ]
+        },
+        {
+          "name": "Telecommunications",
+          "subcategories": [
+            { "name": "Mobile Networks" },
+            { "name": "Internet Service Providers" },
+            { "name": "Satellite Communications" }
+          ]
+        },
+        {
+          "name": "Research & Development",
+          "subcategories": [
+            { "name": "Scientific Research" },
+            { "name": "Industrial R&D" }
+          ]
+        },
+        {
+          "name": "Data & Analytics",
+          "subcategories": [
+            { "name": "Big Data Analytics" },
+            { "name": "Artificial Intelligence" },
+            { "name": "Business Intelligence" }
+          ]
+        },
+        {
+          "name": "Biotechnology",
+          "subcategories": [
+            { "name": "Medical Biotech" },
+            { "name": "Agricultural Biotech" },
+            { "name": "Industrial Biotech" }
+          ]
+        },
+        {
+          "name": "E-commerce & Digital Platforms",
+          "subcategories": [
+            { "name": "Marketplaces" },
+            { "name": "Payment Platforms" },
+            { "name": "Digital Services" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Leadership & Specialized Services",
+      "categories": [
+        {
+          "name": "Government & Public Administration",
+          "subcategories": [
+            { "name": "National Government" },
+            { "name": "Local Government" },
+            { "name": "Public Institutions" }
+          ]
+        },
+        {
+          "name": "Non-Profit & NGO Management",
+          "subcategories": [
+            { "name": "Community NGOs" },
+            { "name": "International NGOs" }
+          ]
+        },
+        {
+          "name": "Policy & Think Tanks",
+          "subcategories": [
+            { "name": "Economic Policy" },
+            { "name": "Social Policy" },
+            { "name": "Environmental Policy" }
+          ]
+        },
+        {
+          "name": "Executive & Corporate Leadership",
+          "subcategories": [
+            { "name": "CEOs & Executives" },
+            { "name": "Corporate Governance" }
+          ]
+        },
+        {
+          "name": "Advanced Healthcare",
+          "subcategories": [
+            { "name": "Specialist Hospitals" },
+            { "name": "Biotech Leadership" }
+          ]
+        },
+        {
+          "name": "International Organizations",
+          "subcategories": [
+            { "name": "United Nations" },
+            { "name": "World Bank" },
+            { "name": "IMF" },
+            { "name": "African Union" }
+          ]
+        }
+      ]
+    }
+]
+

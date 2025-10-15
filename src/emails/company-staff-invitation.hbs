@@ -1,0 +1,44 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  Invitation to Join {{companyName}} Team 👥
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if userName}} {{userName}}{{/if}}, <strong>{{companyName}}</strong> has invited you to join their team on <strong>{{BRAND.name}}</strong>.
+</p>
+
+{{#if role}}
+<div style="margin:16px 0;padding:12px;background:#d4edda;border-radius:8px;color:#155724;">
+  <p style="margin:0;"><strong>🎯 Proposed Role:</strong> {{role}}</p>
+</div>
+{{/if}}
+
+{{#if message}}
+<div style="margin:16px 0;padding:12px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0;font-style:italic;">"{{message}}"</p>
+</div>
+{{/if}}
+
+<div style="margin:16px 0;padding:12px;background:#f8f9fa;border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0 0 10px 0;"><strong>As a team member, you will be able to:</strong></p>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Access company-specific features</li>
+    <li>Collaborate with team members</li>
+    <li>View company profile and updates</li>
+    <li>Participate in team activities</li>
+  </ul>
+</div>
+
+{{> button href=invitationLink label="Accept Invitation"}}
+
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  {{#if expiresInHours}}
+  This invitation will expire in {{expiresInHours}} hours for your security.
+  {{else}}
+  This invitation will expire in 7 days for your security.
+  {{/if}}
+</p>

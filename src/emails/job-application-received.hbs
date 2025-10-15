@@ -1,0 +1,34 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  New Job Application 📋
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, <strong>{{applicantName}}</strong> has applied for your job posting: <strong>{{jobTitle}}</strong>.
+</p>
+
+<div style="margin:16px 0;padding:12px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0;font-weight:500;">Application Details:</p>
+  {{#if coverLetter}}
+  <p style="margin:8px 0;font-style:italic;">"{{coverLetter}}"</p>
+  {{/if}}
+  {{#if expectedSalary}}
+  <p style="margin:4px 0;"><strong>Expected Salary:</strong> {{expectedSalary}}</p>
+  {{/if}}
+  {{#if employmentType}}
+  <p style="margin:4px 0;"><strong>Employment Type:</strong> {{employmentType}}</p>
+  {{/if}}
+</div>
+
+{{> button href=link label="Review Application"}}
+
+<p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+  You can view and manage all applications for this job in your job dashboard.
+</p>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You're receiving this because someone applied to a job you posted.
+</p>

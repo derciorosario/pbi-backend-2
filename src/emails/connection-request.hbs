@@ -1,0 +1,33 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  New Connection Request 🤝
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, <strong>{{fromName}}</strong> would like to connect with you on <strong>{{BRAND.name}}</strong>.
+</p>
+
+{{#if message}}
+<div style="margin:16px 0;padding:12px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0;font-style:italic;">"{{message}}"</p>
+</div>
+{{/if}}
+
+{{#if reason}}
+<p style="margin:12px 0;color:{{BRAND.muted}};">
+  <strong>Reason:</strong> {{reason}}
+</p>
+{{/if}}
+
+{{> button href=link label="View Connection Request"}}
+
+<p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+  You can also view and respond to this request in your notifications panel.
+</p>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  If you don't know this person, you can safely ignore this request.
+</p>

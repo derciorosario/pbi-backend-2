@@ -1,0 +1,1827 @@
+[
+  {
+  "type": "job",
+  "categories": [
+    {
+      "name": "Professionals",
+      "subcategories": [
+        {
+          "name": "Administrative",
+          "subsubcategories": [
+            {
+              "name": "Personal Assistant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Office Admin",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Secretary",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Data Entry",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Virtual Assistant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Operations Support",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Technology",
+          "subsubcategories": [
+            {
+              "name": "Web Developer - Frontend",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Backend Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Full-stack Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "UI/UX Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Product Manager",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Quality Assurance Engineer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Mobile App Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "System Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "IT Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Accounting",
+          "subsubcategories": [
+            {
+              "name": "Auditor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Tax Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Bookkeeper",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Forensic Accountant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Financial Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Corporate Accountant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Risk & Compliance Officer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Engineering",
+          "subsubcategories": [
+            {
+              "name": "Civil",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Mechanical",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Electrical",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Chemical",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Software",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Environmental",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Infrastructure & Construction",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Automobile",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Petroleum",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Project Management",
+          "subsubcategories": [
+            {
+              "name": "Agile PM",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Construction PM",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "IT PM",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Development PM",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Research PM",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Change Management Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "IT Professional",
+          "subsubcategories": [
+            {
+              "name": "Network Engineer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Cybersecurity",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Database Admin",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Cloud Engineer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "System Architect",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Legal",
+          "subsubcategories": [
+            {
+              "name": "Corporate Lawyer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Contract Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Compliance Officer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Civil / Criminal Lawyer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Intellectual Property Lawyer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Human Rights Lawyer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Legal Researcher",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Consulting",
+          "subsubcategories": [
+            {
+              "name": "Business Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Strategy Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Management Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Technology Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Sustainability Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Policy & Governance Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Human Resources",
+          "subsubcategories": [
+            {
+              "name": "Recruiter",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "HR Business Partner",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Training Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Talent Acquisition",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Compensation & Benefits Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "HR Tech Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Marketing & Advertising",
+          "subsubcategories": [
+            {
+              "name": "Digital Marketer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Brand Strategist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Public Relations Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Market Research Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Corporate Communications Officer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Copywriter / Content Creator",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Marketing & Strategy",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Healthcare",
+          "subsubcategories": [
+            {
+              "name": "Medical Doctor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Nurse",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Pharmacist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Lab Scientist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Public Health Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Psychologist / Therapist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Physiotherapist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Education & Research",
+          "subsubcategories": [
+            {
+              "name": "Teacher",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "University Lecturer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Education Technologist (EdTech)",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Academic Researcher",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Curriculum Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Trainer / Coach",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Creative & Design",
+          "subsubcategories": [
+            {
+              "name": "Graphic Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Animator",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Video Editor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Photographer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Illustrator / Digital Artist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Fashion Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Interior Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Science & Environment",
+          "subsubcategories": [
+            {
+              "name": "Biologist / Chemist / Physicist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Environmental Scientist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Climate Change Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Renewable Energy Expert",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Agricultural Scientist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Data Scientist (Applied Science)",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Freelancers",
+      "subcategories": [
+        {
+          "name": "Writing & Translation",
+          "subsubcategories": [
+            {
+              "name": "Copywriter",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Content Writer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Technical Writer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Editor & Proofreader",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Ghostwriter",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Translator",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Transcriber",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Design & Creative",
+          "subsubcategories": [
+            {
+              "name": "Graphic Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "UI/UX Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Illustrator",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Animator (2D/3D)",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Video Editor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Photographer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Logo & Branding Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Interior Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Fashion & Textile Designer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Sales & Marketing",
+          "subsubcategories": [
+            {
+              "name": "Digital Marketing Specialist (SEO, SEM, PPC, Email)",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Social Media Manager",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Ads Manager",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Influencer Marketing Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Content Marketing Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Affiliate Marketing Expert",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Market Research Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Admin Support",
+          "subsubcategories": [
+            {
+              "name": "Virtual Assistant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Data Entry Clerk",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Travel & Event Coordinator",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Operations Assistant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Customer Service",
+          "subsubcategories": [
+            {
+              "name": "Customer Support Representative",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Technical Support Agent",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Help Desk Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Community Manager",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Client Success Manager",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Tech & IT",
+          "subsubcategories": [
+            {
+              "name": "Web Developer (Frontend, Backend, Full Stack)",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Mobile App Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Software Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "QA Tester",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Game Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Data Scientist / Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Machine Learning / AI Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Cloud Computing Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Cybersecurity Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "DevOps Engineer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Legal & Consulting",
+          "subsubcategories": [
+            {
+              "name": "Legal Advisor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Contract Drafting & Review",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Business Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Strategy Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Policy & Governance Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "HR Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Tech Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Fashion Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Finance & Business",
+          "subsubcategories": [
+            {
+              "name": "Accountant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Bookkeeper",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Financial Analyst",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Tax Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Investment Researcher",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Business Plan Writer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Virtual CFO",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Education & Training",
+          "subsubcategories": [
+            {
+              "name": "Online Tutor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Language Teacher",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Corporate Trainer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Curriculum Developer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "eLearning Specialist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Career Coach",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        },
+        {
+          "name": "Health & Wellness",
+          "subsubcategories": [
+            {
+              "name": "Fitness Coach",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Personal Trainer",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Nutritionist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Diet Consultant",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Mental Health Coach",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Therapist",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Yoga Instructor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Mindfulness Instructor",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            },
+            {
+              "name": "Wellness Blogger",
+              "subsubsubcategories": ["Undergraduate", "Graduate", "Postgraduate", "Doctoral", "Vocational/Technical", "Student", "Short Term Training", "None"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Students",
+      "subcategories": [
+        {
+          "name": "Undergraduate",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Graduate",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Postgraduate",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Doctoral",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Vocational/Technical",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Student Entrepreneur",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        },
+        {
+          "name": "Freelancer Student",
+          "subsubcategories": [
+            "Finance",
+            "Business",
+            "Engineering",
+            "Medicine",
+            "IT & Computer Science",
+            "Arts & Humanities",
+            "Agriculture",
+            "Law",
+            "Social Sciences",
+            "Education",
+            "Environmental Studies",
+            "Mass Communication",
+            "Public Administration",
+            "Sociology"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Executives",
+      "subcategories": [
+        {
+          "name": "C-Level Executives (C-Suite)",
+          "subsubcategories": [
+            "Chief Executive Officer (CEO)",
+            "Chief Operating Officer (COO)",
+            "Chief Financial Officer (CFO)",
+            "Chief Technology Officer (CTO)",
+            "Chief Marketing Officer (CMO)",
+            "Chief Human Resources Officer (CHRO)",
+            "Chief Information Officer (CIO)",
+            "Chief Strategy Officer (CSO)"
+          ]
+        },
+        {
+          "name": "Vice Presidents",
+          "subsubcategories": [
+            "Executive Vice President (EVP)",
+            "Senior Vice President (SVP)",
+            "Vice President (VP)"
+          ]
+        },
+        {
+          "name": "Directors",
+          "subsubcategories": [
+            "Global Managing Director",
+            "Regional Managing Director",
+            "Managing Director",
+            "Executive Director",
+            "Non-Executive Director",
+            "Independent Director",
+            "Associate Director",
+            "Assistant Director"
+          ]
+        },
+        {
+          "name": "Managers",
+          "subsubcategories": [
+            "General Manager (GM)",
+            "Operations Manager",
+            "Project Manager",
+            "Product Manager",
+            "Marketing Manager",
+            "Sales Manager",
+            "Finance Manager",
+            "Human Resources (HR) Manager",
+            "IT / Technology Manager",
+            "Supply Chain / Logistics Manager",
+            "Customer Service Manager",
+            "Business Development Manager"
+          ]
+        },
+        {
+          "name": "Other Executive Roles",
+          "subsubcategories": [
+            "General Counsel / Chief Legal Officer",
+            "Chief Innovation Officer",
+            "Chief Risk Officer",
+            "Chief Compliance Officer"
+          ]
+        }
+      ]
+    }
+  ]
+ },
+  {
+  "type": "event",
+  "categories": [
+    {
+      "name": "Business & Professional",
+      "subcategories": [
+        "Conferences",
+        "Trade Shows",
+        "Networking Events",
+        "Seminars",
+        "Workshops",
+        "Product Launches",
+        "Job Fairs",
+        "Startup Pitches"
+      ]
+    },
+    {
+      "name": "Educational & Training",
+      "subcategories": [
+        "Lectures",
+        "Webinars",
+        "Training Programs",
+        "Bootcamps",
+        "Classes",
+        "Panel Discussions",
+        "Academic Conferences",
+        "Graduation Ceremonies"
+      ]
+    },
+    {
+      "name": "Entertainment & Cultural",
+      "subcategories": [
+        "Concerts",
+        "Festivals",
+        "Theater Shows",
+        "Movie Screenings",
+        "Comedy Shows",
+        "Art Exhibitions",
+        "Cultural Performances"
+      ]
+    },
+    {
+      "name": "Sports & Fitness",
+      "subcategories": [
+        "Tournaments",
+        "Marathons",
+        "Yoga Classes",
+        "Fitness Bootcamps",
+        "Esports Competitions",
+        "Team Sports Matches"
+      ]
+    },
+    {
+      "name": "Social & Community",
+      "subcategories": [
+        "Meetups",
+        "Parties",
+        "Reunions",
+        "Picnics",
+        "Community Fairs",
+        "Fundraisers",
+        "Volunteering Activities"
+      ]
+    },
+    {
+      "name": "Religious & Spiritual",
+      "subcategories": [
+        "Church Services",
+        "Prayer Meetings",
+        "Pilgrimages",
+        "Gospel Concerts",
+        "Retreats",
+        "Meditation Sessions",
+        "Religious Festivals"
+      ]
+    },
+    {
+      "name": "Political & Government",
+      "subcategories": [
+        "Campaign Rallies",
+        "Debates",
+        "Parliamentary Sessions",
+        "Civic Engagement Programs",
+        "Town Halls",
+        "Government Summits"
+      ]
+    },
+    {
+      "name": "Charity & Non-Profit",
+      "subcategories": [
+        "Fundraising Galas",
+        "Awareness Campaigns",
+        "Donation Drives",
+        "Volunteer Events",
+        "NGO Conferences"
+      ]
+    },
+    {
+      "name": "Health & Wellness",
+      "subcategories": [
+        "Health Fairs",
+        "Blood Donation Drives",
+        "Medical Conferences",
+        "Therapy Sessions",
+        "Wellness Retreats",
+        "Mental Health Workshops"
+      ]
+    },
+    {
+      "name": "Technology & Innovation",
+      "subcategories": [
+        "Hackathons",
+        "Developer Meetups",
+        "Startup Competitions",
+        "Tech Expos",
+        "AI/Cloud Conferences"
+      ]
+    },
+    {
+      "name": "Family & Personal Events",
+      "subcategories": [
+        "Weddings",
+        "Engagements",
+        "Birthdays",
+        "Baby Showers",
+        "Funerals/Memorials",
+        "Anniversaries",
+        "Naming Ceremonies"
+      ]
+    },
+    {
+      "name": "Food & Drink Events",
+      "subcategories": [
+        "Food Festivals",
+        "Wine Tastings",
+        "Cooking Classes",
+        "Farmers Markets",
+        "Restaurant Openings"
+      ]
+    },
+    {
+      "name": "Travel & Adventure Events",
+      "subcategories": [
+        "Tours",
+        "Camping Trips",
+        "Hiking Expeditions",
+        "Cruise Gatherings",
+        "Travel Fairs"
+      ]
+    },
+    {
+      "name": "Virtual / Online Events",
+      "subcategories": [
+        "Online Webinars",
+        "Virtual Conferences",
+        "Online Networking",
+        "Livestreamed Concerts",
+        "Online Workshops"
+      ]
+    }
+  ]
+}
+,
+  {
+  "type": "product",
+  "categories": [
+    {
+      "name": "Electronics & Technology",
+      "subcategories": [
+        "Mobile Phones",
+        "Laptops",
+        "Tablets",
+        "Televisions",
+        "Cameras",
+        "Audio Equipment",
+        "Smart Home Devices",
+        "Wearables",
+        "Gaming Consoles",
+        "Computer Accessories"
+      ]
+    },
+    {
+      "name": "Fashion & Apparel",
+      "subcategories": [
+        "Men’s Clothing",
+        "Women’s Clothing",
+        "Kids’ Clothing",
+        "Shoes",
+        "Bags",
+        "Jewelry",
+        "Watches",
+        "Sunglasses",
+        "Accessories"
+      ]
+    },
+    {
+      "name": "Home & Living",
+      "subcategories": [
+        "Furniture",
+        "Kitchenware",
+        "Bedding",
+        "Home Decor",
+        "Lighting",
+        "Storage Solutions",
+        "Cleaning Supplies",
+        "Appliances"
+      ]
+    },
+    {
+      "name": "Beauty & Personal Care",
+      "subcategories": [
+        "Skincare",
+        "Haircare",
+        "Makeup",
+        "Perfumes",
+        "Grooming Kits",
+        "Hygiene Products",
+        "Spa & Wellness Products"
+      ]
+    },
+    {
+      "name": "Food & Beverages",
+      "subcategories": [
+        "Groceries",
+        "Snacks",
+        "Beverages",
+        "Packaged Foods",
+        "Fresh Produce",
+        "Dairy Products",
+        "Alcoholic Drinks",
+        "Organic Foods"
+      ]
+    },
+    {
+      "name": "Health & Wellness",
+      "subcategories": [
+        "Supplements",
+        "Medical Equipment",
+        "Fitness Equipment",
+        "First Aid",
+        "Health Monitoring Devices",
+        "Personal Care"
+      ]
+    },
+    {
+      "name": "Sports & Outdoors",
+      "subcategories": [
+        "Sporting Goods",
+        "Exercise Equipment",
+        "Camping Gear",
+        "Hiking Gear",
+        "Bicycles",
+        "Outdoor Games"
+      ]
+    },
+    {
+      "name": "Automotive",
+      "subcategories": [
+        "Cars",
+        "Motorcycles",
+        "Auto Parts",
+        "Car Accessories",
+        "Tires",
+        "Oils & Fluids",
+        "Tools & Equipment"
+      ]
+    },
+    {
+      "name": "Baby & Kids",
+      "subcategories": [
+        "Baby Clothing",
+        "Diapers",
+        "Toys",
+        "Strollers",
+        "Baby Food",
+        "Learning Materials",
+        "Kids’ Furniture"
+      ]
+    }
+  ]
+}
+,
+ 
+{
+  "type": "service",
+  "categories": [
+    {
+      "name": "Business & Professional Services",
+      "subcategories": [
+        "Virtual Assistance",
+        "Consulting",
+        "Project Management",
+        "Accounting & Bookkeeping",
+        "Legal Services",
+        "HR & Recruitment",
+        "Business Coaching"
+      ]
+    },
+    {
+      "name": "Creative & Design Services",
+      "subcategories": [
+        "Graphic Design",
+        "Logo Design",
+        "Web Design",
+        "UX/UI",
+        "Animation",
+        "Video Editing",
+        "Photography",
+        "Interior Design"
+      ]
+    },
+    {
+      "name": "Technology & IT Services",
+      "subcategories": [
+        "Software Development",
+        "App Development",
+        "Web Development",
+        "Cloud Services",
+        "Cybersecurity",
+        "IT Support",
+        "Data Science",
+        "AI/ML Services"
+      ]
+    },
+    {
+      "name": "Marketing & Advertising Services",
+      "subcategories": [
+        "Social Media Management",
+        "SEO",
+        "Content Marketing",
+        "Paid Ads (Google/Facebook)",
+        "Email Marketing",
+        "Branding",
+        "Public Relations"
+      ]
+    },
+    {
+      "name": "Writing & Translation Services",
+      "subcategories": [
+        "Copywriting",
+        "Blogging",
+        "Technical Writing",
+        "Resume Writing",
+        "Translations",
+        "Transcriptions",
+        "Proofreading",
+        "Script Writing"
+      ]
+    },
+    {
+      "name": "Education & Training Services",
+      "subcategories": [
+        "Tutoring",
+        "Online Courses",
+        "Coaching",
+        "Corporate Training",
+        "Workshops",
+        "Exam Prep",
+        "Language Learning"
+      ]
+    },
+    {
+      "name": "Health & Wellness Services",
+      "subcategories": [
+        "Personal Training",
+        "Nutrition Coaching",
+        "Therapy & Counseling",
+        "Yoga/Meditation Classes",
+        "Spa & Massage",
+        "Telemedicine"
+      ]
+    },
+    {
+      "name": "Home & Maintenance Services",
+      "subcategories": [
+        "Plumbing",
+        "Electrical Work",
+        "Cleaning",
+        "Pest Control",
+        "Gardening",
+        "Carpentry",
+        "Appliance Repair",
+        "Moving & Relocation"
+      ]
+    },
+    {
+      "name": "Events & Entertainment Services",
+      "subcategories": [
+        "Event Planning",
+        "Catering",
+        "DJ Services",
+        "Live Bands",
+        "Photography & Videography",
+        "Decoration",
+        "MC/Hosting"
+      ]
+    }
+  ]
+}
+,
+ 
+{
+  "type": "tourism",
+  "categories": [
+    {
+      "name": "Tourist Guides & Services",
+      "subcategories": [
+        {
+          "name": "Local Guides",
+          "subsubcategories": [
+            "City Tours",
+            "Cultural Tours",
+            "Historical Tours"
+          ]
+        },
+        {
+          "name": "Specialist Guides",
+          "subsubcategories": [
+            "Wildlife & Safari Guides",
+            "Eco-Tourism & Nature Guides",
+            "Adventure & Sports Guides",
+            "Art & Heritage Guides"
+          ]
+        },
+        {
+          "name": "Digital/Audio Guides",
+          "subsubcategories": [
+            "Mobile Apps",
+            "Audio Tours",
+            "Virtual Tours"
+          ]
+        },
+        {
+          "name": "Tour Operators & Agencies",
+          "subsubcategories": [
+            "Package Tours",
+            "Customized Trips",
+            "Group Tours",
+            "Travel Planners"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tourist Attractions",
+      "subcategories": [
+        {
+          "name": "Natural Attractions",
+          "subsubcategories": [
+            "Mountains",
+            "Beaches",
+            "Waterfalls",
+            "Lakes & Rivers",
+            "National Parks & Reserves"
+          ]
+        },
+        {
+          "name": "Cultural Attractions",
+          "subsubcategories": [
+            "Museums & Art Galleries",
+            "UNESCO Heritage Sites",
+            "Temples, Churches, Mosques, Shrines",
+            "Castles, Forts, Palaces"
+          ]
+        },
+        {
+          "name": "Recreational Attractions",
+          "subsubcategories": [
+            "Theme Parks",
+            "Zoos & Aquariums",
+            "Botanical Gardens",
+            "Golf Courses"
+          ]
+        },
+        {
+          "name": "Adventure/Activity-Based Attractions",
+          "subsubcategories": [
+            "Hiking Trails",
+            "Safari Parks",
+            "Diving & Snorkeling Sites",
+            "Ski Resorts",
+            "Desert Tours"
+          ]
+        },
+        {
+          "name": "Events & Festivals",
+          "subsubcategories": [
+            "Music Festivals",
+            "Cultural Celebrations",
+            "Food & Wine Festivals",
+            "Sports Events (Olympics, Football, Marathons)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Accommodation",
+      "subcategories": [
+        {
+          "name": "Hotels",
+          "subsubcategories": [
+            "Luxury Hotels (5-star, resorts)",
+            "Mid-Range / Boutique Hotels",
+            "Budget Hotels / Motels",
+            "Business Hotels"
+          ]
+        },
+        {
+          "name": "Resorts",
+          "subsubcategories": [
+            "Beach Resorts",
+            "Mountain Resorts",
+            "Spa & Wellness Resorts",
+            "Eco-Resorts"
+          ]
+        },
+        {
+          "name": "Guesthouses & B&Bs"
+        },
+        {
+          "name": "Hostels",
+          "subsubcategories": [
+            "Backpacker Hostels",
+            "Youth Hostels"
+          ]
+        },
+        {
+          "name": "Vacation Rentals",
+          "subsubcategories": [
+            "Airbnb",
+            "Villas",
+            "Serviced Apartments"
+          ]
+        },
+        {
+          "name": "Camping & Glamping",
+          "subsubcategories": [
+            "Tent Camps",
+            "RVs & Caravans",
+            "Luxury Camping (Glamping)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transportation",
+      "subcategories": [
+        {
+          "name": "Air Travel",
+          "subsubcategories": [
+            "International Airlines",
+            "Domestic Airlines",
+            "Charter Flights"
+          ]
+        },
+        {
+          "name": "Land Travel",
+          "subsubcategories": [
+            "Buses & Coaches",
+            "Car Rentals",
+            "Motorbike & Scooter Rentals",
+            "Train Services"
+          ]
+        },
+        {
+          "name": "Water Travel",
+          "subsubcategories": [
+            "Ferries",
+            "Cruise Ships",
+            "Private Yachts & Boat Tours"
+          ]
+        },
+        {
+          "name": "Local Transport",
+          "subsubcategories": [
+            "Taxis",
+            "Ride-hailing (Uber, Bolt, etc.)",
+            "E-scooters",
+            "Bicycles",
+            "Trams/Metro"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Food & Restaurants",
+      "subcategories": [
+        "Fine Dining (luxury restaurants, Michelin-starred)",
+        "Casual Dining (cafés, bistros, family restaurants)",
+        "Street Food (food trucks, local markets, traditional food vendors)",
+        "Themed Dining (cultural restaurants, dinner shows, medieval dining, revolving restaurants)",
+        {
+          "name": "Food Tours & Tastings",
+          "subsubcategories": [
+            "Wine Tasting",
+            "Brewery Tours",
+            "Food & Market Tours"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tourist Entertainment",
+      "subcategories": [
+        {
+          "name": "Cultural Entertainment",
+          "subsubcategories": [
+            "Dance Shows",
+            "Traditional Music Concerts",
+            "Theatre & Opera"
+          ]
+        },
+        {
+          "name": "Nightlife",
+          "subsubcategories": [
+            "Nightclubs",
+            "Bars & Lounges",
+            "Casinos"
+          ]
+        },
+        {
+          "name": "Sports & Adventure Entertainment",
+          "subsubcategories": [
+            "Stadiums & Arenas",
+            "Extreme Sports Parks",
+            "Adventure Parks"
+          ]
+        },
+        {
+          "name": "Shopping & Leisure",
+          "subsubcategories": [
+            "Malls",
+            "Craft Markets",
+            "Souvenir Shops"
+          ]
+        },
+        {
+          "name": "Wellness & Leisure",
+          "subsubcategories": [
+            "Spas & Massage Centers",
+            "Yoga & Meditation Retreats",
+            "Wellness Resorts"
+          ]
+        }
+      ]
+    }
+  ]
+}
+,
+  
+  {
+  "type": "opportunity",
+  "categories": [
+    {
+      "name": "Scholarships",
+      "subcategories": [
+        {
+          "name": "Undergraduate Scholarships",
+          "subsubcategories": [
+            "Fully-Funded Scholarships",
+            "Partial-Funded Scholarships"
+          ]
+        },
+        {
+          "name": "Postgraduate Scholarships",
+          "subsubcategories": [
+            "Masters Scholarships"
+          ]
+        },
+        {
+          "name": "Exchange Programs",
+          "subsubcategories": [
+            "Student Exchange Programs",
+            "Erasmus & Cultural Exchange"
+          ]
+        },
+        {
+          "name": "Fellowships",
+          "subsubcategories": [
+            "Academic Fellowships",
+            "Research Fellowships",
+            "Leadership Fellowships"
+          ]
+        },
+        {
+          "name": "Professional Training",
+          "subsubcategories": [
+            "Leadership Development",
+            "Technical & Vocational Training",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Online Courses",
+          "subsubcategories": [
+            "MOOCs (Coursera, edX, Udemy, etc.)",
+            "Certification Programs",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Skill Bootcamps",
+          "subsubcategories": [
+            "Coding",
+            "Digital Marketing",
+            "Design",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Workshops & Masterclasses",
+          "subsubcategories": [
+            "Soft Skills Training (communication, leadership)",
+            "Hard Skills Training (IT, engineering, finance)",
+            "Entrepreneurship"
+          ]
+        },
+        {
+          "name": "Exhibition and Conferences",
+          "subsubcategories": [
+            "Startups",
+            "AfCFTA",
+            "Trade Fairs",
+            "Conferences"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Grants",
+      "subcategories": [
+        {
+          "name": "Research Grants"
+        },
+        {
+          "name": "Business Grants"
+        },
+        {
+          "name": "NGO/Nonprofit Grants"
+        },
+        {
+          "name": "Competitions",
+          "subsubcategories": [
+            "Hackathons",
+            "Business Pitch Competitions",
+            "Art & Creative Contests"
+          ]
+        },
+        {
+          "name": "Innovation & Startup Funding",
+          "subsubcategories": [
+            "Seed Funding",
+            "Venture Capital Opportunities",
+            "Accelerator Programs",
+            "PhD & Research Grants"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Volunteering & Exchange",
+      "subcategories": [
+        {
+          "name": "Local Volunteering",
+          "subsubcategories": [
+            "Community Projects",
+            "Nonprofit Organizations"
+          ]
+        },
+        {
+          "name": "International Volunteering",
+          "subsubcategories": [
+            "Humanitarian Work",
+            "Peace Corps & International NGOs"
+          ]
+        },
+        {
+          "name": "Cultural Exchange Programs",
+          "subsubcategories": [
+            "Youth Exchange",
+            "Work & Travel Programs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mentorship & Leadership",
+      "subcategories": [
+        {
+          "name": "Mentorship Programs",
+          "subsubcategories": [
+            "Career Mentorship",
+            "Business Mentorship"
+          ]
+        },
+        {
+          "name": "Leadership Programs",
+          "subsubcategories": [
+            "Youth Leadership Initiatives",
+            "Women in Leadership Programs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Investment Funds / Investors",
+      "subcategories": [
+        {
+          "name": "Eligibility",
+          "subsubcategories": [
+            "Age",
+            "Gender",
+            "Region",
+            "Nationality",
+            "Educational Qualification",
+            "Experience"
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+]

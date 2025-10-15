@@ -1,0 +1,31 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  New Event Registration 📝
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, <strong>{{registrantName}}</strong> has registered for your event: <strong>{{eventTitle}}</strong>.
+</p>
+
+<div style="margin:16px 0;padding:12px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0;font-weight:500;">Registration Details:</p>
+  {{#if numberOfPeople}}
+  <p style="margin:4px 0;"><strong>Number of People:</strong> {{numberOfPeople}}</p>
+  {{/if}}
+  {{#if reasonForAttending}}
+  <p style="margin:8px 0;font-style:italic;">"{{reasonForAttending}}"</p>
+  {{/if}}
+</div>
+
+{{> button href=link label="Review Registrations"}}
+
+<p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+  You can view and manage all registrations for this event in your event dashboard.
+</p>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You're receiving this because someone registered for one of your events.
+</p>

@@ -1,0 +1,2058 @@
+{
+  "goals": [
+    "Funding",
+    "Job opportunities",
+    "Internship",
+    "Investors",
+    "Grants",
+    "Events",
+    "Scholarship",
+    "Networking",
+    "Training",
+    "Mentorship/Coaching",
+    "Franchising",
+    "Expanding into a new market",
+    "Partnership",
+    "Products",
+    "Professionals",
+    "Volunteer opportunity",
+    "Research/ project collaborators",
+    "Services providers",
+    "Tourist guide",
+    "Students",
+    "Job seekers",
+    "Freelancers",
+    "Social entrepreneurs/ NGOs"
+  ],
+  
+  "identities": [
+  {
+    "name": "Entrepreneurs",
+    "categories": [
+      {
+        "name": "Technology",
+        "subcategories": [
+          { "name": "Software Development" },
+          { "name": "Hardware & Devices" },
+          { "name": "Fintech" },
+          { "name": "Artificial Intelligence" },
+          { "name": "Data Science & Analysis" },
+          { "name": "Cybersecurity" },
+          { "name": "Telecom & Connectivity" },
+          { "name": "SaaS" },
+          { "name": "AI/ML" },
+          { "name": "Emerging Tech" }
+        ]
+      },
+      {
+        "name": "Trade",
+        "subcategories": [
+          {
+            "name": "Fashion",
+            "subsubs": [
+              "Apparel Design",
+              "Footwear",
+              "Accessories",
+              "Modest/Traditional Wear",
+              "Fashion Tech"
+            ]
+          },
+          { "name": "Food & Beverage" },
+          { "name": "Electronics" },
+          { "name": "Home Goods" },
+          { "name": "Raw Materials" },
+          {
+            "name": "Beauty & Cosmetics",
+            "subsubs": [
+              "Skincare",
+              "Haircare",
+              "Makeup",
+              "Fragrances",
+              "Beauty Tech"
+            ]
+          },
+          { "name": "E-commerce & Business Trade" },
+          { "name": "Automotive Trade" },
+          { "name": "Industrial" }
+        ]
+      },
+      {
+        "name": "Agriculture",
+        "subcategories": [
+          { "name": "Crop Production" },
+          { "name": "Livestock & Poultry" },
+          { "name": "Agro-Processing" },
+          { "name": "Fishery & Aquaculture" },
+          { "name": "Forestry & Timber" },
+          { "name": "Agro-Tech" },
+          { "name": "Agricultural Equipment & Inputs" },
+          { "name": "Organic & Sustainable Farming" }
+        ]
+      },
+      {
+        "name": "Manufacturing",
+        "subcategories": [
+          { "name": "Food & Beverage" },
+          { "name": "Textiles & Apparel" },
+          { "name": "Industrial Goods" },
+          { "name": "Furniture & Interiors" },
+          { "name": "Consumer Goods" },
+          { "name": "Machinery & Equipment" },
+          { "name": "Pharmaceutical & Biotech" },
+          { "name": "Automotive" },
+          { "name": "Packaging Materials" },
+          { "name": "Electrical & Lightenings" }
+        ]
+      },
+      {
+        "name": "Energy",
+        "subcategories": [
+          { "name": "Renewable Energy" },
+          { "name": "Oil & Gas" },
+          { "name": "Power Generation & Distribution" },
+          { "name": "Energy Equipment & Services" },
+          { "name": "Clean Tech / Green Energy Solutions" }
+        ]
+      },
+      {
+        "name": "Service Providers",
+        "subcategories": [
+          { "name": "Consulting" },
+          { "name": "Training" },
+          { "name": "Marketing & Advertising" },
+          { "name": "Financial Services" },
+          { "name": "Human Resources / Recruiter" },
+          { "name": "Education & Training" },
+          { "name": "Health & Wellness" },
+          { "name": "Logistics & Delivery Service" },
+          { "name": "Cleaning & Facility Management" },
+          { "name": "Event Planning & Hospitality Service" },
+          { "name": "Coaching / Mentorship" },
+          { "name": "Master of Ceremony (MC)" },
+          { "name": "Legal Services" },
+          { "name": "Creative & Design Services" },
+          { "name": "Customer Support & Outsourcing" },
+          { "name": "Tourist Guide / Agent" }
+        ]
+      }
+    ]
+  },
+   {
+    "name": "Business Owners / Businesses",
+    "categories": [
+      {
+        "name": "SME",
+        "subcategories": [
+          { "name": "Agriculture & Agri-business" },
+          { "name": "Energy & Power" },
+          { "name": "Manufacturing" },
+          { "name": "Infrastructure & Construction" },
+          { "name": "Commerce & Financial Services" },
+          { "name": "E-Commerce & Digital Trade" },
+          { "name": "Technology" },
+          { "name": "Fashion & Textile" },
+          { "name": "Health & Wellness" },
+          { "name": "Media & Entertainment" },
+          { "name": "Education" },
+          { "name": "Transportation & Logistics" },
+          { "name": "Tourism & Hospitality" },
+          { "name": "Art & Culture" }
+        ]
+      },
+      {
+        "name": "Large Enterprise",
+        "subcategories": [
+          { "name": "Agriculture & Agri-business" },
+          { "name": "Energy & Power" },
+          { "name": "Manufacturing" },
+          { "name": "Infrastructure & Construction" },
+          { "name": "Commerce & Financial Services" },
+          { "name": "E-Commerce & Digital Trade" },
+          { "name": "Technology" },
+          { "name": "Fashion & Textile" },
+          { "name": "Health & Wellness" },
+          { "name": "Media & Entertainment" },
+          { "name": "Education" },
+          { "name": "Transportation & Logistics" },
+          { "name": "Tourism & Hospitality" },
+          { "name": "Art & Culture" }
+        ]
+      },
+      {
+        "name": "Family Business",
+        "subcategories": [
+          { "name": "Agriculture & Agri-business" },
+          { "name": "Energy & Power" },
+          { "name": "Manufacturing" },
+          { "name": "Infrastructure & Construction" },
+          { "name": "Commerce & Financial Services" },
+          { "name": "E-Commerce & Digital Trade" },
+          { "name": "Technology" },
+          { "name": "Fashion & Textile" },
+          { "name": "Health & Wellness" },
+          { "name": "Media & Entertainment" },
+          { "name": "Education" },
+          { "name": "Transportation & Logistics" },
+          { "name": "Tourism & Hospitality" },
+          { "name": "Art & Culture" }
+        ]
+      },
+      {
+        "name": "Sole Proprietorship",
+        "subcategories": [
+          { "name": "Agriculture & Agri-business" },
+          { "name": "Energy & Power" },
+          { "name": "Manufacturing" },
+          { "name": "Infrastructure & Construction" },
+          { "name": "Commerce & Financial Services" },
+          { "name": "E-Commerce & Digital Trade" },
+          { "name": "Technology" },
+          { "name": "Fashion & Textile" },
+          { "name": "Health & Wellness" },
+          { "name": "Media & Entertainment" },
+          { "name": "Education" },
+          { "name": "Transportation & Logistics" },
+          { "name": "Tourism & Hospitality" },
+          { "name": "Art & Culture" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Social Entrepreneurs",
+    "categories": [
+      {
+        "name": "Startups",
+        "subcategories": [
+          { "name": "Education & Skill Development" },
+          { "name": "Health & Wellbeing" },
+          { "name": "Environment & Climate Action" },
+          { "name": "Gender Equality" },
+          { "name": "Women Empowerment" },
+          { "name": "Youth Development & Employability" },
+          { "name": "Poverty Alleviation & Economic Inclusion" },
+          { "name": "Human Rights & Advocacy" },
+          { "name": "Art, Culture & Creative Impact" },
+          { "name": "Technology for Social Impact" }
+        ]
+      },
+      {
+        "name": "NGOs",
+        "subcategories": [
+          { "name": "Education & Skill Development" },
+          { "name": "Health & Wellbeing" },
+          { "name": "Environment & Climate Action" },
+          { "name": "Gender Equality" },
+          { "name": "Women Empowerment" },
+          { "name": "Youth Development & Employability" },
+          { "name": "Poverty Alleviation & Economic Inclusion" },
+          { "name": "Human Rights & Advocacy" },
+          { "name": "Art, Culture & Creative Impact" },
+          { "name": "Technology for Social Impact" }
+        ]
+      },
+      {
+        "name": "Social Enterprise",
+        "subcategories": [
+          { "name": "Education & Skill Development" },
+          { "name": "Health & Wellbeing" },
+          { "name": "Environment & Climate Action" },
+          { "name": "Gender Equality" },
+          { "name": "Women Empowerment" },
+          { "name": "Youth Development & Employability" },
+          { "name": "Poverty Alleviation & Economic Inclusion" },
+          { "name": "Human Rights & Advocacy" },
+          { "name": "Art, Culture & Creative Impact" },
+          { "name": "Technology for Social Impact" }
+        ]
+      },
+      {
+        "name": "Foundations",
+        "subcategories": [
+          { "name": "Education & Skill Development" },
+          { "name": "Health & Wellbeing" },
+          { "name": "Environment & Climate Action" },
+          { "name": "Gender Equality" },
+          { "name": "Women Empowerment" },
+          { "name": "Youth Development & Employability" },
+          { "name": "Poverty Alleviation & Economic Inclusion" },
+          { "name": "Human Rights & Advocacy" },
+          { "name": "Art, Culture & Creative Impact" },
+          { "name": "Technology for Social Impact" }
+        ]
+      },
+      {
+        "name": "Charities",
+        "subcategories": [
+          { "name": "Education & Skill Development" },
+          { "name": "Health & Wellbeing" },
+          { "name": "Environment & Climate Action" },
+          { "name": "Gender Equality" },
+          { "name": "Women Empowerment" },
+          { "name": "Youth Development & Employability" },
+          { "name": "Poverty Alleviation & Economic Inclusion" },
+          { "name": "Human Rights & Advocacy" },
+          { "name": "Art, Culture & Creative Impact" },
+          { "name": "Technology for Social Impact" }
+        ]
+      },
+      {
+        "name": "Community Based Organisations",
+        "subcategories": [
+          { "name": "Education & Skill Development" },
+          { "name": "Health & Wellbeing" },
+          { "name": "Environment & Climate Action" },
+          { "name": "Gender Equality" },
+          { "name": "Women Empowerment" },
+          { "name": "Youth Development & Employability" },
+          { "name": "Poverty Alleviation & Economic Inclusion" },
+          { "name": "Human Rights & Advocacy" },
+          { "name": "Art, Culture & Creative Impact" },
+          { "name": "Technology for Social Impact" }
+        ]
+      },
+      {
+        "name": "Research Institutes",
+        "subcategories": [
+          { "name": "Education & Skill Development" },
+          { "name": "Health & Wellbeing" },
+          { "name": "Environment & Climate Action" },
+          { "name": "Gender Equality" },
+          { "name": "Women Empowerment" },
+          { "name": "Youth Development & Employability" },
+          { "name": "Poverty Alleviation & Economic Inclusion" },
+          { "name": "Human Rights & Advocacy" },
+          { "name": "Art, Culture & Creative Impact" },
+          { "name": "Technology for Social Impact" }
+        ]
+      }
+    ]
+  },
+  {
+  "name": "Professionals",
+  "categories": [
+    {
+      "name": "Administrative",
+      "subcategories": [
+        { "name": "Personal Assistant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Office Admin", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Secretary", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Data Entry", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Virtual Assistant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Operations Support", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Technology",
+      "subcategories": [
+        { "name": "Web Developer - Frontend", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Backend Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Full-stack Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "UI/UX Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Product Manager", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Quality Assurance Engineer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Mobile App Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "System Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "IT Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Accounting",
+      "subcategories": [
+        { "name": "Auditor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Tax Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Bookkeeper", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Forensic Accountant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Financial Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Corporate Accountant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Risk & Compliance Officer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Engineering",
+      "subcategories": [
+        { "name": "Civil", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Mechanical", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Electrical", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Chemical", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Software", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Environmental", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Infrastructure & Construction", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Automobile", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Petroleum", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Project Management",
+      "subcategories": [
+        { "name": "Agile PM", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Construction PM", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "IT PM", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Development PM", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Research PM", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Change Management Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "IT Professional",
+      "subcategories": [
+        { "name": "Network Engineer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Cybersecurity", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Database Admin", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Cloud Engineer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "System Architect", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Legal",
+      "subcategories": [
+        { "name": "Corporate Lawyer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Contract Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Compliance Officer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Civil / Criminal Lawyer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Intellectual Property Lawyer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Human Rights Lawyer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Legal Researcher", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Consulting",
+      "subcategories": [
+        { "name": "Business Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Strategy Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Management Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Technology Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Sustainability Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Policy & Governance Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Human Resources",
+      "subcategories": [
+        { "name": "Recruiter", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "HR Business Partner", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Training Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Talent Acquisition", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Compensation & Benefits Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "HR Tech Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Marketing & Advertising",
+      "subcategories": [
+        { "name": "Digital Marketer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Brand Strategist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Public Relations Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Market Research Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Corporate Communications Officer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Copywriter / Content Creator", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Marketing & Strategy", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "subcategories": [
+        { "name": "Medical Doctor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Nurse", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Pharmacist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Lab Scientist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Public Health Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Psychologist / Therapist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Physiotherapist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Education & Research",
+      "subcategories": [
+        { "name": "Teacher", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "University Lecturer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Education Technologist (EdTech)", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Academic Researcher", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Curriculum Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Trainer / Coach", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Creative & Design",
+      "subcategories": [
+        { "name": "Graphic Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Animator", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Video Editor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Photographer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Illustrator / Digital Artist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Fashion Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Interior Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Science & Environment",
+      "subcategories": [
+        { "name": "Biologist / Chemist / Physicist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Environmental Scientist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Climate Change Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Renewable Energy Expert", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Agricultural Scientist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Data Scientist (Applied Science)", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    }
+  ]
+},
+{
+  "name": "Freelancers",
+  "categories": [
+    {
+      "name": "Writing & Translation",
+      "subcategories": [
+        { "name": "Copywriter", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Content Writer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Technical Writer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Editor & Proofreader", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Ghostwriter", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Translator", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Transcriber", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Design & Creative",
+      "subcategories": [
+        { "name": "Graphic Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "UI/UX Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Illustrator", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Animator (2D/3D)", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Video Editor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Photographer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Logo & Branding Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Interior Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Fashion & Textile Designer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Sales & Marketing",
+      "subcategories": [
+        { "name": "Digital Marketing Specialist (SEO, SEM, PPC, Email)", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Social Media Manager", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Ads Manager", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Influencer Marketing Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Content Marketing Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Affiliate Marketing Expert", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Market Research Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Admin Support",
+      "subcategories": [
+        { "name": "Virtual Assistant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Data Entry Clerk", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Travel & Event Coordinator", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Operations Assistant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Customer Service",
+      "subcategories": [
+        { "name": "Customer Support Representative", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Technical Support Agent", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Help Desk Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Community Manager", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Client Success Manager", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Tech & IT",
+      "subcategories": [
+        { "name": "Web Developer (Frontend, Backend, Full Stack)", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Mobile App Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Software Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "QA Tester", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Game Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Data Scientist / Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Machine Learning / AI Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Cloud Computing Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Cybersecurity Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "DevOps Engineer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Legal & Consulting",
+      "subcategories": [
+        { "name": "Legal Advisor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Contract Drafting & Review", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Business Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Strategy Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Policy & Governance Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "HR Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Tech Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Fashion Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Finance & Business",
+      "subcategories": [
+        { "name": "Accountant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Bookkeeper", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Financial Analyst", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Tax Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Investment Researcher", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Business Plan Writer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Virtual CFO", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Education & Training",
+      "subcategories": [
+        { "name": "Online Tutor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Language Teacher", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Corporate Trainer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Curriculum Developer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "eLearning Specialist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Career Coach", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    },
+    {
+      "name": "Health & Wellness",
+      "subcategories": [
+        { "name": "Fitness Coach", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Personal Trainer", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Nutritionist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Diet Consultant", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Mental Health Coach", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Therapist", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Yoga Instructor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Mindfulness Instructor", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] },
+        { "name": "Wellness Blogger", "subsubs": ["Undergraduate","Graduate","Postgraduate","Doctoral","Vocational/Technical","Student","Short Term Training","None"] }
+      ]
+    }
+  ]
+},
+{
+  "name": "Students",
+  "categories": [
+    {
+      "name": "Undergraduate",
+      "subcategories": [
+        { "name": "Finance" },
+        { "name": "Business" },
+        { "name": "Engineering" },
+        { "name": "Medicine" },
+        { "name": "IT & Computer Science" },
+        { "name": "Arts & Humanities" },
+        { "name": "Agriculture" },
+        { "name": "Law" },
+        { "name": "Social Sciences" },
+        { "name": "Education" },
+        { "name": "Environmental Studies" },
+        { "name": "Mass Communication" },
+        { "name": "Public Administration" },
+        { "name": "Sociology" }
+      ]
+    },
+    {
+      "name": "Graduate",
+      "subcategories": [
+        { "name": "Finance" },
+        { "name": "Business" },
+        { "name": "Engineering" },
+        { "name": "Medicine" },
+        { "name": "IT & Computer Science" },
+        { "name": "Arts & Humanities" },
+        { "name": "Agriculture" },
+        { "name": "Law" },
+        { "name": "Social Sciences" },
+        { "name": "Education" },
+        { "name": "Environmental Studies" },
+        { "name": "Mass Communication" },
+        { "name": "Public Administration" },
+        { "name": "Sociology" }
+      ]
+    },
+    {
+      "name": "Postgraduate",
+      "subcategories": [
+        { "name": "Finance" },
+        { "name": "Business" },
+        { "name": "Engineering" },
+        { "name": "Medicine" },
+        { "name": "IT & Computer Science" },
+        { "name": "Arts & Humanities" },
+        { "name": "Agriculture" },
+        { "name": "Law" },
+        { "name": "Social Sciences" },
+        { "name": "Education" },
+        { "name": "Environmental Studies" },
+        { "name": "Mass Communication" },
+        { "name": "Public Administration" },
+        { "name": "Sociology" }
+      ]
+    },
+    {
+      "name": "Doctoral",
+      "subcategories": [
+        { "name": "Finance" },
+        { "name": "Business" },
+        { "name": "Engineering" },
+        { "name": "Medicine" },
+        { "name": "IT & Computer Science" },
+        { "name": "Arts & Humanities" },
+        { "name": "Agriculture" },
+        { "name": "Law" },
+        { "name": "Social Sciences" },
+        { "name": "Education" },
+        { "name": "Environmental Studies" },
+        { "name": "Mass Communication" },
+        { "name": "Public Administration" },
+        { "name": "Sociology" }
+      ]
+    },
+    {
+      "name": "Vocational/Technical",
+      "subcategories": [
+        { "name": "Finance" },
+        { "name": "Business" },
+        { "name": "Engineering" },
+        { "name": "Medicine" },
+        { "name": "IT & Computer Science" },
+        { "name": "Arts & Humanities" },
+        { "name": "Agriculture" },
+        { "name": "Law" },
+        { "name": "Social Sciences" },
+        { "name": "Education" },
+        { "name": "Environmental Studies" },
+        { "name": "Mass Communication" },
+        { "name": "Public Administration" },
+        { "name": "Sociology" }
+      ]
+    },
+    {
+      "name": "Student Entrepreneur",
+      "subcategories": [
+        { "name": "Finance" },
+        { "name": "Business" },
+        { "name": "Engineering" },
+        { "name": "Medicine" },
+        { "name": "IT & Computer Science" },
+        { "name": "Arts & Humanities" },
+        { "name": "Agriculture" },
+        { "name": "Law" },
+        { "name": "Social Sciences" },
+        { "name": "Education" },
+        { "name": "Environmental Studies" },
+        { "name": "Mass Communication" },
+        { "name": "Public Administration" },
+        { "name": "Sociology" }
+      ]
+    },
+    {
+      "name": "Freelancer Student",
+      "subcategories": [
+        { "name": "Finance" },
+        { "name": "Business" },
+        { "name": "Engineering" },
+        { "name": "Medicine" },
+        { "name": "IT & Computer Science" },
+        { "name": "Arts & Humanities" },
+        { "name": "Agriculture" },
+        { "name": "Law" },
+        { "name": "Social Sciences" },
+        { "name": "Education" },
+        { "name": "Environmental Studies" },
+        { "name": "Mass Communication" },
+        { "name": "Public Administration" },
+        { "name": "Sociology" }
+      ]
+    }
+  ]
+},{
+  "name": "Government Officials",
+  "categories": [
+    {
+      "name": "Local Government",
+      "subcategories": [
+        { "name": "Finance & Treasury", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Trade & Industry", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Foreign Affairs & Diplomacy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Youth & Sports", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Education", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Health", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Infrastructure & Housing", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "ICT & Digital Economy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Energy & Power", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Agriculture & Rural Development", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Security & Defense", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Justice & Legal Affairs", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Transportation (Aviation, Roads, Maritime, Rail)", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Environment & Climate Change", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Tourism, Arts & Culture", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Labor & Employment", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Science, Technology & Innovation", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Social Development & Welfare", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Policy & Planning", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] }
+      ]
+    },
+    {
+      "name": "State/Regional Government",
+      "subcategories": [
+        { "name": "Finance & Treasury", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Trade & Industry", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Foreign Affairs & Diplomacy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Youth & Sports", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Education", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Health", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Infrastructure & Housing", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "ICT & Digital Economy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Energy & Power", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Agriculture & Rural Development", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Security & Defense", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Justice & Legal Affairs", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Transportation (Aviation, Roads, Maritime, Rail)", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Environment & Climate Change", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Tourism, Arts & Culture", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Labor & Employment", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Science, Technology & Innovation", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Social Development & Welfare", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Policy & Planning", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] }
+      ]
+    },
+    {
+      "name": "National/Federal Government",
+      "subcategories": [
+        { "name": "Finance & Treasury", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Trade & Industry", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Foreign Affairs & Diplomacy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Youth & Sports", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Education", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Health", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Infrastructure & Housing", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "ICT & Digital Economy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Energy & Power", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Agriculture & Rural Development", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Security & Defense", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Justice & Legal Affairs", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Transportation (Aviation, Roads, Maritime, Rail)", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Environment & Climate Change", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Tourism, Arts & Culture", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Labor & Employment", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Science, Technology & Innovation", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Social Development & Welfare", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Policy & Planning", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] }
+      ]
+    },
+    {
+      "name": "Intergovernmental & Regional Bodies (AU, ECOWAS, SADC, UN-affiliated)",
+      "subcategories": [
+        { "name": "Finance & Treasury", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Trade & Industry", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Foreign Affairs & Diplomacy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Youth & Sports", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Education", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Health", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Infrastructure & Housing", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "ICT & Digital Economy", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Energy & Power", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Agriculture & Rural Development", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Security & Defense", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Justice & Legal Affairs", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Transportation (Aviation, Roads, Maritime, Rail)", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Environment & Climate Change", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Tourism, Arts & Culture", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Labor & Employment", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Science, Technology & Innovation", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Social Development & Welfare", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] },
+        { "name": "Policy & Planning", "subsubs": ["Minister/Commissioner","Director General/Permanent Secretary","Policy Maker","Regulatory Official","Legislative Official (MP, Senator, Assembly Member)","Diplomat/Ambassador","Public Affairs & Communication Officer","Technical Adviser","Program/Project Manager","Regulatory & Compliance Officer"] }
+      ]
+    },
+      {
+    "name": "Sports Professionals",
+    "categories": [
+      {
+        "name": "Athlete",
+        "subcategories": [
+          { "name": "General", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Coach",
+        "subcategories": [
+          { "name": "General", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Referee",
+        "subcategories": [
+          { "name": "General", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Sports Official",
+        "subcategories": [
+          { "name": "General", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Sports Administrator",
+        "subcategories": [
+          { "name": "General", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Sports Agent / Manager",
+        "subcategories": [
+          { "name": "General", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Football",
+        "subcategories": [
+          { "name": "Football", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Basketball",
+        "subcategories": [
+          { "name": "Basketball", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Athletics (Track & Field)",
+        "subcategories": [
+          { "name": "Athletics", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Tennis",
+        "subcategories": [
+          { "name": "Tennis", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Martial Arts",
+        "subcategories": [
+          {
+            "name": "Disciplines",
+            "subsubs": [
+              "Karate (Amateur)",
+              "Karate (Professional)",
+              "Judo (Amateur)",
+              "Judo (Professional)",
+              "Taekwondo (Amateur)",
+              "Taekwondo (Professional)",
+              "Boxing (Amateur)",
+              "Boxing (Professional)",
+              "Wrestling (Amateur)",
+              "Wrestling (Professional)",
+              "MMA (Amateur)",
+              "MMA (Professional)"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Volleyball",
+        "subcategories": [
+          { "name": "Volleyball", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Swimming",
+        "subcategories": [
+          { "name": "Swimming", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Rugby",
+        "subcategories": [
+          { "name": "Rugby", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Cricket",
+        "subcategories": [
+          { "name": "Cricket", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Hockey",
+        "subcategories": [
+          { "name": "Hockey", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Table Tennis",
+        "subcategories": [
+          { "name": "Table Tennis", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Golf",
+        "subcategories": [
+          { "name": "Golf", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Cycling",
+        "subcategories": [
+          { "name": "Cycling", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "eSports",
+        "subcategories": [
+          { "name": "eSports", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Gymnastics",
+        "subcategories": [
+          { "name": "Gymnastics", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Badminton",
+        "subcategories": [
+          { "name": "Badminton", "subsubs": ["Amateur", "Professional"] }
+        ]
+      },
+      {
+        "name": "Baseball / Softball",
+        "subcategories": [
+          { "name": "Baseball / Softball", "subsubs": ["Amateur", "Professional"] }
+        ]
+      }
+    ]
+  },
+    {
+  "name": "Press & Media",
+  "categories": [
+    {
+      "name": "Reporter",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    },
+    {
+      "name": "Editor",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    },
+    {
+      "name": "Broadcast Journalist",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    },
+    {
+      "name": "Investigative Journalist",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    },
+    {
+      "name": "Photojournalist",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    },
+    {
+      "name": "Columnist",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    },
+    {
+      "name": "News Anchor",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    },
+    {
+      "name": "Media Correspondent",
+      "subcategories": [
+        { "name": "Politics" },
+        { "name": "Business & Economy" },
+        { "name": "Sports" },
+        { "name": "Health" },
+        { "name": "Technology" },
+        { "name": "Culture" },
+        { "name": "Lifestyle" },
+        { "name": "Environment" },
+        { "name": "Crime & Security" },
+        { "name": "International Affairs" },
+        { "name": "Entertainment & Celebrity" },
+        { "name": "Human Rights & Social Justice" },
+        { "name": "Science & Innovation" },
+        { "name": "Education" }
+      ]
+    }
+  ]
+}
+,{
+  "name": "Creative & Artist",
+  "categories": [
+    {
+      "name": "Performing Arts",
+      "subcategories": [
+        { "name": "Music" },
+        { "name": "Dance" },
+        { "name": "Theatre" },
+        { "name": "Drama" },
+        { "name": "Comedy" },
+        { "name": "Spoken Word" },
+        { "name": "Performance Production" }
+      ]
+    },
+    {
+      "name": "Visual Arts",
+      "subcategories": [
+        { "name": "Painting" },
+        { "name": "Sculpture" },
+        { "name": "Drawing" },
+        { "name": "Photography" },
+        { "name": "Digital Art" },
+        { "name": "Illustration" },
+        { "name": "Mixed Media" },
+        { "name": "Graphic Design" }
+      ]
+    },
+    {
+      "name": "Literary Arts",
+      "subcategories": [
+        { "name": "Creative Writing" },
+        { "name": "Poetry" },
+        { "name": "Storytelling" },
+        { "name": "Scriptwriting" },
+        { "name": "Playwriting" },
+        { "name": "Publishing (Artistic Side)" }
+      ]
+    },
+    {
+      "name": "Fashion & Design",
+      "subcategories": [
+        { "name": "Apparel Design" },
+        { "name": "Footwear" },
+        { "name": "Accessories" },
+        { "name": "Modest/Traditional Wear" },
+        { "name": "Fashion Tech" },
+        { "name": "Textile & Costume Design" }
+      ]
+    },
+    {
+      "name": "Media & Entertainment",
+      "subcategories": [
+        { "name": "Filmmaking" },
+        { "name": "Directing" },
+        { "name": "Acting" },
+        { "name": "Cinematography" },
+        { "name": "Radio" },
+        { "name": "Podcasting" },
+        { "name": "Gaming" },
+        { "name": "Animation" },
+        { "name": "Multimedia Production" }
+      ]
+    },
+    {
+      "name": "Crafts & Handwork",
+      "subcategories": [
+        { "name": "Pottery" },
+        { "name": "Weaving" },
+        { "name": "Jewelry Making" },
+        { "name": "Leatherwork" },
+        { "name": "Woodwork" },
+        { "name": "Handcrafted Accessories" },
+        { "name": "Traditional Crafts" }
+      ]
+    },
+    {
+      "name": "Cultural Arts & Heritage",
+      "subcategories": [
+        { "name": "Cultural Performances" },
+        { "name": "Traditional Art Forms" },
+        { "name": "Heritage Preservation" },
+        { "name": "Indigenous Crafts" },
+        { "name": "Festival Arts" }
+      ]
+    }
+  ]
+}
+
+  ]
+}
+,
+{
+  "name": "Investors",
+  "categories": [
+    {
+      "name": "Angel Investor",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    },
+    {
+      "name": "Venture Capitalist",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    },
+    {
+      "name": "Impact Investor",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    },
+    {
+      "name": "Private Equity Investor",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    },
+    {
+      "name": "Philanthropist",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    },
+    {
+      "name": "Corporate Sponsor",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    },
+    {
+      "name": "Donor",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    },
+    {
+      "name": "Grant Maker",
+      "subcategories": [
+        { "name": "Technology", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Education", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Health", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Climate & Environment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Agriculture", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Creative Economy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Infrastructure", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Energy", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Finance & Fintech", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Manufacturing", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Tourism & Hospitality", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Media & Entertainment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Social Enterprises & NGOs", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Gender Equality & Women Empowerment", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] },
+        { "name": "Youth Development", "subsubs": ["Equity Investment","Debt Financing","Seed & Early-Stage Funding","Series/Scale-up Investment","Grants","Donations","Endowments","Sponsorships","Corporate Social Responsibility (CSR)","Public-Private Partnerships"] }
+      ]
+    }
+  ]
+},
+{
+      "name": "Executives",
+      "categories": [
+        {
+          "name": "C-Level Executives (C-Suite)",
+          "subcategories": [
+            { "name": "Chief Executive Officer (CEO)" },
+            { "name": "Chief Operating Officer (COO)" },
+            { "name": "Chief Financial Officer (CFO)" },
+            { "name": "Chief Technology Officer (CTO)" },
+            { "name": "Chief Marketing Officer (CMO)" },
+            { "name": "Chief Human Resources Officer (CHRO)" },
+            { "name": "Chief Information Officer (CIO)" },
+            { "name": "Chief Strategy Officer (CSO)" }
+          ]
+        },
+        {
+          "name": "Vice Presidents",
+          "subcategories": [
+            { "name": "Executive Vice President (EVP)" },
+            { "name": "Senior Vice President (SVP)" },
+            { "name": "Vice President (VP)" }
+          ]
+        },
+        {
+          "name": "Directors",
+          "subcategories": [
+            { "name": "Global Managing Director" },
+            { "name": "Regional Managing Director" },
+            { "name": "Managing Director" },
+            { "name": "Executive Director" },
+            { "name": "Non-Executive Director" },
+            { "name": "Independent Director" },
+            { "name": "Associate Director" },
+            { "name": "Assistant Director" }
+          ]
+        },
+        {
+          "name": "Managers",
+          "subcategories": [
+            { "name": "General Manager (GM)" },
+            { "name": "Operations Manager" },
+            { "name": "Project Manager" },
+            { "name": "Product Manager" },
+            { "name": "Marketing Manager" },
+            { "name": "Sales Manager" },
+            { "name": "Finance Manager" },
+            { "name": "Human Resources (HR) Manager" },
+            { "name": "IT / Technology Manager" },
+            { "name": "Supply Chain / Logistics Manager" },
+            { "name": "Customer Service Manager" },
+            { "name": "Business Development Manager" }
+          ]
+        },
+        {
+          "name": "Other Executive Roles",
+          "subcategories": [
+            { "name": "General Counsel / Chief Legal Officer" },
+            { "name": "Chief Innovation Officer" },
+            { "name": "Chief Risk Officer" },
+            { "name": "Chief Compliance Officer" }
+          ]
+        }
+      ]
+    }
+],
+"company_identities": [
+      {
+      "name": "Companies",
+      "categories": [
+        {
+          "name": "Technology",
+          "subcategories": [
+            { "name": "Software Development", "subsubs": ["SaaS", "Mobile Apps", "Web Apps"] },
+            { "name": "Hardware & Devices", "subsubs": ["Computers", "Smartphones", "Wearables"] },
+            { "name": "IT Services", "subsubs": ["Cloud Computing", "Cybersecurity", "Managed Services"] },
+            { "name": "Artificial Intelligence & Machine Learning" },
+            { "name": "Blockchain & Web3" },
+            { "name": "FinTech", "subsubs": ["Payment Solutions", "Digital Banking", "Investment Platforms"] },
+            { "name": "E-commerce Platforms" }
+          ]
+        },
+        {
+          "name": "Engineering",
+          "subcategories": [
+            { "name": "Civil Engineering", "subsubs": ["Construction", "Infrastructure", "Urban Planning"] },
+            { "name": "Mechanical Engineering", "subsubs": ["Automotive", "Aerospace", "Robotics", "Manufacturing"] },
+            { "name": "Electrical & Electronics Engineering", "subsubs": ["Power Systems", "Microelectronics", "Telecommunications"] },
+            { "name": "Chemical Engineering", "subsubs": ["Petrochemical", "Pharmaceuticals", "Food Processing"] },
+            { "name": "Software Engineering", "subsubs": ["Embedded Systems", "Enterprise Software"] },
+            { "name": "Environmental Engineering", "subsubs": ["Waste Management", "Renewable Energy", "Sustainability Solutions"] }
+          ]
+        },
+        {
+          "name": "Health & Insurance",
+          "subcategories": [
+            { "name": "Healthcare Providers", "subsubs": ["Hospitals", "Clinics", "Telemedicine"] },
+            { "name": "Pharmaceuticals & Biotech" },
+            { "name": "Health Tech", "subsubs": ["Wearables", "Health Apps", "Diagnostic Tools"] },
+            { "name": "Insurance Services", "subsubs": ["Health Insurance", "Life Insurance", "Property & Casualty Insurance", "Auto Insurance", "Travel Insurance"] },
+            { "name": "Wellness & Fitness", "subsubs": ["Gyms", "Mental Health Services", "Nutrition Companies"] }
+          ]
+        },
+        {
+          "name": "Finance & Banking",
+          "subcategories": [
+            { "name": "Retail Banking" },
+            { "name": "Investment Banking" },
+            { "name": "Asset & Wealth Management" },
+            { "name": "Venture Capital & Private Equity" },
+            { "name": "Microfinance & Lending" },
+            { "name": "Financial Advisory Services" },
+            { "name": "Digital Banking & Neobanks" }
+          ]
+        },
+        {
+          "name": "Retail & Consumer Goods",
+          "subcategories": [
+            { "name": "E-commerce Stores" },
+            { "name": "Fashion & Apparel" },
+            { "name": "Food & Beverage", "subsubs": ["Restaurants", "FMCG", "Packaged Foods"] },
+            { "name": "Electronics & Appliances" },
+            { "name": "Beauty & Personal Care" },
+            { "name": "Luxury Goods" }
+          ]
+        },
+        {
+          "name": "Energy & Utilities",
+          "subcategories": [
+            { "name": "Oil & Gas" },
+            { "name": "Renewable Energy", "subsubs": ["Solar", "Wind", "Hydro", "Biomass"] },
+            { "name": "Power Distribution & Utilities" },
+            { "name": "Mining & Natural Resources" },
+            { "name": "Energy Trading & Storage" }
+          ]
+        },
+        {
+          "name": "Real Estate & Construction",
+          "subcategories": [
+            { "name": "Residential Real Estate" },
+            { "name": "Commercial Real Estate" },
+            { "name": "Industrial Real Estate" },
+            { "name": "Real Estate Investment Trusts (REITs)" },
+            { "name": "Property Management" },
+            { "name": "Construction & Infrastructure Development" }
+          ]
+        },
+        {
+          "name": "Media & Entertainment",
+          "subcategories": [
+            { "name": "Film & TV Production" },
+            { "name": "Music Industry" },
+            { "name": "Gaming & Esports" },
+            { "name": "Digital Content Creators", "subsubs": ["Influencers", "Streaming Platforms"] },
+            { "name": "Publishing", "subsubs": ["Books", "Magazines", "Online Media"] },
+            { "name": "Advertising & Marketing Agencies" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NGOs/NPOs",
+      "categories": [
+        {
+          "name": "Humanitarian & Relief NGOs",
+          "subcategories": [
+            { "name": "Disaster Relief" },
+            { "name": "Refugee Support" },
+            { "name": "Emergency Aid" },
+            { "name": "Crisis Response" }
+          ]
+        },
+        {
+          "name": "Health NGOs",
+          "subcategories": [
+            { "name": "Public Health" },
+            { "name": "Hospitals" },
+            { "name": "HIV/AIDS" },
+            { "name": "Malaria" },
+            { "name": "Maternal & Child Health" },
+            { "name": "Mental Health" },
+            { "name": "Medical Research" }
+          ]
+        },
+        {
+          "name": "Education NGOs",
+          "subcategories": [
+            { "name": "Literacy Programs" },
+            { "name": "School Support" },
+            { "name": "Scholarships" },
+            { "name": "Teacher Training" },
+            { "name": "E-learning" },
+            { "name": "Special Education" }
+          ]
+        },
+        {
+          "name": "Environmental NGOs",
+          "subcategories": [
+            { "name": "Climate Change" },
+            { "name": "Conservation" },
+            { "name": "Wildlife Protection" },
+            { "name": "Deforestation" },
+            { "name": "Renewable Energy" },
+            { "name": "Pollution Control" }
+          ]
+        },
+        {
+          "name": "Human Rights & Advocacy NGOs",
+          "subcategories": [
+            { "name": "Gender Equality" },
+            { "name": "Child Rights" },
+            { "name": "Disability Rights" },
+            { "name": "LGBTQ+ Rights" },
+            { "name": "Anti-Trafficking" },
+            { "name": "Democracy Promotion" }
+          ]
+        },
+        {
+          "name": "Community Development NGOs",
+          "subcategories": [
+            { "name": "Rural Development" },
+            { "name": "Urban Development" },
+            { "name": "Housing" },
+            { "name": "Water & Sanitation" },
+            { "name": "Infrastructure Support" }
+          ]
+        },
+        {
+          "name": "Economic Development NGOs",
+          "subcategories": [
+            { "name": "Poverty Alleviation" },
+            { "name": "Microfinance" },
+            { "name": "Job Creation" },
+            { "name": "Small Business Support" },
+            { "name": "Skill Development" }
+          ]
+        },
+        {
+          "name": "Peace & Security NGOs",
+          "subcategories": [
+            { "name": "Conflict Resolution" },
+            { "name": "Peacebuilding" },
+            { "name": "Arms Control" },
+            { "name": "Anti-Corruption" },
+            { "name": "Governance & Transparency" }
+          ]
+        },
+        {
+          "name": "Cultural & Heritage NGOs",
+          "subcategories": [
+            { "name": "Cultural Preservation" },
+            { "name": "Museums & Heritage Sites" },
+            { "name": "Community Arts" }
+          ]
+        },
+        {
+          "name": "Animal Welfare NGOs",
+          "subcategories": [
+            { "name": "Animal Rescue" },
+            { "name": "Anti-Poaching" },
+            { "name": "Pet Welfare" },
+            { "name": "Farm Animal Protection" }
+          ]
+        },
+        {
+          "name": "Faith-Based NGOs" },
+        {
+          "name": "International Development NGOs",
+          "subcategories": [
+            { "name": "Global Poverty Reduction" },
+            { "name": "UN Partnership Programs" },
+            { "name": "Sustainable Development Goals (SDGs)" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Government / Public Sector",
+      "categories": [
+        { "name": "Central/Federal Government Agencies" },
+        { "name": "State/Regional Government Agencies" },
+        { "name": "Local/Municipal Government" },
+        { "name": "Public Enterprises / State-Owned Enterprises (SOEs)" },
+        { "name": "Regulatory Authorities", "subsubs": ["SEC", "FCC"] },
+        { "name": "Military & Defense Organizations" }
+      ]
+    },
+    {
+      "name": "Educational & Research",
+      "categories": [
+        { "name": "Schools (Public, Private)" },
+        { "name": "Colleges & Universities" },
+        { "name": "Research Institutes" },
+        { "name": "Think Tanks" },
+        { "name": "Training Centers" }
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "categories": [
+        { "name": "Public Hospitals" },
+        { "name": "Private Hospitals & Clinics" },
+        { "name": "Health NGOs", "subsubs": ["Médecins Sans Frontières"] },
+        { "name": "International Health Organizations", "subsubs": ["WHO"] },
+        { "name": "Biotech & Medical Research Institutes" }
+      ]
+    },
+    {
+      "name": "International / Intergovernmental",
+      "categories": [
+        { "name": "United Nations (UN)", "subsubs": ["UNICEF", "WHO", "UNESCO"] },
+        { "name": "World Bank & IMF" },
+        { "name": "World Trade Organization (WTO)" },
+        { "name": "African Union (AU)" },
+        { "name": "European Union (EU)" },
+        { "name": "ASEAN" },
+        { "name": "NATO" },
+        { "name": "OPEC" }
+      ]
+    },
+    {
+      "name": "Hybrid / Special",
+      "categories": [
+        { "name": "Social Enterprises (business + social impact)" },
+        { "name": "Professional Associations", "subsubs": ["Bar Association", "Medical Associations"] },
+        { "name": "Labor Unions" },
+        { "name": "Cooperatives" },
+        { "name": "Community Development Organizations" }
+      ]
+    }
+],
+"company_identities.old_version_ignoreit": [
+      {
+      "name": "Business",
+      "categories": [
+        {
+          "name": "Technology",
+          "subcategories": [
+            { "name": "Software Development", "subsubs": ["SaaS", "Mobile Apps", "Web Apps"] },
+            { "name": "Hardware & Devices", "subsubs": ["Computers", "Smartphones", "Wearables"] },
+            { "name": "IT Services", "subsubs": ["Cloud Computing", "Cybersecurity", "Managed Services"] },
+            { "name": "Artificial Intelligence & Machine Learning" },
+            { "name": "Blockchain & Web3" },
+            { "name": "FinTech", "subsubs": ["Payment Solutions", "Digital Banking", "Investment Platforms"] },
+            { "name": "E-commerce Platforms" }
+          ]
+        },
+        {
+          "name": "Engineering",
+          "subcategories": [
+            { "name": "Civil Engineering", "subsubs": ["Construction", "Infrastructure", "Urban Planning"] },
+            { "name": "Mechanical Engineering", "subsubs": ["Automotive", "Aerospace", "Robotics", "Manufacturing"] },
+            { "name": "Electrical & Electronics Engineering", "subsubs": ["Power Systems", "Microelectronics", "Telecommunications"] },
+            { "name": "Chemical Engineering", "subsubs": ["Petrochemical", "Pharmaceuticals", "Food Processing"] },
+            { "name": "Software Engineering", "subsubs": ["Embedded Systems", "Enterprise Software"] },
+            { "name": "Environmental Engineering", "subsubs": ["Waste Management", "Renewable Energy", "Sustainability Solutions"] }
+          ]
+        },
+        {
+          "name": "Health & Insurance",
+          "subcategories": [
+            { "name": "Healthcare Providers", "subsubs": ["Hospitals", "Clinics", "Telemedicine"] },
+            { "name": "Pharmaceuticals & Biotech" },
+            { "name": "Health Tech", "subsubs": ["Wearables", "Health Apps", "Diagnostic Tools"] },
+            { "name": "Insurance Services", "subsubs": ["Health Insurance", "Life Insurance", "Property & Casualty Insurance", "Auto Insurance", "Travel Insurance"] },
+            { "name": "Wellness & Fitness", "subsubs": ["Gyms", "Mental Health Services", "Nutrition Companies"] }
+          ]
+        },
+        {
+          "name": "Finance & Banking",
+          "subcategories": [
+            { "name": "Retail Banking" },
+            { "name": "Investment Banking" },
+            { "name": "Asset & Wealth Management" },
+            { "name": "Venture Capital & Private Equity" },
+            { "name": "Microfinance & Lending" },
+            { "name": "Financial Advisory Services" },
+            { "name": "Digital Banking & Neobanks" }
+          ]
+        },
+        {
+          "name": "Retail & Consumer Goods",
+          "subcategories": [
+            { "name": "E-commerce Stores" },
+            { "name": "Fashion & Apparel" },
+            { "name": "Food & Beverage", "subsubs": ["Restaurants", "FMCG", "Packaged Foods"] },
+            { "name": "Electronics & Appliances" },
+            { "name": "Beauty & Personal Care" },
+            { "name": "Luxury Goods" }
+          ]
+        },
+        {
+          "name": "Energy & Utilities",
+          "subcategories": [
+            { "name": "Oil & Gas" },
+            { "name": "Renewable Energy", "subsubs": ["Solar", "Wind", "Hydro", "Biomass"] },
+            { "name": "Power Distribution & Utilities" },
+            { "name": "Mining & Natural Resources" },
+            { "name": "Energy Trading & Storage" }
+          ]
+        },
+        {
+          "name": "Real Estate & Construction",
+          "subcategories": [
+            { "name": "Residential Real Estate" },
+            { "name": "Commercial Real Estate" },
+            { "name": "Industrial Real Estate" },
+            { "name": "Real Estate Investment Trusts (REITs)" },
+            { "name": "Property Management" },
+            { "name": "Construction & Infrastructure Development" }
+          ]
+        },
+        {
+          "name": "Media & Entertainment",
+          "subcategories": [
+            { "name": "Film & TV Production" },
+            { "name": "Music Industry" },
+            { "name": "Gaming & Esports" },
+            { "name": "Digital Content Creators", "subsubs": ["Influencers", "Streaming Platforms"] },
+            { "name": "Publishing", "subsubs": ["Books", "Magazines", "Online Media"] },
+            { "name": "Advertising & Marketing Agencies" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NGOs/NPOs",
+      "categories": [
+        {
+          "name": "Humanitarian & Relief NGOs",
+          "subcategories": [
+            { "name": "Disaster Relief" },
+            { "name": "Refugee Support" },
+            { "name": "Emergency Aid" },
+            { "name": "Crisis Response" }
+          ]
+        },
+        {
+          "name": "Health NGOs",
+          "subcategories": [
+            { "name": "Public Health" },
+            { "name": "Hospitals" },
+            { "name": "HIV/AIDS" },
+            { "name": "Malaria" },
+            { "name": "Maternal & Child Health" },
+            { "name": "Mental Health" },
+            { "name": "Medical Research" }
+          ]
+        },
+        {
+          "name": "Education NGOs",
+          "subcategories": [
+            { "name": "Literacy Programs" },
+            { "name": "School Support" },
+            { "name": "Scholarships" },
+            { "name": "Teacher Training" },
+            { "name": "E-learning" },
+            { "name": "Special Education" }
+          ]
+        },
+        {
+          "name": "Environmental NGOs",
+          "subcategories": [
+            { "name": "Climate Change" },
+            { "name": "Conservation" },
+            { "name": "Wildlife Protection" },
+            { "name": "Deforestation" },
+            { "name": "Renewable Energy" },
+            { "name": "Pollution Control" }
+          ]
+        },
+        {
+          "name": "Human Rights & Advocacy NGOs",
+          "subcategories": [
+            { "name": "Gender Equality" },
+            { "name": "Child Rights" },
+            { "name": "Disability Rights" },
+            { "name": "LGBTQ+ Rights" },
+            { "name": "Anti-Trafficking" },
+            { "name": "Democracy Promotion" }
+          ]
+        },
+        {
+          "name": "Community Development NGOs",
+          "subcategories": [
+            { "name": "Rural Development" },
+            { "name": "Urban Development" },
+            { "name": "Housing" },
+            { "name": "Water & Sanitation" },
+            { "name": "Infrastructure Support" }
+          ]
+        },
+        {
+          "name": "Economic Development NGOs",
+          "subcategories": [
+            { "name": "Poverty Alleviation" },
+            { "name": "Microfinance" },
+            { "name": "Job Creation" },
+            { "name": "Small Business Support" },
+            { "name": "Skill Development" }
+          ]
+        },
+        {
+          "name": "Peace & Security NGOs",
+          "subcategories": [
+            { "name": "Conflict Resolution" },
+            { "name": "Peacebuilding" },
+            { "name": "Arms Control" },
+            { "name": "Anti-Corruption" },
+            { "name": "Governance & Transparency" }
+          ]
+        },
+        {
+          "name": "Cultural & Heritage NGOs",
+          "subcategories": [
+            { "name": "Cultural Preservation" },
+            { "name": "Museums & Heritage Sites" },
+            { "name": "Community Arts" }
+          ]
+        },
+        {
+          "name": "Animal Welfare NGOs",
+          "subcategories": [
+            { "name": "Animal Rescue" },
+            { "name": "Anti-Poaching" },
+            { "name": "Pet Welfare" },
+            { "name": "Farm Animal Protection" }
+          ]
+        },
+        {
+          "name": "Faith-Based NGOs" },
+        {
+          "name": "International Development NGOs",
+          "subcategories": [
+            { "name": "Global Poverty Reduction" },
+            { "name": "UN Partnership Programs" },
+            { "name": "Sustainable Development Goals (SDGs)" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Government & Public Sector",
+      "categories": [
+        {
+          "name": "Government Bodies",
+          "subcategories": [
+            { "name": "Central/Federal Government Agencies" },
+            { "name": "State/Regional Government Agencies" },
+            { "name": "Local/Municipal Government" },
+            { "name": "Public Enterprises / SOEs" },
+            { "name": "Regulatory Authorities" },
+            { "name": "Military & Defense Organizations" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Educational & Research",
+      "categories": [
+        {
+          "name": "Institutions",
+          "subcategories": [
+            { "name": "Schools", "subsubs": ["Public", "Private"] },
+            { "name": "Colleges & Universities" },
+            { "name": "Research Institutes" },
+            { "name": "Think Tanks" },
+            { "name": "Training Centers" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "categories": [
+        {
+          "name": "Providers",
+          "subcategories": [
+            { "name": "Public Hospitals" },
+            { "name": "Private Hospitals & Clinics" },
+            { "name": "Health NGOs" },
+            { "name": "International Health Orgs", "subsubs": ["WHO", "Médecins Sans Frontières"] },
+            { "name": "Biotech & Medical Research Institutes" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "International & Intergovernmental Organizations",
+      "categories": [
+        {
+          "name": "Global Orgs",
+          "subcategories": [
+            { "name": "United Nations & Agencies", "subsubs": ["UNICEF", "WHO", "UNESCO"] },
+            { "name": "World Bank & IMF" },
+            { "name": "World Trade Organization (WTO)" },
+            { "name": "African Union (AU)" },
+            { "name": "European Union (EU)" },
+            { "name": "ASEAN" },
+            { "name": "NATO" },
+            { "name": "OPEC" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hybrid / Special",
+      "categories": [
+        {
+          "name": "Types",
+          "subcategories": [
+            { "name": "Social Enterprises" },
+            { "name": "Professional Associations" },
+            { "name": "Labor Unions" },
+            { "name": "Cooperatives" },
+            { "name": "Community Development Organizations" }
+          ]
+        }
+      ]
+    }
+]
+
+}

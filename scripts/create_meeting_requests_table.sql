@@ -1,0 +1,25 @@
+-- Create meeting_requests table manually
+CREATE TABLE IF NOT EXISTS `meeting_requests` (
+  `id` VARCHAR(36) NOT NULL PRIMARY KEY,
+  `fromUserId` VARCHAR(36) NOT NULL,
+  `toUserId` VARCHAR(36) NOT NULL,
+  `title` VARCHAR(200) NOT NULL,
+  `agenda` TEXT,
+  `scheduledAt` DATETIME NOT NULL,
+  `duration` INT NOT NULL DEFAULT 30,
+  `timezone` VARCHAR(50) NOT NULL DEFAULT 'UTC',
+  `mode` ENUM('video', 'in_person') NOT NULL DEFAULT 'video',
+  `location` VARCHAR(300),
+  `link` VARCHAR(500),
+  `status` ENUM('pending', 'accepted', 'rejected', 'cancelled') NOT NULL DEFAULT 'pending',
+  `respondedAt` DATETIME,
+  `rejectionReason` TEXT,
+  `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `meeting_requests_from_user_id` (`fromUserId`),
+  INDEX `meeting_requests_to_user_id` (`toUserId`),
+  INDEX `meeting_requests_status` (`status`),
+  INDEX `meeting_requests_scheduled_at` (`scheduledAt`),
+  FOREIGN KEY (`fromUserId`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`toUserId`) REFERENCES `users` (`id`) ON DELETE CASCADE
+);

@@ -1,0 +1,43 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  New Meeting Request 📅
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi{{#if name}} {{name}}{{/if}}, <strong>{{fromName}}</strong> has requested a meeting with you on <strong>{{BRAND.name}}</strong>.
+</p>
+
+<div style="margin:16px 0;padding:16px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <h3 style="margin:0 0 8px 0;font-size:16px;">Meeting Details</h3>
+  <p style="margin:0 0 8px 0;"><strong>Title:</strong> {{title}}</p>
+  <p style="margin:0 0 8px 0;"><strong>Date:</strong> {{formatDate scheduledAt}}</p>
+  <p style="margin:0 0 8px 0;"><strong>Time:</strong> {{formatTime scheduledAt}} ({{timezone}})</p>
+  <p style="margin:0 0 8px 0;"><strong>Duration:</strong> {{duration}} minutes</p>
+  <p style="margin:0 0 8px 0;"><strong>Mode:</strong> {{mode}}</p>
+  
+  {{#if location}}
+  <p style="margin:0 0 8px 0;"><strong>Location:</strong> {{location}}</p>
+  {{/if}}
+  
+  {{#if link}}
+  <p style="margin:0 0 8px 0;"><strong>Meeting Link:</strong> <a href="{{link}}" style="color:{{BRAND.primary}};">{{link}}</a></p>
+  {{/if}}
+  
+  {{#if agenda}}
+  <p style="margin:8px 0 0 0;"><strong>Agenda:</strong></p>
+  <p style="margin:4px 0 0 0;font-style:italic;">{{agenda}}</p>
+  {{/if}}
+</div>
+
+{{> button href=link label="View Meeting Request"}}
+
+<p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+  You can accept or decline this meeting request from your notifications panel.
+</p>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  If you don't know this person or can't attend this meeting, you can decline the request.
+</p>

@@ -1,0 +1,169 @@
+{
+  "Agriculture": [
+    "Crop Production",
+    "Livestock & Poultry",
+    "Agro-Processing",
+    "Agro-Tech",
+    "Agricultural Equipment & Inputs"
+  ],
+  "Energy": [
+    "Renewable Energy (Solar, Wind, Hydro)",
+    "Oil & Gas",
+    "Power Generation & Distribution",
+    "Energy Equipment & Services"
+    
+  ],
+  "Manufacturing": [
+    "Food & Beverage",
+    "Textiles & Apparel",
+    "Industrial Goods",
+    "Consumer Goods",
+    "Machinery & Equipment"
+  ],
+  "Infrastructure & Construction": [
+    "Real Estate Development",
+    "Civil Engineering & Roads",
+    "Building Materials",
+    "Smart Cities & Urban Planning"
+  ],
+  "Commerce & Financial Services": [
+    "Banking",
+    "Insurance",
+    "Fintech",
+    "Investment & Capital Markets",
+    "Microfinance & Cooperative Services"
+  ],
+  "E-Commerce": [
+    "Online Retail",
+    "B2B Platforms",
+    "Logistics & Delivery Services",
+    "Digital Payment Solutions"
+  ],
+  "Technology": [
+    "Software Development",
+    "Hardware & Devices",
+    "Fintech",
+    "Artificial Intelligence",
+    "Data Analysis",
+    "Cybersecurity",
+    "Telecom & Connectivity"
+  ],
+  "Fashion": [
+    "Apparel Design",
+    "Footwear",
+    "Accessories",
+    "Modest/Traditional Wear",
+    "Fashion Tech"
+  ],
+  "Oil & Gas": [
+    "Upstream (Exploration & Production)",
+    "Midstream (Transport & Storage)",
+    "Downstream (Refining & Distribution)",
+    "Oilfield Services"
+  ],
+  "Automobile": [
+    "Vehicle Manufacturing",
+    "Auto Parts & Accessories",
+    "Electric Vehicles",
+    "Auto Services & Maintenance"
+  ],
+  "Media & Entertainment": [
+    "Film & Television",
+    "Radio & Podcasting",
+    "Gaming & Animation",
+    "Publishing (Books, Magazines, Digital Publishing)"
+  ],
+  "Marketing & Advertising": [
+    "Digital Marketing (SEO, SEM, Social Media, Content Marketing, Copywriting)",
+    "Branding & Creative Strategy (Brand Identity, Graphic Design, Storytelling)",
+    "Advertising (Traditional Media, TV/Radio, Outdoor, Print)",
+    "Public Relations (Media Relations, Crisis Communication, Reputation Management)",
+    "Market Research & Analytics (Consumer Insights, Surveys, Data Analysis)",
+    "Event Marketing & Activations (Expos, Trade Shows, Experiential Campaigns)",
+    "Influencer & Affiliate Marketing",
+    "Email & Direct Marketing",
+    "Product Marketing & Go-to-Market Strategy"
+  ],
+  "Education": [
+    "Schools & Training Institutes",
+    "Higher Education",
+    "EdTech",
+    "Research & Development",
+    "Vocational/Skills Training"
+  ],
+  "Health & Health Services": [
+    "Hospitals & Clinics",
+    "Pharmaceuticals",
+    "Biotechnology",
+    "Medical Equipment",
+    "Health Tech / Telemedicine"
+  ],
+  "Maritime & Transport": [
+    "Shipping & Logistics",
+    "Ports & Harbors",
+    "Aviation",
+    "Public Transportation",
+    "Freight & Delivery Services"
+  ],
+  "Tourism & Hospitality": [
+    "Hotels & Accommodation",
+    "Travel Agencies & Tour Operators",
+    "Eco-Tourism",
+    "Cultural Tourism",
+    "Event Management"
+  ],
+  "Arts & Culture": [
+    "Visual Arts",
+    "Performing Arts",
+    "Cultural Heritage",
+    "Crafts & Handwork",
+    "Creative Writing & Literature",
+    "Painting & Sculpture",
+    "Photography",
+    "Digital Art / Illustration",
+    "Graphic Design",
+    "Music",
+    "Dance",
+    "Theatre & Drama",
+    "Comedy / Spoken Word",
+    "Performance Production"
+  ],
+  "Beauty & Cosmetics": [
+    "Skincare",
+    "Haircare",
+    "Makeup",
+    "Fragrances",
+    "Beauty Tech"
+  ],
+  "Public Sector": [
+    "Government Ministries & Agencies",
+    "Policy & Regulation",
+    "Public-Private Partnerships",
+    "Trade & Investment Promotion"
+  ],
+  "Professional Services": [
+    "Legal",
+    "Accounting & Auditing",
+    "Consulting",
+    "Human Resources",
+    "Marketing & Advertising"
+  ],
+  "Students": [
+    "Undergraduate",
+    "Graduate",
+    "Postgraduate",
+    "Student Entrepreneur",
+    "Freelancer",
+    "Vocational/Technical Students"
+  ],
+  "Support Role": [
+    "Mentor/Coach",
+    "Trainer",
+    "Consultant",
+    "Recruiter",
+    "Service Provider",
+    "Events Organizer",
+    "Tourism Agent"
+  ]
+  
+}

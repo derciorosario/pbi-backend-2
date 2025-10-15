@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Entrepreneurs",
+    "categories": [
+      {
+        "name": "Technology",
+        "subcategories": [
+          { "name": "Software Development", "subsubs": ["Frontend", "Backend", "Full-stack", "Mobile"] },
+          { "name": "Artificial Intelligence", "subsubs": ["ML Engineer", "Data Scientist"] },
+          { "name": "Cybersecurity" },
+          { "name": "Telecom & Connectivity" }
+        ]
+      },
+      {
+        "name": "Trade",
+        "subcategories": [
+          { "name": "Fashion", "subsubs": ["Apparel", "Footwear", "Accessories", "Modest/Traditional Wear", "Fashion Tech"] },
+          { "name": "Food & Beverage" },
+          { "name": "Raw Materials" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Professional",
+    "categories": [
+      {
+        "name": "Technology",
+        "subcategories": [
+          { "name": "Web Developer", "subsubs": ["Frontend", "Backend", "Full-stack"] },
+          { "name": "Product Manager" },
+          { "name": "UI/UX Designer" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Unassigned Group",
+    "categories": [
+      {
+        "name": "Public Sector",
+        "subcategories": [
+          { "name": "Policy & Regulation" },
+          { "name": "Trade & Investment Promotion" }
+        ]
+      }
+    ]
+  }
+]
