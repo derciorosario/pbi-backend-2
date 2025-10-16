@@ -7,6 +7,22 @@ const {
   UserIdentityInterest, UserCategoryInterest, UserSubcategoryInterest, UserSubsubCategoryInterest,
   Goal, UserGoal,
   Contact,
+  // Company management models
+  CompanyInvitation, CompanyRepresentative, CompanyStaff, OrganizationJoinRequest,
+  // Content models that reference users
+  Job, Event, Service, Product, Tourism, Funding, Moment, Need,
+  // Communication models
+  Message, Conversation, MeetingRequest, Notification,
+  // Social models
+  Like, Comment, Repost, UserBlock, Report,
+  // Applications and registrations
+  JobApplication, EventRegistration,
+  // Connection models
+  Connection, ConnectionRequest,
+  // Settings and tokens
+  UserSettings, VerificationToken,
+  // Portfolio models
+  WorkSample, Gallery,
 } = require("../models");
 const { computeProfileProgress } = require("../utils/profileProgress");
 
@@ -415,8 +431,8 @@ exports.updateUser = async (req, res) => {
 };
 
 /**
- * Delete a user
- */
+  * Delete a user
+  */
 exports.deleteUser = async (req, res) => {
   try {
     // Check if user is admin
@@ -427,7 +443,15 @@ exports.deleteUser = async (req, res) => {
     const { id } = req.params;
 
     // Find the user
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+          include: [
+            {
+              model: Profile, as: "profile",
+            },
+          ],
+    });
+
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -437,7 +461,191 @@ exports.deleteUser = async (req, res) => {
       return res.status(403).json({ message: "Cannot delete another admin user" });
     }
 
-    // Delete the user
+    // Delete all related records in proper order to avoid foreign key constraint errors
+
+    // 1. Delete company invitations (as company, invited user, or inviter)
+    await CompanyInvitation.destroy({
+      where: {
+        [Op.or]: [
+          { companyId: id },
+          { invitedUserId: id },
+          { invitedBy: id },
+          { cancelledBy: id }
+        ]
+      }
+    });
+
+    // 2. Delete company representatives
+    await CompanyRepresentative.destroy({
+      where: {
+        [Op.or]: [
+          { companyId: id },
+          { representativeId: id },
+          { authorizedBy: id },
+          { revokedBy: id }
+        ]
+      }
+    });
+
+    // 3. Delete company staff
+    await CompanyStaff.destroy({
+      where: {
+        [Op.or]: [
+          { companyId: id },
+          { staffId: id },
+          { invitedBy: id },
+          { removedBy: id }
+        ]
+      }
+    });
+
+    // 4. Delete organization join requests
+    await OrganizationJoinRequest.destroy({
+      where: {
+        [Op.or]: [
+          { organizationId: id },
+          { userId: id },
+          { cancelledBy: id },
+          { approvedBy: id }
+        ]
+      }
+    });
+
+    // 5. Delete content created by the user
+    await Job.destroy({ where: { postedByUserId: id } });
+    await Event.destroy({ where: { organizerUserId: id } });
+    await Service.destroy({ where: { providerUserId: id } });
+    await Product.destroy({ where: { sellerUserId: id } });
+    await Tourism.destroy({ where: { authorUserId: id } });
+    await Funding.destroy({ where: { creatorUserId: id } });
+    await Moment.destroy({ where: { userId: id } });
+    await Need.destroy({ where: { userId: id } });
+
+    // 6. Delete applications and registrations
+    await JobApplication.destroy({ where: { userId: id } });
+    await EventRegistration.destroy({ where: { userId: id } });
+
+    // 7. Delete messages (as sender or receiver)
+    await Message.destroy({
+      where: {
+        [Op.or]: [
+          { senderId: id },
+          { receiverId: id }
+        ]
+      }
+    });
+
+    // 8. Delete conversations (as user1 or user2)
+    await Conversation.destroy({
+      where: {
+        [Op.or]: [
+          { user1Id: id },
+          { user2Id: id }
+        ]
+      }
+    });
+
+    // 9. Delete connection requests (as sender or receiver)
+    await ConnectionRequest.destroy({
+      where: {
+        [Op.or]: [
+          { fromUserId: id },
+          { toUserId: id }
+        ]
+      }
+    });
+
+    // 10. Delete connections (as userOne or userTwo)
+    await Connection.destroy({
+      where: {
+        [Op.or]: [
+          { userOneId: id },
+          { userTwoId: id }
+        ]
+      }
+    });
+
+    // 11. Delete meeting requests (as requester or recipient)
+    await MeetingRequest.destroy({
+      where: {
+        [Op.or]: [
+          { fromUserId: id },
+          { toUserId: id }
+        ]
+      }
+    });
+
+    // 12. Delete notifications
+    await Notification.destroy({ where: { userId: id } });
+
+    // 13. Delete social interactions
+   
+       await Comment.destroy({
+    where: {
+      [Op.or]: [
+        { userId: user.id },
+        { targetId: user.id }
+      ]
+    }
+  });
+
+   await Repost.destroy({
+    where: {
+      [Op.or]: [
+        { userId: user.id },
+        { targetId: user.id }
+      ]
+    }
+  });
+
+  await Like.destroy({
+    where: {
+      [Op.or]: [
+        { userId: user.id },
+        { targetId: user.id }
+      ]
+    }
+  });
+
+    // 14. Delete reports and blocks
+    await Report.destroy({
+      where: {
+        [Op.or]: [
+          { reporterId: id },
+          { targetId: id }
+        ]
+      }
+    });
+    await UserBlock.destroy({
+      where: {
+        [Op.or]: [
+          { blockerId: id },
+          { blockedId: id }
+        ]
+      }
+    });
+
+    await VerificationToken.destroy({ where: { userId: user.id } });
+    
+
+    // 15. Delete profile-related data (these should cascade, but being explicit)
+    await WorkSample.destroy({ where: { profileId: user.profile?.id } });
+    await Gallery.destroy({ where: { profileId: user.profile?.id } });
+
+    // 16. Delete taxonomy relationships (through tables)
+    await UserGoal.destroy({ where: { userId: id } });
+    await UserIdentity.destroy({ where: { userId: id } });
+    await UserCategory.destroy({ where: { userId: id } });
+    await UserSubcategory.destroy({ where: { userId: id } });
+    await UserSubsubCategory.destroy({ where: { userId: id } });
+
+    // Interest relationships
+    await UserIdentityInterest.destroy({ where: { userId: id } });
+    await UserCategoryInterest.destroy({ where: { userId: id } });
+    await UserSubcategoryInterest.destroy({ where: { userId: id } });
+    await UserSubsubCategoryInterest.destroy({ where: { userId: id } });
+
+    // 17. Finally, delete the user (this will cascade to Profile, UserSettings, VerificationToken)
     await user.destroy();
 
     res.json({ message: "User deleted successfully" });

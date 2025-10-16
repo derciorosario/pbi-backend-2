@@ -69,7 +69,6 @@ exports.createJob = async (req, res) => {
     //await validateCategoryPair(primaryCategoryId, primarySubcategoryId);
     if(categoryIds?.length || subcategoryIds?.length || subsubCategoryIds?.length) await validateAudienceHierarchy({ categoryIds: categoryIds.length ? categoryIds : [primaryCategoryId], subcategoryIds, subsubCategoryIds });
 
-
    
     // create job
     const job = await Job.create({
@@ -142,8 +141,6 @@ const validateCategoryPair = async (categoryId, subcategoryId) => {
     }
   }
 };
-
-
 
 
 exports.updateJob = async (req, res) => {
@@ -261,14 +258,12 @@ exports.getJob = async (req, res) => {
     if (!job) return res.status(404).json({ message: "Job not found" });
 
     const response = { job };
-
     try {
       await cache.set(__jobCacheKey, response, JOB_CACHE_TTL);
       console.log(`💾 Job cached: ${__jobCacheKey}`);
     } catch (e) {
       console.error("Job cache write error:", e.message);
     }
-
     res.json(response);
   } catch (err) {
     console.error("getJob error", err);
@@ -276,8 +271,8 @@ exports.getJob = async (req, res) => {
   }
 };
 
-
 exports.listJobs = async (req, res) => {
+
   const { categoryId, subcategoryId, country, q } = req.query;
   const where = {};
   if (categoryId) where.categoryId = categoryId;
@@ -291,6 +286,7 @@ exports.listJobs = async (req, res) => {
     include: [{ association: "category" }, { association: "subcategory" }],
   });
   res.json({ jobs });
+  
 };
 
 exports.deleteJob = async (req, res) => {

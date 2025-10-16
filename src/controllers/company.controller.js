@@ -1797,6 +1797,8 @@ exports.revokeRepresentative = async (req, res, next) => {
     const { representativeId } = req.params;
     const companyId = req.user.sub;
 
+    const company=await User.findByPk(companyId)
+
     const representative = await CompanyRepresentative.findOne({
       where: {
         companyId,

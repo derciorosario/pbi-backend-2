@@ -603,6 +603,23 @@ async function updateAvatarUrl(req, res, next) {
   } catch (e) { next(e); }
 }
 
+/* PUT /api/profile/avatar */
+async function updateCoverImage(req, res, next) {
+  try {
+    const userId = req.user.sub;
+    const { coverImage } = req.body;
+
+    const user = await User.findByPk(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.coverImage = coverImage || null;
+    await user.save();
+
+    return res.json({ message: "Avatar updated successfully", coverImage: user.coverImage });
+  } catch (e) { next(e); }
+  
+}
+
 /* GET /api/profile/work-samples */
 async function getWorkSamples(req, res, next) {
   try {
@@ -1159,5 +1176,6 @@ module.exports = {
   updateIndustrySelections,
   getJobApplicationsForCompany,
   getEventRegistrationsForCompany,
+  updateCoverImage
 };
 

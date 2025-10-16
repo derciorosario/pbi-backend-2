@@ -10,9 +10,6 @@ const { getIdentityCatalogFunc } = require("../utils/identity_taxonomy");
 
 
 
-
-
-
 exports.getIdentityCatalog = async (req, res) => {
   try {
     // 🔑 Determine type priority

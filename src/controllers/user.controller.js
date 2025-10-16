@@ -66,7 +66,7 @@ exports.getPublicProfile = async (req, res) => {
 
     // ── Base user with taxonomy selections kept as before ─────────────────────
     const user = await User.findByPk(id, {
-      attributes: ["id", "name", "email", "accountType", "country", "city", "avatarUrl", "createdAt"],
+      attributes: ["id", "name", "email", "accountType", "country", "city", "avatarUrl", "createdAt","coverImage"],
       include: [
         {
           model: Profile, as: "profile",
@@ -278,6 +278,7 @@ exports.getPublicProfile = async (req, res) => {
       city: user.city,
       country: user.country,
       avatarUrl: user.profile?.avatarUrl || user.avatarUrl,
+      coverImage:user?.coverImage || null,
       professionalTitle: user.profile?.professionalTitle,
       about: user.profile?.about,
       experienceLevel: user.profile?.experienceLevel,

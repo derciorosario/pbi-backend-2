@@ -1588,6 +1588,8 @@ const finalRows = filteredRows;
       const catsOut = (u.interests || []).map((i) => i.category?.name).filter(Boolean);
       const subsOut = (u.interests || []).map((i) => i.subcategory?.name).filter(Boolean);
 
+      console.log({u})
+
       return {
         raw: u,
         score: 0,
@@ -1600,6 +1602,7 @@ const finalRows = filteredRows;
           countryOfResidence: u.countryOfResidence,
           avatarUrl: u.profile?.avatarUrl || u.avatarUrl || null,
           email: u.email,
+          coverImage:u.coverImage,
           lookingFor: goalNames.join(", "),
           goals: goalNames,
           cats: catsOut,

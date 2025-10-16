@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       token: { type: DataTypes.STRING, allowNull: false },
       userId: { type: DataTypes.UUID, allowNull: false },
       type: {
-        type: DataTypes.ENUM("email_verify", "password_reset"),
+        type: DataTypes.ENUM("email_verify", "password_reset",'delete_account'),
         defaultValue: "email_verify",
       },
       expiresAt: { type: DataTypes.DATE, allowNull: false },

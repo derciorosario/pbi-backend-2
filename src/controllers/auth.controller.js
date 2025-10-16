@@ -1,4 +1,4 @@
-const { createUserAndSendVerification, verifyEmailToken, resendVerification, login, requestPasswordReset, resetPassword } =
+const { createUserAndSendVerification, verifyEmailToken, resendVerification, login, requestPasswordReset, resetPassword, requestAccountDeletion, confirmAccountDeletion } =
   require("../services/auth.service");
 const { User, CompanyRepresentative } = require("../models");
 const { loginWithGoogle } = require("../services/auth.service");
@@ -112,8 +112,8 @@ async function checkGoogleUserStatus(req, res, next) {
 
 async function googleSignIn(req, res, next) {
   try {
-    const { idToken, accountType, accessToken } = req.body;
-    const { user, token } = await loginWithGoogle({ idToken, accountType, accessToken });
+    const { idToken, accountType, accessToken,birthDate } = req.body;
+    const { user, token } = await loginWithGoogle({ idToken, accountType, accessToken,birthDate });
     res.json({
       token,
       user: {
@@ -123,6 +123,7 @@ async function googleSignIn(req, res, next) {
         accountType: user.accountType,
         avatarUrl: user.avatarUrl,
         provider: user.provider,
+        
       },
     });
   } catch (err) {
@@ -166,7 +167,7 @@ async function getCompanyToken(req, res, next) {
     const userId = req.user.sub;
 
     // Verify that the user is authorized to represent this company
-   /* const representation = await CompanyRepresentative.findOne({
+    /* const representation = await CompanyRepresentative.findOne({
       where: {
         companyId,
         representativeId: userId,
@@ -182,9 +183,9 @@ async function getCompanyToken(req, res, next) {
 
     // Get the company user
     const company = await User.findByPk(companyId);
-   /* if (!company || company.accountType !== "company") {
-      return res.status(404).json({ message: "Company not found" });
-    }*/
+    /* if (!company || company.accountType !== "company") {
+       return res.status(404).json({ message: "Company not found" });
+     }*/
 
     if (!company) {
       return res.status(404).json({ message: "Company not found" });
@@ -210,6 +211,29 @@ async function getCompanyToken(req, res, next) {
   }
 }
 
+async function requestDeleteAccount(req, res, next) {
+  try {
+    const { email } = req.body;
+
+    // For privacy: always return success, even if user not found
+    await requestAccountDeletion(email);
+
+    res.json({ message: "If an account with that email exists, a deletion confirmation link has been sent." });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function confirmDeleteAccount(req, res, next) {
+  try {
+    const { token } = req.params;
+    await confirmAccountDeletion(token);
+    res.json({ message: "Account has been successfully deleted." });
+  } catch (err) {
+    next(err);
+  }
+}
+
 
 module.exports = {
   forgotPassword,
@@ -221,5 +245,7 @@ module.exports = {
   me,
   googleSignIn,
   checkGoogleUserStatus,
-  getCompanyToken
+  getCompanyToken,
+  requestDeleteAccount,
+  confirmDeleteAccount
 };

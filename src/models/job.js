@@ -65,9 +65,11 @@ module.exports = (sequelize, DataTypes) => {
       benefits:      { type: DataTypes.STRING(500) },
 
       
-
       // Application
-      applicationDeadline:   { type: DataTypes.DATEONLY },
+      applicationDeadline:   { type: DataTypes.DATEONLY,  set(v) {
+          // turn "", null, undefined into NULL in DB
+          this.setDataValue("applicationDeadline", v && String(v).trim() ? v : null);
+        }, },
       positions:             { type: DataTypes.INTEGER, defaultValue: 1 },
       applicationInstructions:{ type: DataTypes.TEXT },
       contactEmail:          { type: DataTypes.STRING(160) },

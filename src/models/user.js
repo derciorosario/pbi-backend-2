@@ -49,9 +49,10 @@ module.exports = (sequelize, DataTypes) => {
 
       isVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
 
-      provider: { type: DataTypes.ENUM("local", "google"), allowNull: false, defaultValue: "local" },
+       provider: { type: DataTypes.ENUM("local", "google"), allowNull: false, defaultValue: "local" },
        googleId: { type: DataTypes.STRING(64), allowNull: true },
        avatarUrl: { type: DataTypes.TEXT('long'), allowNull: true},
+       coverImage: { type: DataTypes.TEXT('long'), allowNull: true},
 
     },
     {

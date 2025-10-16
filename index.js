@@ -231,9 +231,12 @@ const PORT = process.env.PORT || 5000;
     await sequelize.authenticate();
     console.log("✅ Database connected");
 
+    //require('./scripts/run-gallery-migration.js')
+
+
     // Auto-sync DB tables (use migrations in production)
     // Temporarily disabled to avoid schema issues during development
-    // await sequelize.sync({ force: false, alter: true });
+   // await sequelize.sync({ force: false, alter: true });
     
     // 👉 Run seeding if needed
     //await seedIfEmpty();
@@ -970,7 +973,6 @@ async function pushHeaderCounts(socketOrUserId) {
             conversationId: conversation.id,
           });
 
-          console.log('-1')
 
           const msgPayload = {
             id: message.id,
@@ -995,7 +997,7 @@ async function pushHeaderCounts(socketOrUserId) {
             const receiver = await User.findByPk(receiverId, { attributes: ["id", "name", "email"] });
             const isEnabled = await isEmailNotificationEnabled(receiverId, 'messages');
 
-            if (isEnabled && receiver) {
+            if (isEnabled && receiver && 0==1) {
               const baseUrl = process.env.WEBSITE_URL || "https://54links.com";
               const messagesLink = `${baseUrl}/messages?userId=${socket.userId}`;
 
@@ -1016,7 +1018,8 @@ async function pushHeaderCounts(socketOrUserId) {
             // Continue even if email fails
           }
 
-          // Create in-app notification for receiver
+          if(0==1){
+             // Create in-app notification for receiver
           try {
             await Notification.create({
               userId: receiverId,
@@ -1033,6 +1036,7 @@ async function pushHeaderCounts(socketOrUserId) {
           } catch (notifErr) {
             console.error("Failed to create message notification:", notifErr);
             // Continue even if notification creation fails
+          }
           }
 
           reply(socket, ack, "private_message_result", { ok: true, data: { message: msgPayload } });

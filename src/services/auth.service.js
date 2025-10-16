@@ -1,10 +1,28 @@
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const dayjs = require("dayjs");
-const { User, VerificationToken, Profile } = require("../models");
+const { User, VerificationToken } = require("../models");
 const { sendEmail, sendTemplatedEmail } = require("../utils/email");
 const { sign } = require("../utils/jwt");
 const { OAuth2Client } = require("google-auth-library");
+
+
+ // Import all the models we need for deletion
+  const {
+    CompanyInvitation, CompanyRepresentative, CompanyStaff, OrganizationJoinRequest,
+    Job, Event, Service, Product, Tourism, Funding, Moment, Need,
+    Message, Conversation, MeetingRequest, Notification,
+    Like, Comment, Repost, UserBlock, Report,
+    JobApplication, EventRegistration,
+    Connection, ConnectionRequest,
+    UserSettings, VerificationToken: VT, Profile,
+    WorkSample, Gallery,
+    UserGoal, UserIdentity, UserCategory, UserSubcategory, UserSubsubCategory,
+    UserIdentityInterest, UserCategoryInterest, UserSubcategoryInterest, UserSubsubCategoryInterest,
+  } = require("../models");
+
+  const { Op } = require("sequelize");
+
 
 async function createUserAndSendVerification({
   name, email, password, accountType = "individual",
@@ -186,7 +204,7 @@ async function fetchUserInfoWithAccessToken(accessToken) {
   return res.json(); // { sub, email, email_verified, name, picture, hd? }
 }
 
-async function loginWithGoogle({ idToken, accessToken, accountType = "individual", additionalFields = {} }) {
+async function loginWithGoogle({ idToken, accessToken,birthDate, accountType = "individual", additionalFields = {} }) {
   let payload;
 
   if (idToken) {
@@ -243,12 +261,17 @@ async function loginWithGoogle({ idToken, accessToken, accountType = "individual
       ...additionalFields, // Include any additional fields from signup
     };
 
+    if(!birthDate){
+      return
+    }
+
     user = await User.create(userData);
+
 
     // Create Profile with birthDate if provided
     const profileData = { userId: user.id };
-    if (additionalFields.birthDate) {
-      profileData.birthDate = additionalFields.birthDate;
+    if (birthDate) {
+      profileData.birthDate = birthDate;
     }
     await Profile.create(profileData);
   } else {
@@ -349,5 +372,290 @@ async function resetPassword({  token, password }) {
   return true;
 }
 
+// Send account deletion email with token
+async function requestAccountDeletion(email) {
+  const user = await User.findOne({ where: { email } });
+
+  // For privacy: always return success, even if user not found
+  if (!user) return true;
+
+  // Don't allow deletion of admin accounts
+  if (user.accountType === "admin") {
+    const e = new Error("Admin accounts cannot be deleted through this method");
+    e.status = 403;
+    throw e;
+  }
+
+  // Invalidate previous deletion tokens
+  await VerificationToken.update(
+    { usedAt: new Date() },
+    { where: { userId: user.id, usedAt: null, type: "delete_account" } }
+  );
+
+  // Issue a new token
+  const token = crypto.randomBytes(32).toString("hex");
+  const expiresAt = dayjs().add(24, "hour").toDate(); // 24h expiry
+  await VerificationToken.create({
+    userId: user.id,
+    token,
+    type: "delete_account",
+    expiresAt,
+  });
+
+  // The user asked that link be BASE_URL/verify/:token
+  const link = `${process.env.BASE_URL || ""}/delete-account/${token}`;
+
+  await sendTemplatedEmail({
+    to: user.email,
+    subject: "Confirm Account Deletion",
+    template: "delete-account",
+    context: {
+      subject: "Confirm Account Deletion",
+      preheader: "Please confirm that you want to delete your account.",
+      name: user.name,
+      link,
+      expiresInHours: 24,
+    },
+  });
+
+  return true;
+}
+
+// Verify token + delete account
+async function confirmAccountDeletion(token) {
+  const record = await VerificationToken.findOne({
+    where: { token, type: "delete_account", usedAt: null },
+  });
+  if (!record) {
+    const e = new Error("Invalid or used token");
+    e.status = 400;
+    throw e;
+  }
+  if (new Date(record.expiresAt) < new Date()) {
+    const e = new Error("Token expired");
+    e.status = 400;
+    throw e;
+  }
+
+   const user = await User.findByPk(record.userId, {
+          include: [
+            {
+              model: Profile, as: "profile",
+            },
+          ],
+    });
+
+  if (!user) {
+    const e = new Error("Invalid token");
+    e.status = 400;
+    throw e;
+  }
+
+  // Don't allow deletion of admin accounts
+  if (user.accountType === "admin") {
+    const e = new Error("Admin accounts cannot be deleted");
+    e.status = 403;
+    throw e;
+  }
+
+ 
+
+  // Delete all related records in proper order to avoid foreign key constraint errors
+
+  // 1. Delete company invitations (as company, invited user, or inviter)
+  await CompanyInvitation.destroy({
+    where: {
+      [Op.or]: [
+        { companyId: user.id },
+        { invitedUserId: user.id },
+        { invitedBy: user.id },
+        { cancelledBy: user.id }
+      ]
+    }
+  });
+
+
+
+  // 2. Delete company representatives
+  await CompanyRepresentative.destroy({
+    where: {
+      [Op.or]: [
+        { companyId: user.id },
+        { representativeId: user.id },
+        { authorizedBy: user.id },
+        { revokedBy: user.id }
+      ]
+    }
+  });
+
+  // 3. Delete company staff
+  await CompanyStaff.destroy({
+    where: {
+      [Op.or]: [
+        { companyId: user.id },
+        { staffId: user.id },
+        { invitedBy: user.id },
+        { removedBy: user.id }
+      ]
+    }
+  });
+
+  // 4. Delete organization join requests
+  await OrganizationJoinRequest.destroy({
+    where: {
+      [Op.or]: [
+        { organizationId: user.id },
+        { userId: user.id },
+        { cancelledBy: user.id },
+        { approvedBy: user.id }
+      ]
+    }
+  });
+
+  // 5. Delete content created by the user
+  await Job.destroy({ where: { postedByUserId: user.id } });
+  await Event.destroy({ where: { organizerUserId: user.id } });
+  await Service.destroy({ where: { providerUserId: user.id } });
+  await Product.destroy({ where: { sellerUserId: user.id } });
+  await Tourism.destroy({ where: { authorUserId: user.id } });
+  await Funding.destroy({ where: { creatorUserId: user.id } });
+  await Moment.destroy({ where: { userId: user.id } });
+  await Need.destroy({ where: { userId: user.id } });
+
+  // 6. Delete applications and registrations
+  await JobApplication.destroy({ where: { userId: user.id } });
+  await EventRegistration.destroy({ where: { userId: user.id } });
+
+  // 7. Delete messages (as sender or receiver)
+  await Message.destroy({
+    where: {
+      [Op.or]: [
+        { senderId: user.id },
+        { receiverId: user.id }
+      ]
+    }
+  });
+
+  // 8. Delete conversations (as user1 or user2)
+  await Conversation.destroy({
+    where: {
+      [Op.or]: [
+        { user1Id: user.id },
+        { user2Id: user.id }
+      ]
+    }
+  });
+
+  // 9. Delete connection requests (as sender or receiver)
+  await ConnectionRequest.destroy({
+    where: {
+      [Op.or]: [
+        { fromUserId: user.id },
+        { toUserId: user.id }
+      ]
+    }
+  });
+
+  // 10. Delete connections (as userOne or userTwo)
+  await Connection.destroy({
+    where: {
+      [Op.or]: [
+        { userOneId: user.id },
+        { userTwoId: user.id }
+      ]
+    }
+  });
+
+  // 11. Delete meeting requests (as requester or recipient)
+  await MeetingRequest.destroy({
+    where: {
+      [Op.or]: [
+        { fromUserId: user.id },
+        { toUserId: user.id }
+      ]
+    }
+  });
+
+  // 12. Delete notifications
+  await Notification.destroy({ where: { userId: user.id } });
+
+   await Comment.destroy({
+    where: {
+      [Op.or]: [
+        { userId: user.id },
+        { targetId: user.id }
+      ]
+    }
+  });
+
+   await Repost.destroy({
+    where: {
+      [Op.or]: [
+        { userId: user.id },
+        { targetId: user.id }
+      ]
+    }
+  });
+
+  await Like.destroy({
+    where: {
+      [Op.or]: [
+        { userId: user.id },
+        { targetId: user.id }
+      ]
+    }
+  });
+
+  // 14. Delete reports and blocks
+  await Report.destroy({
+    where: {
+      [Op.or]: [
+        { reporterId: user.id },
+        { targetId: user.id }
+      ]
+    }
+  });
+
+  await UserBlock.destroy({
+    where: {
+      [Op.or]: [
+        { blockerId: user.id },
+        { blockedId: user.id }
+      ]
+    }
+  });
+
+
+  await VerificationToken.destroy({ where: { userId: user.id } });
+
+  // 15. Delete profile-related data (these should cascade, but being explicit)
+  await WorkSample.destroy({ where: { profileId: user.profile?.id } });
+  await Gallery.destroy({ where: { profileId: user.profile?.id } });
+
+  // 16. Delete taxonomy relationships (through tables)
+  await UserGoal.destroy({ where: { userId: user.id } });
+  await UserIdentity.destroy({ where: { userId: user.id } });
+  await UserCategory.destroy({ where: { userId: user.id } });
+  await UserSubcategory.destroy({ where: { userId: user.id } });
+  await UserSubsubCategory.destroy({ where: { userId: user.id } });
+
+  // Interest relationships
+  await UserIdentityInterest.destroy({ where: { userId: user.id } });
+  await UserCategoryInterest.destroy({ where: { userId: user.id } });
+  await UserSubcategoryInterest.destroy({ where: { userId: user.id } });
+  await UserSubsubCategoryInterest.destroy({ where: { userId: user.id } });
+
+  // 17. Finally, delete the user (this will cascade to Profile, UserSettings, VerificationToken)
+  await user.destroy();
+
+
+  // Mark token as used
+  record.usedAt = new Date();
+  await record.save();
+
+  return true;
+}
+
 module.exports = {requestPasswordReset,
-  resetPassword, createUserAndSendVerification, verifyEmailToken, resendVerification, login,loginWithGoogle };
+  resetPassword, createUserAndSendVerification, verifyEmailToken, resendVerification, login,loginWithGoogle,
+  requestAccountDeletion, confirmAccountDeletion };

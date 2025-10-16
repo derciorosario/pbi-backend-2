@@ -17,6 +17,7 @@ router.put("/profile/industry-selections", auth(true), C.updateIndustrySelection
 router.put("/profile/portfolio", auth(true), C.updatePortfolio);
 router.put("/profile/availability", auth(true), C.updateAvailability);
 router.put("/profile/avatar", auth(true), C.updateAvatarUrl);
+router.put("/profile/cover-image", auth(true), C.updateCoverImage);
 router.get("/profile/work-samples", auth(true), C.getWorkSamples);
 router.post("/profile/work-samples", auth(true), C.createWorkSample);
 router.put("/profile/work-samples/:id", auth(true), C.updateWorkSample);

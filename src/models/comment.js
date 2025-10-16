@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: "comments",
       timestamps: true,
-      paranoid: true, // Soft delete
       indexes: [
         { fields: ["userId"] },
         { fields: ["targetType", "targetId"] },
