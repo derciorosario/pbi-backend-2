@@ -252,12 +252,31 @@ async function getMe(req, res, next) {
       }).then(([settings]) => settings),
     ]);
 
+    const galleryItems = await Gallery.count({
+      where: { profileId: profile.id }
+    });
+
+    const workSamples=await WorkSample.count({
+      where: { profileId: profile.id }
+    });
+
     const counts = {
+      identities:doIdentRows.length,
       categories:   doCatRows.length,
       subcategories: doSubRows.length,
-      // podemos somar subsubs se quiser mostrar no progresso
       subsubs:       doXRows.length,
+
+      workSamples,
+
+      galleryItems,
+
+      wantIdentities:wantIdentRows.length,
+      wantCategories:   wantCatRows.length,
+      wantSubcategories: wantSubRows.length,
+      wantSubsubs:       wantXRows.length,
+      
       industryCategories: industryCatRows.length,
+      industrySubcategories:industrySubRows.length
     };
 
     const progress = computeProfileProgress({ user, profile, counts });
@@ -591,7 +610,7 @@ async function updateAvailability(req, res, next) {
 async function updateAvatarUrl(req, res, next) {
   try {
     const userId = req.user.sub;
-    const { avatarUrl } = req.body;
+    const  avatarUrl = req.savedFileUrl;
 
     const user = await User.findByPk(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -603,11 +622,21 @@ async function updateAvatarUrl(req, res, next) {
   } catch (e) { next(e); }
 }
 
+
+/* PUT /api/profile/avatar */
+async function uploadLogo(req, res, next) {
+  try {
+    const  avatarUrl = req.savedFileUrl;
+    return res.json({url:avatarUrl});
+  } catch (e) { next(e); }
+}
+
+
 /* PUT /api/profile/avatar */
 async function updateCoverImage(req, res, next) {
   try {
     const userId = req.user.sub;
-    const { coverImage } = req.body;
+    const  coverImage  = req.savedFileUrl;
 
     const user = await User.findByPk(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -1176,6 +1205,7 @@ module.exports = {
   updateIndustrySelections,
   getJobApplicationsForCompany,
   getEventRegistrationsForCompany,
-  updateCoverImage
+  updateCoverImage,
+  uploadLogo
 };
 

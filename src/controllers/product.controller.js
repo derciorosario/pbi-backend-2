@@ -31,6 +31,32 @@ exports.getMeta = async (req, res) => {
   });
 };
 
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const item = await Product.findByPk(id);
+    if (!item) return res.status(404).json({ message: "Post not found" });
+    if (String(item.sellerUserId) !== String(req.user?.id) && req.user?. accountType!="admin") {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    await item.destroy();
+     await cache.deleteKeys([
+      ["feed", "products", req.user.id] 
+    ])
+    
+    await cache.deleteKeys([
+      ["feed","all",req.user.id] 
+    ]);
+    res.json({ message: "Post deleted successfully" });
+  } catch (err) {
+    console.error("delete post error", err);
+    res.status(400).json({ message: err.message });
+  }
+};
+
+
 exports.create = async (req, res) => {
   try {
     const uid = req.user?.id; // from auth middleware

@@ -55,10 +55,6 @@ module.exports = (sequelize, DataTypes) => {
       message: {
         type: DataTypes.TEXT,
         allowNull: false,
-        validate: {
-          notEmpty: { msg: "Message is required" },
-          len: { args: [10, 2000], msg: "Message must be between 10 and 2000 characters" }
-        }
       },
       companyName: {
         type: DataTypes.STRING,

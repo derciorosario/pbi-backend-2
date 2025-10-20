@@ -839,7 +839,7 @@ exports.getAllContacts= async (req, res, next)=> {
       offset: parseInt(offset),
       order: [[sortBy, sortOrder.toUpperCase()]],
       attributes: [
-        'id', 'fullName', 'email', 'phone', 'contactReason',
+        'id', 'fullName', 'email', 'phone', 'contactReason','message',
         'companyName', 'website', 'status', 'createdAt', 'respondedAt', 'notes'
       ]
     });

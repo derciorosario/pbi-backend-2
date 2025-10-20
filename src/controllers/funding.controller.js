@@ -176,6 +176,32 @@ exports.create = async (req, res) => {
   }
 };
 
+
+
+exports.deleteFunding = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const item = await Funding.findByPk(id);
+    if (!item) return res.status(404).json({ message: "Post not found" });
+    if (String(item.creatorUserId) !== String(req.user?.id) && req.user?. accountType!="admin") {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    await item.destroy();
+     await cache.deleteKeys([
+      ["feed", "funding", req.user.id] 
+    ])
+    
+    await cache.deleteKeys([
+      ["feed","all",req.user.id] 
+    ]);
+    res.json({ message: "Post deleted successfully" });
+  } catch (err) {
+    console.error("delete post error", err);
+    res.status(400).json({ message: err.message });
+  }
+};
+
 exports.update = async (req, res) => {
   try {
     const uid = req.user?.id;
@@ -269,6 +295,7 @@ exports.update = async (req, res) => {
       generalSubsubCategoryId: generalSubsubCategoryId === '' ? null : generalSubsubCategoryId,
       industryCategoryId: industryCategoryId === '' ? null : industryCategoryId,
       industrySubcategoryId: industrySubcategoryId === '' ? null : industrySubcategoryId,
+
     });
 
     await funding.save();
@@ -283,13 +310,14 @@ exports.update = async (req, res) => {
       });
     }
 
-   
     await cache.deleteKeys([
       ["feed", "funding", req.user.id] 
     ]);
-     await cache.deleteKeys([
+
+    await cache.deleteKeys([
           ["feed","all",req.user.id] 
-        ]);
+    ]);
+
     await exports.getOne({ params: { id: funding.id }, query: { updated: true } }, res);
 
   } catch (err) {

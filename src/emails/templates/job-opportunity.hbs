@@ -45,20 +45,20 @@
                     <!-- Meta -->
                     <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
                       <tr>
-                        {{#if createdBy.avatarUrl}}
+                        {{#if createdByAvatarUrl}}
                         <td valign="middle" style="padding-right:6px;">
-                          <img src="{{createdBy.avatarUrl}}" alt="{{createdBy.name}}" width="20" height="20" style="display:block;border-radius:50%;">
+                          <img src="{{createdByAvatarUrl}}" alt="{{createdByName}}" width="20" height="20" style="display:block;border-radius:50%;">
                         </td>
                         {{/if}}
                         <td valign="middle" style="font-size:12px;color:#666;">
-                          Posted by {{createdBy.name}} • {{createdAt}}
+                          Posted by {{createdByName}} • {{createdAt}}
                         </td>
                       </tr>
                     </table>
 
                     <!-- Description -->
                     <div style="margin-bottom:10px;font-size:13px;line-height:1.4;color:#333;">
-                      {{description}}
+                      {{{description}}}
                     </div>
 
                     <!-- Button -->

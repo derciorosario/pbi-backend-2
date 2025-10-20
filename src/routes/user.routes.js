@@ -6,6 +6,7 @@ const auth = require("../middleware/auth");
 
 // Public profile (optional auth: doesn't block visitors)
 router.get("/users/:id/public", auth(false), C.getPublicProfile);
+router.get("/users/:id/public/basic", auth(false), C.getPublicBasicProfile);
 
 // Search users (requires authentication)
 router.get("/users/search", auth(), C.searchUsers);

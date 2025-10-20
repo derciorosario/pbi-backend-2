@@ -59,8 +59,8 @@ const limiter = rateLimit({
 
 
 // --- Response size guard: cap at 10MB and log big payloads ---
-const TEN_MB = 15 * 1024 * 1024;
-const FIVE_MB = 5 * 1024 * 1024;
+const TEN_MB = 40 * 1024 * 1024;
+const FIVE_MB = 40 * 1024 * 1024;
 
 app.use((req, res, next) => {
   const _json = res.json.bind(res);
@@ -232,6 +232,8 @@ const PORT = process.env.PORT || 5000;
     console.log("✅ Database connected");
 
     //require('./scripts/run-gallery-migration.js')
+
+  //  require('./scripts/create_contacts_table.js')
 
 
     // Auto-sync DB tables (use migrations in production)

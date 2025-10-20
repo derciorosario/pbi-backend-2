@@ -62,7 +62,7 @@ async function submitContact(req, res, next) {
 
     // Send email notification to admin
     try {
-      const adminEmail = 'derciorosario55@gmail.com'// process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "admin@54links.com";
+      const adminEmail = process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "updates-noreply@54links.com";
 
       await sendTemplatedEmail({
         to: adminEmail,

@@ -25,31 +25,27 @@ const localStorage = multer.diskStorage({
     cb(null, uploadsDir);
   },
   filename: function (req, file, cb) {
-    // Create a unique filename with original extension
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const ext = path.extname(file.originalname);
-    const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_'); // Replace spaces with underscores
-    const filename = 'attachment-' + uniqueSuffix + '-' + basename + ext;
+    const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
+    const filename = 'media-' + uniqueSuffix + '-' + basename + ext;
     cb(null, filename);
   }
 });
 
-// Custom dual storage engine - saves locally AND to S3
+// Custom dual storage engine
 const dualStorage = {
   _handleFile: function (req, file, cb) {
-    // First, save locally using multer's disk storage
     localStorage._handleFile(req, file, (error, fileInfo) => {
       if (error) {
         return cb(error);
       }
 
-      // Create S3 filename (same as local but with folder structure)
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       const ext = path.extname(file.originalname);
       const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
-      const s3Filename = `attachments/attachment-${uniqueSuffix}-${basename}${ext}`;
+      const s3Filename = `media/attachment-${uniqueSuffix}-${basename}${ext}`;
 
-      // Read the locally saved file
       const localFilePath = path.join(uploadsDir, fileInfo.filename);
       const fileBuffer = fs.readFileSync(localFilePath);
 
@@ -57,24 +53,21 @@ const dualStorage = {
         Bucket: process.env.S3_BUCKET_NAME,
         Key: s3Filename,
         Body: fileBuffer,
+        ContentType: file.mimetype,
         Metadata: {
           fieldName: file.fieldname,
           originalName: file.originalname
         }
       };
 
-      // Upload to S3
       s3.upload(params, (err, data) => {
         if (err) {
           console.error('S3 upload error:', err);
-          // Don't fail the upload if S3 fails, just log it
         }
 
-        // Use S3 URL for the saved file URL (if S3 upload succeeded)
         if (data && data.Location) {
           req.savedFileUrl = data.Location;
         } else {
-          // Fallback to local URL if S3 upload failed
           req.savedFileUrl = `${process.env.BACKEND_URL || `http://localhost:${process.env.PORT || 5000}`}/api/uploads/${fileInfo.filename}`;
         }
 
@@ -89,7 +82,6 @@ const dualStorage = {
     });
   },
   _removeFile: function (req, file, cb) {
-    // Remove local file if it exists
     if (file.filename) {
       const localFilePath = path.join(uploadsDir, file.filename);
       fs.unlink(localFilePath, (err) => {
@@ -102,30 +94,25 @@ const dualStorage = {
   }
 };
 
-// File filter to allow images and documents
+// File filter
 const fileFilter = (req, file, cb) => {
   const allowedMimes = [
     // Images
-    'image/jpeg',
-    'image/png',
-    'image/gif',
-    'image/webp',
+    'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/bmp', 'image/svg+xml',
+    // Videos
+    'video/mp4', 'video/mpeg', 'video/ogg', 'video/webm', 'video/quicktime', 'video/x-msvideo',
+    'video/x-flv', 'video/3gpp', 'video/3gpp2', 'video/mp2t', 'video/x-ms-wmv',
     // Documents
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/vnd.ms-powerpoint',
-    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    'application/vnd.ms-excel',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    'text/plain',
-    'text/csv'
+    'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'text/plain', 'text/csv', 'application/rtf'
   ];
 
   if (allowedMimes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error('File type not allowed. Only images and documents are permitted.'), false);
+    cb(new Error(`File type '${file.mimetype}' not allowed. Only images, videos, and documents are permitted.`), false);
   }
 };
 
@@ -133,10 +120,15 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: dualStorage,
   limits: {
-    fileSize: 20 * 1024 * 1024 // 5MB limit
+    fileSize: 50 * 1024 * 1024 // 50MB
   },
   fileFilter: fileFilter
 });
 
-module.exports = upload;
-
+// Export different upload configurations for flexibility
+module.exports = {
+  upload,
+  single: (fieldName) => upload.single(fieldName),
+  array: (fieldName, maxCount) => upload.array(fieldName, maxCount),
+  fields: (fields) => upload.fields(fields)
+};

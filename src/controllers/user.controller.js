@@ -45,6 +45,25 @@ const toPublicUser = (u) => ({
 
 
 
+exports.getPublicBasicProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // ── Base user with taxonomy selections kept as before ─────────────────────
+    const user = await User.findByPk(id, {
+      attributes: ["id", "name", "email", "accountType", "country", "city", "avatarUrl", "createdAt","coverImage"],
+    });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (user.accountType === "admin") return res.status(404).json({ message: "User not found" });
+
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch profile" });
+  }
+};
+
 
 
 exports.getPublicProfile = async (req, res) => {

@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       maxSalary:      { type: DataTypes.DECIMAL(12,2), allowNull: true },
       currency:       { type: DataTypes.STRING(10), allowNull: true }, // e.g. USD, NGN, ZAR...
 
-      benefits:      { type: DataTypes.STRING(500) },
+      benefits:       { type: DataTypes.STRING(500) },
 
       
       // Application
@@ -88,6 +88,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       coverImageBase64: { type: DataTypes.TEXT('long'), allowNull: true },
+      videoUrl: { type: DataTypes.TEXT('long'), allowNull: true },
     },
     {
       tableName: "jobs",

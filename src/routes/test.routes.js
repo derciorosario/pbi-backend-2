@@ -8,7 +8,7 @@ const { runNotificationEmailsNow, sendNotificationEmails } = require('../cron/no
  * @desc Trigger notification emails for testing
  * @access Private
  */
-router.post('/notifications', auth(true), function(req, res) {
+router.get('/notifications', auth(false), function(req, res) {
   try {
     // Run the notification emails
     runNotificationEmailsNow()
@@ -30,6 +30,7 @@ router.post('/notifications', auth(true), function(req, res) {
  * @desc Trigger daily notification emails for testing (no auth required for testing)
  * @access Public (for testing only)
  */
+
 router.get('/notifications/daily', function(req, res) {
   try {
     // Run daily notification emails

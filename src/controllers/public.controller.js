@@ -9,8 +9,8 @@ const {
 const { getIdentityCatalogFunc } = require("../utils/identity_taxonomy");
 
 
-
 exports.getIdentityCatalog = async (req, res) => {
+
   try {
     // 🔑 Determine type priority
     const type =
@@ -19,25 +19,22 @@ exports.getIdentityCatalog = async (req, res) => {
       (req.user && req?.user?.accountType) ||
       "individual"; // 'individual' | 'company' | 'all'
 
-    // ✅ Return goals WITH ids (from DB)
+    //Return goals WITH ids (from DB)
     const goalsDb = await Goal.findAll({
       attributes: ["id", "name"],
       order: [["name", "ASC"]],
     });
+
     const goals = goalsDb.map((g) => ({ id: g.id, name: g.name }));
-
     let identities=await getIdentityCatalogFunc(type)
-
     res.json({ identities, goals, type });
+
   } catch (err) {
     console.error("❌ Error in getIdentityCatalog:", err);
     res.status(500).json({ error: "Internal server error" });
   }
+
 };
-
-
-
-
 
 
 
@@ -153,3 +150,7 @@ exports.getIdentityCatalog = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };**/
+
+
+
+

@@ -239,6 +239,7 @@ exports.respondToMeetingRequest = async (req, res) => {
         item_id:meetingRequest,
         action,
         fromName:meetingRequest.recipient.name,
+        fromUserId:meetingRequest.recipient.id,
         title: meetingRequest.title,
         scheduledAt: meetingRequest.scheduledAt,
         rejectionReason,
@@ -359,6 +360,7 @@ exports.cancelMeetingRequest = async (req, res) => {
         message: `${meetingRequest.requester.name || meetingRequest.requester.email} cancelled the meeting request: "${meetingRequest.title}"`,
         payload: {
           item_id: meetingRequest.id,
+          fromUserId:meetingRequest.requester.id,
           meetingRequestId: meetingRequest.id,
           title: meetingRequest.title,
           scheduledAt: meetingRequest.scheduledAt

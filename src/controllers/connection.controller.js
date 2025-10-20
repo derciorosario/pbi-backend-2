@@ -56,6 +56,14 @@ exports.removeConnection = async (req, res) => {
       ["people", req.user.id] 
     ]);
 
+    await cache.deleteKeys([
+      ["feed", req.user.id] 
+    ]);
+
+    await cache.deleteKeys([
+      ["profile", otherUserId] 
+    ]);
+
     return res.json({ ok: true });
   } catch (err) {
     console.error(err);
@@ -144,6 +152,19 @@ exports.createRequest = async (req, res) => {
       // Continue even if email fails
     }
 
+
+    await cache.deleteKeys([
+      ["people", req.user.id] 
+    ]);
+     await cache.deleteKeys([
+      ["feed", req.user.id] 
+    ]);
+
+
+     await cache.deleteKeys([
+      ["profile", toUserId] 
+    ]);
+
     return res.json({ ok: true, requestId: reqRow.id });
   } catch (err) {
     console.error(err);
@@ -195,7 +216,9 @@ exports.getMyPending = async (req, res) => {
 
 
 exports.respond = async (req, res) => {
+
   try {
+
     const userId = req.user?.id;
     const { id } = req.params;
     const { action } = req.body; // "accept" | "reject"
@@ -217,6 +240,7 @@ exports.respond = async (req, res) => {
         where: { fromUserId: row.fromUserId, toUserId: row.toUserId, status: "accepted" },
         attributes: ["id"],
       });
+
       if (alreadyAccepted && alreadyAccepted.id !== row.id) {
         await row.destroy();
         return res.json({ ok: true, status: "accepted", deduped: true });
@@ -251,6 +275,18 @@ exports.respond = async (req, res) => {
       }).catch((e) => {
         console.log(e)
       });
+
+
+      await cache.deleteKeys([
+        ["people", req.user.id] 
+      ]);
+
+       await cache.deleteKeys([
+        ["feed", req.user.id] 
+      ]);
+      await cache.deleteKeys([
+        ["profile", row.fromUserId] 
+      ]);
       
 
       (async () => {
@@ -273,7 +309,6 @@ exports.respond = async (req, res) => {
           }
         } catch {}
       })();
-
       return res.json({ ok: true, status: "accepted" });
     }
 

@@ -118,7 +118,7 @@ function generatePeopleCacheKey(req, bidirectionalMatch = true, bidirectionalMat
      audienceSubsubCategoryIds,
      industryIds,
      viewOnlyConnections,
-     limit = 20,
+     limit = 50,
      offset = 0,
    } = req.query;
 
@@ -178,7 +178,7 @@ exports.searchPeople = async (req, res) => {
         industryIds,
         bidirectionalMatch,
         bidirectionalMatchFormula,
-        limit = 20,
+        limit = 50,
         offset = 0,
       } = req.query;
 
@@ -1157,8 +1157,12 @@ const finalRows = filteredRows;
         subsubcategory: 0
       };
 
+    
       // Debug logging
       console.log('=== UNIDIRECTIONAL MATCH ALGORITHM DEBUG ===');
+
+      console.log(`Target: ${u.name} -` +u.email)
+
           console.log('Current user interests (what they want):', {
         identity: [...currentUserIdentityInterests],
         category: [...currentUserCategoryInterests],
@@ -1588,8 +1592,7 @@ const finalRows = filteredRows;
       const catsOut = (u.interests || []).map((i) => i.category?.name).filter(Boolean);
       const subsOut = (u.interests || []).map((i) => i.subcategory?.name).filter(Boolean);
 
-      console.log({u})
-
+      
       return {
         raw: u,
         score: 0,

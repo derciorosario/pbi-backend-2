@@ -46,6 +46,14 @@ async function createUserAndSendVerification({
     otherCountries, webpage,
   });
 
+  console.log({
+    name, email, passwordHash, accountType, phone, biography, nationality, countryOfResidence,
+    // Individual fields
+    avatarUrl, gender,
+    // Company fields
+    otherCountries, webpage,
+  })
+
   // Create Profile with birthDate if provided
   const profileData = { userId: user.id };
   if (birthDate) {

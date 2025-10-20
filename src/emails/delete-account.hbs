@@ -1,0 +1,28 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  Confirm Account Deletion
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi {{#if name}}{{name}}{{else}}there{{/if}}, we're sorry to see you go. Please confirm that you want to delete your <strong>{{BRAND.name}}</strong> account.
+</p>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  <strong>Important:</strong> This action cannot be undone. All your data, including your profile, posts, connections, and activity will be permanently removed.
+</p>
+
+{{> button href=link label="Delete My Account"}}
+
+<p style="color:{{BRAND.muted}};font-size:13px;margin:12px 0 0 0;">
+   This link expires in {{expiresInHours}} hours. If the button doesn't work, copy and paste this URL:
+   <br/><span style="word-break:break-all;color:{{BRAND.text}};font-size:12px;">{{link}}</span>
+</p>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+   Changed your mind? You can simply ignore this email and your account will remain active.
+   <br/>
+   If this wasn't you, please contact <a href="mailto:{{BRAND.supportEmail}}">{{BRAND.supportEmail}}</a> immediately.
+</p>

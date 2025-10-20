@@ -26,6 +26,25 @@ exports.uploadImages = async (req, res) => {
   }
 };
 
+
+// Handle image uploads for moments
+exports.uploadMedia = async (req, res) => {
+  try {
+    if (!req.user?.id) return res.status(401).json({ message: "Unauthorized" });
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No files uploaded" });
+    }
+    const filenames = req.files.map(file => file.filename);
+    res.json({ filenames });
+  } catch (err) {
+    console.error("upload media error", err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
+
 exports.createMoment = async (req, res) => {
   try {
     if (!req.user?.id) return res.status(401).json({ message: "Unauthorized" });

@@ -28,8 +28,16 @@ const localStorage = multer.diskStorage({
     // Create a unique filename with original extension
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const ext = path.extname(file.originalname);
-    const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_'); // Replace spaces with underscores
-    const filename = 'attachment-' + uniqueSuffix + '-' + basename + ext;
+    
+    // Different prefixes for different file types
+    let prefix = 'file';
+    if (file.fieldname === 'coverImage') {
+      prefix = 'cover';
+    } else if (file.fieldname === 'video') {
+      prefix = 'video';
+    }
+    
+    const filename = prefix + '-' + uniqueSuffix + ext;
     cb(null, filename);
   }
 });
@@ -46,8 +54,20 @@ const dualStorage = {
       // Create S3 filename (same as local but with folder structure)
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       const ext = path.extname(file.originalname);
-      const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
-      const s3Filename = `attachments/attachment-${uniqueSuffix}-${basename}${ext}`;
+      
+      // Different S3 folders for different file types
+      let s3Folder = 'uploads';
+      let s3Prefix = 'file';
+      
+      if (file.fieldname === 'coverImage') {
+        s3Folder = 'images';
+        s3Prefix = 'cover';
+      } else if (file.fieldname === 'video') {
+        s3Folder = 'videos';
+        s3Prefix = 'video';
+      }
+      
+      const s3Filename = `${s3Folder}/${s3Prefix}-${uniqueSuffix}${ext}`;
 
       // Read the locally saved file
       const localFilePath = path.join(uploadsDir, fileInfo.filename);
@@ -57,6 +77,7 @@ const dualStorage = {
         Bucket: process.env.S3_BUCKET_NAME,
         Key: s3Filename,
         Body: fileBuffer,
+        ContentType: file.mimetype,
         Metadata: {
           fieldName: file.fieldname,
           originalName: file.originalname
@@ -102,41 +123,68 @@ const dualStorage = {
   }
 };
 
-// File filter to allow images and documents
+// File filter to allow images and videos only
 const fileFilter = (req, file, cb) => {
   const allowedMimes = [
     // Images
     'image/jpeg',
+    'image/jpg',
     'image/png',
     'image/gif',
     'image/webp',
-    // Documents
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'application/vnd.ms-powerpoint',
-    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    'application/vnd.ms-excel',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    'text/plain',
-    'text/csv'
+    'image/bmp',
+    'image/svg+xml',
+    
+    // Videos
+    'video/mp4',
+    'video/mpeg',
+    'video/ogg',
+    'video/webm',
+    'video/quicktime',
+    'video/x-msvideo',
+    'video/x-flv',
+    'video/3gpp',
+    'video/3gpp2',
+    'video/mp2t',
+    'video/x-ms-wmv'
   ];
 
   if (allowedMimes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error('File type not allowed. Only images and documents are permitted.'), false);
+    cb(new Error(`File type '${file.mimetype}' not allowed. Only images and videos are permitted.`), false);
   }
 };
 
-// Create multer upload instance
-const upload = multer({
+// Create separate upload instances for different file types
+const uploadCoverImage = multer({
   storage: dualStorage,
   limits: {
-    fileSize: 20 * 1024 * 1024 // 5MB limit
+    fileSize: 5 * 1024 * 1024 // 5MB limit for images
   },
   fileFilter: fileFilter
 });
 
-module.exports = upload;
+const uploadVideo = multer({
+  storage: dualStorage,
+  limits: {
+    fileSize: 50 * 1024 * 1024 // 50MB limit for videos
+  },
+  fileFilter: fileFilter
+});
 
+// Export different upload configurations
+module.exports = {
+  // Single file uploads
+  uploadCover: uploadCoverImage.single('coverImage'),
+  uploadVideo: uploadVideo.single('video'),
+  
+  // For general use
+  upload: multer({
+    storage: dualStorage,
+    limits: {
+      fileSize: 50 * 1024 * 1024 // 50MB default limit
+    },
+    fileFilter: fileFilter
+  })
+};

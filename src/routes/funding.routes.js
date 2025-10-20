@@ -15,5 +15,7 @@ router.get("/projects/my", auth(true), C.getMyProjects); // Get projects created
 router.get("/projects/:id", auth(false), C.getOne);
 router.post("/projects", auth(true), C.create);
 router.put("/projects/:id", auth(true), C.update);
+router.delete("/projects/:id", auth(true), C.deleteFunding);
+
 
 module.exports = router;

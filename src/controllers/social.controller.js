@@ -1,6 +1,6 @@
 const { Like, Comment, Repost, User, Profile } = require("../models");
 const { Op } = require("sequelize");
-
+const { cache } = require("../utils/redis");
 // ==================== LIKES ====================
 
 /**
@@ -19,6 +19,11 @@ exports.toggleLike = async (req, res) => {
     const existingLike = await Like.findOne({
       where: { userId, targetType, targetId }
     });
+
+
+    await cache.deleteKeys([
+        ["feed", req.user.id] 
+    ]);
 
     if (existingLike) {
       // Unlike: delete the existing like
@@ -58,6 +63,7 @@ exports.getLikeStatus = async (req, res) => {
       liked: !!existingLike,
       count
     });
+
   } catch (err) {
     console.error("Error getting like status:", err);
     res.status(500).json({ message: "Failed to get like status" });
@@ -110,6 +116,10 @@ exports.createComment = async (req, res) => {
         }]
       }]
     });
+
+    await cache.deleteKeys([
+        ["feed", req.user.id] 
+    ]);
 
     res.status(201).json(commentWithUser);
   } catch (err) {
@@ -201,6 +211,10 @@ exports.updateComment = async (req, res) => {
       return res.status(403).json({ message: "Not authorized to update this comment" });
     }
 
+     await cache.deleteKeys([
+        ["feed", req.user.id] 
+    ]);
+
     comment.text = text.trim();
     await comment.save();
 
@@ -235,6 +249,10 @@ exports.deleteComment = async (req, res) => {
     comment.status = "deleted";
     await comment.save();
 
+    await cache.deleteKeys([
+        ["feed", req.user.id] 
+    ]);
+
     res.json({ message: "Comment deleted successfully" });
   } catch (err) {
     console.error("Error deleting comment:", err);
@@ -254,7 +272,7 @@ exports.createRepost = async (req, res) => {
 
     const { targetType, targetId, comment } = req.body || {};
     if (!targetType) return res.status(400).json({ message: "targetType is required" });
-    if (!targetId) return res.status(400).json({ message: "targetId is required" });
+    if (!targetId) return res.status(400).json({ message: "targetId is required." });
 
     // Check if the repost already exists
     const existingRepost = await Repost.findOne({
@@ -271,6 +289,11 @@ exports.createRepost = async (req, res) => {
       targetId,
       comment: comment || null
     });
+
+
+    await cache.deleteKeys([
+        ["feed", req.user.id] 
+    ]);
 
     res.status(201).json(repost);
   } catch (err) {
@@ -298,6 +321,10 @@ exports.deleteRepost = async (req, res) => {
     if (repost.userId !== userId) {
       return res.status(403).json({ message: "Not authorized to delete this repost" });
     }
+
+     await cache.deleteKeys([
+        ["feed", req.user.id] 
+    ]);
 
     await repost.destroy();
     res.json({ message: "Repost deleted successfully" });
