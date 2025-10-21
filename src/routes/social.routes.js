@@ -6,6 +6,11 @@ const S = require("../controllers/social.controller");
 router.post("/likes", auth(true), S.toggleLike);
 router.get("/likes/:targetType/:targetId", auth(false), S.getLikeStatus);
 
+
+router.get("/likes/:targetType/:targetId/users", S.getLikes); // New route - get all likes with users
+router.get("/likes/:targetType/:targetId/users/paginated", S.getLikesPaginated); // New route - paginated likes
+router.post("/likes/check-batch", auth(false), S.checkUserLikes); // New route - batch check likes
+
 // Comment routes
 router.post("/comments", auth(true), S.createComment);
 router.get("/comments/:targetType/:targetId", S.getComments);

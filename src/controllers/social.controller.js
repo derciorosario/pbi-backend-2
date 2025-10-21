@@ -3,6 +3,175 @@ const { Op } = require("sequelize");
 const { cache } = require("../utils/redis");
 // ==================== LIKES ====================
 
+
+
+/**
+ * Get all likes for a specific target including user information
+ */
+exports.getLikes = async (req, res) => {
+  try {
+    const { targetType, targetId } = req.params;
+    
+    if (!targetType || !targetId) {
+      return res.status(400).json({ message: "targetType and targetId are required" });
+    }
+
+    const likes = await Like.findAll({
+      where: { 
+        targetType, 
+        targetId 
+      },
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "avatarUrl", "accountType"],
+          include: [{
+            model: Profile,
+            as: "profile",
+            attributes: ["professionalTitle"]
+          }]
+        }
+      ],
+      order: [["createdAt", "DESC"]]
+    });
+
+    // Transform the response to include user info more cleanly
+    const likesWithUsers = likes.map(like => ({
+      id: like.id,
+      createdAt: like.createdAt,
+      user: {
+        id: like.user.id,
+        name: like.user.name,
+        avatarUrl: like.user.avatarUrl,
+        accountType: like.user.accountType,
+        professionalTitle: like.user.profile?.professionalTitle,
+      }
+    }));
+
+    res.json({
+      count: likes.length,
+      likes: likesWithUsers
+    });
+
+  } catch (err) {
+    console.error("Error getting likes:", err);
+    res.status(500).json({ message: "Failed to get likes" });
+  }
+};
+
+/**
+ * Get paginated likes for a specific target including user information
+ */
+exports.getLikesPaginated = async (req, res) => {
+  try {
+    const { targetType, targetId } = req.params;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = (page - 1) * limit;
+
+    if (!targetType || !targetId) {
+      return res.status(400).json({ message: "targetType and targetId are required" });
+    }
+
+    const { count, rows: likes } = await Like.findAndCountAll({
+      where: { 
+        targetType, 
+        targetId 
+      },
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "avatarUrl", "accountType"],
+          include: [{
+            model: Profile,
+            as: "profile",
+            attributes: ["professionalTitle"]
+          }]
+        }
+      ],
+      order: [["createdAt", "DESC"]],
+      limit,
+      offset
+    });
+
+    // Transform the response
+    const likesWithUsers = likes.map(like => ({
+      id: like.id,
+      createdAt: like.createdAt,
+      user: {
+        id: like.user.id,
+        name: like.user.name,
+        avatarUrl: like.user.avatarUrl,
+        accountType: like.user.accountType,
+        professionalTitle: like.user.profile?.professionalTitle,
+      }
+    }));
+
+    res.json({
+      count,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+      likes: likesWithUsers
+    });
+
+  } catch (err) {
+    console.error("Error getting paginated likes:", err);
+    res.status(500).json({ message: "Failed to get likes" });
+  }
+};
+
+/**
+ * Check if current user has liked specific targets (batch check)
+ */
+exports.checkUserLikes = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) return res.status(401).json({ message: "Unauthorized" });
+
+    const { targets } = req.body; // Expected format: [{ targetType, targetId }, ...]
+    
+    if (!Array.isArray(targets)) {
+      return res.status(400).json({ message: "targets array is required" });
+    }
+
+    const likeStatuses = await Promise.all(
+      targets.map(async (target) => {
+        const { targetType, targetId } = target;
+        
+        if (!targetType || !targetId) {
+          return null;
+        }
+
+        const existingLike = await Like.findOne({
+          where: { userId, targetType, targetId }
+        });
+
+        const count = await getLikeCount(targetType, targetId);
+
+        return {
+          targetType,
+          targetId,
+          liked: !!existingLike,
+          count
+        };
+      })
+    );
+
+    // Filter out any null results from invalid targets
+    const validResults = likeStatuses.filter(result => result !== null);
+
+    res.json(validResults);
+
+  } catch (err) {
+    console.error("Error checking user likes:", err);
+    res.status(500).json({ message: "Failed to check like status" });
+  }
+};
+
+
+
 /**
  * Toggle a like (create if doesn't exist, delete if it does)
  */

@@ -2,12 +2,14 @@ const router = require("express").Router();
 const C = require("../controllers/funding.controller");
 const auth = require("../middleware/auth"); // auth(true) -> requires token
 const upload = require("../utils/multerConfig");
+const uploadMedia = require("../utils/multerConfigAllMediaAttachments");
 
 // Metadata for form
 router.get("/meta", auth(false), C.getMeta);
 
 // Upload images
-router.post("/upload-images", auth(true), upload.array('images', 20), C.uploadImages);
+router.post("/upload-images", auth(true), uploadMedia.array('images', 20), C.uploadImages);
+router.post("/upload-attachments", auth(true), uploadMedia.array('attachments', 20), C.uploadImages);
 
 // CRUD for funding projects
 router.get("/projects", auth(false), C.list);

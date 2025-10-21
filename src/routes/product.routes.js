@@ -2,6 +2,8 @@ const router = require("express").Router();
 const C = require("../controllers/product.controller");
 const auth = require("../middleware/auth"); // auth(true) -> requires token
 const upload = require("../utils/multerConfig");
+const uploadMedia = require("../utils/multerConfigAllMediaAttachments");
+
 
 // Metadata for form
 router.get("/meta", auth(false), C.getMeta);
@@ -15,6 +17,8 @@ router.put("/:id", auth(true), C.update);
 router.delete("/:id", auth(true), C.deleteProduct);
 
 // File upload routes
-router.post("/upload-images", auth(true), upload.array('images', 20), C.uploadImages);
+router.post("/upload-images", auth(true), uploadMedia.array('images', 20), C.uploadImages);
+router.post("/upload-attachments", auth(true), uploadMedia.array('attachments', 20), C.uploadImages);
+
 
 module.exports = router;

@@ -516,6 +516,8 @@ exports.create = async (req, res) => {
       subcategoryIds: _subcategoryIds,
       subsubCategoryIds: _subsubCategoryIds,
 
+      videoUrl,
+
 
       generalCategoryId,
       generalSubcategoryId,
@@ -578,6 +580,7 @@ exports.create = async (req, res) => {
       subcategoryId: primarySubcategoryId,
       startAt,
       endAt,
+      videoUrl,
       timezone: timezone || null,
       locationType,
       country: country || null,
@@ -700,6 +703,7 @@ exports.update = async (req, res) => {
       country: body.country || null,
       coverImageBase64:body.coverImageBase64 || null,
       city: body.city || null,
+      videoUrl:body.videoUrl,
       address: body.address ?? event.address,
       onlineUrl: body.onlineUrl ?? event.onlineUrl,
       registrationType: registrationType ?? event.registrationType,
@@ -844,7 +848,7 @@ exports.deleteEvent = async (req, res) => {
   }
 };
 
-// Handle cover image upload
+
 exports.uploadCoverImage = async (req, res) => {
   try {
     if (!req.user?.id) return res.status(401).json({ message: "Unauthorized" });
@@ -854,14 +858,14 @@ exports.uploadCoverImage = async (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    // Return the filename to be stored in the database
-    const filename = req.file.filename;
-    const filePath = `/uploads/${filename}`; // Path relative to server root
+    // Return the S3 URL that was saved in req.savedFileUrl during upload
+    const s3Url = req.savedFileUrl;
 
     res.status(200).json({
       success: true,
-      filename: filename,
-      filePath: filePath
+      filename: req.file.filename,
+      url: s3Url, // S3 URL for the uploaded file
+      filePath: s3Url // Use S3 URL as the file path
     });
   } catch (err) {
     console.error("uploadCoverImage error", err);

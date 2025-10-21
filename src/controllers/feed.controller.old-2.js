@@ -68,8 +68,6 @@ const {
   MomentIdentity,
   JobApplication, // Add this
   EventRegistration, // Add this
-  Like, // Add this
-  Comment, // Add this
   sequelize,
 } = require("../models");
 const { getConnectionStatusMap } = require("../utils/connectionStatus");
@@ -172,14 +170,7 @@ function generateFeedCacheKey(req) {
      workSchedule,
      careerLevel,
      paymentType,
-
-    jobsView,
-    eventsView,
-    productsView,
-    servicesView,
-    tourismView,
-    fundingView,
-
+     jobsView,
      postType,
      season,
      budgetRange,
@@ -226,13 +217,7 @@ function generateFeedCacheKey(req) {
      workSchedule,
      careerLevel,
      paymentType,
-
      jobsView,
-     eventsView,
-     productsView,
-     servicesView,
-     tourismView,
-     fundingView,
      postType,
      season,
      budgetRange,
@@ -1121,14 +1106,7 @@ exports.getFeed = async (req, res) => {
       workSchedule,
       careerLevel,
       paymentType,
-
       jobsView,
-      eventsView,
-      productsView,
-      servicesView,
-      tourismView,
-      fundingView,
-
       postType,
       season,
       budgetRange,
@@ -1884,191 +1862,72 @@ const createJobLocationFilter = () => {
       whereFunding[Op.or].push({ industryCategoryId: { [Op.in]: effIndustryIds } });
     }
 
-
-
-
-
-    // Helper function to get like counts for multiple items
-    async function getLikeCounts(items) {
-      if (!items.length) return {};
-      
-      const likeCounts = {};
-      
-      // Group items by type
-      const itemsByType = {};
-      items.forEach(item => {
-        if (!itemsByType[item.kind]) {
-          itemsByType[item.kind] = [];
-        }
-        itemsByType[item.kind].push(item.id);
-      });
-      
-      // Get counts for each type
-      for (const [targetType, ids] of Object.entries(itemsByType)) {
-        const counts = await Like.findAll({
-          where: {
-            targetType: targetType,
-            targetId: { [Op.in]: ids }
-          },
-          attributes: ['targetId', [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
-          group: ['targetId'],
-          raw: true
-        });
-        
-        counts.forEach(count => {
-          likeCounts[count.targetId] = parseInt(count.count) || 0;
-        });
-      }
-      
-      return likeCounts;
-    }
-
-    // Helper function to get comment counts for multiple items
-    async function getCommentCounts(items) {
-      if (!items.length) return {};
-      
-      const commentCounts = {};
-      
-      // Group items by type
-      const itemsByType = {};
-      items.forEach(item => {
-        if (!itemsByType[item.kind]) {
-          itemsByType[item.kind] = [];
-        }
-        itemsByType[item.kind].push(item.id);
-      });
-      
-      // Get counts for each type
-      for (const [targetType, ids] of Object.entries(itemsByType)) {
-        const counts = await Comment.findAll({
-          where: {
-            targetType: targetType,
-            targetId: { [Op.in]: ids },
-            status: 'active'
-          },
-          attributes: ['targetId', [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
-          group: ['targetId'],
-          raw: true
-        });
-        
-        counts.forEach(count => {
-          commentCounts[count.targetId] = parseInt(count.count) || 0;
-        });
-      }
-      
-      return commentCounts;
-    }
-
-    // Helper function to check if current user has liked each item
-    async function getUserLikeStatus(currentUserId, items) {
-      if (!currentUserId || !items.length) return {};
-      
-      const userLikes = {};
-      
-      // Group items by type
-      const itemsByType = {};
-      items.forEach(item => {
-        if (!itemsByType[item.kind]) {
-          itemsByType[item.kind] = [];
-        }
-        itemsByType[item.kind].push(item.id);
-      });
-      
-      // Get user likes for each type
-      for (const [targetType, ids] of Object.entries(itemsByType)) {
-        const likes = await Like.findAll({
-          where: {
-            userId: currentUserId,
-            targetType: targetType,
-            targetId: { [Op.in]: ids }
-          },
-          attributes: ['targetId'],
-          raw: true
-        });
-        
-        likes.forEach(like => {
-          userLikes[like.targetId] = true;
-        });
-      }
-      
-      return userLikes;
-    }
-
-
-    
     async function getConStatusItems(items) {
-  const currentUserId = req.user?.id || null;
-  const targetIds = items
-    .map((it) =>
-      it.kind === "job"
-        ? it.postedByUserId
-        : it.kind === "event"
-        ? it.organizerUserId
-        : it.kind === "service"
-        ? it.providerUserId
-        : it.kind === "product"
-        ? it.sellerUserId
-        : it.kind === "tourism"
-        ? it.authorUserId
-        : it.kind === "funding"
-        ? it.creatorUserId
-        : it.kind === "need"
-        ? it.userId
-        : it.kind === "moment"
-        ? it.userId
-        : null
-    )
-    .filter(Boolean);
+      const currentUserId = req.user?.id || null;
+      const targetIds = items
+        .map((it) =>
+          it.kind === "job"
+            ? it.postedByUserId
+            : it.kind === "event"
+            ? it.organizerUserId
+            : it.kind === "service"
+            ? it.providerUserId
+            : it.kind === "product"
+            ? it.sellerUserId
+            : it.kind === "tourism"
+            ? it.authorUserId
+            : it.kind === "funding"
+            ? it.creatorUserId
+            : it.kind === "need"
+            ? it.userId
+            : it.kind === "moment"
+            ? it.userId
+            : null
+        )
+        .filter(Boolean);
 
-  // Get job applications and event registrations status
-  const jobIds = items.filter(it => it.kind === 'job').map(job => job.id);
-  const eventIds = items.filter(it => it.kind === 'event').map(event => event.id);
+        // Get job applications and event registrations status
+      const jobIds = items.filter(it => it.kind === 'job').map(job => job.id);
+      const eventIds = items.filter(it => it.kind === 'event').map(event => event.id);
 
-  // Get like counts, comment counts, and user like status
-  const [statusMap, jobApplicationsMap, eventRegistrationsMap, likeCounts, commentCounts, userLikes] = await Promise.all([
-    getConnectionStatusMap(currentUserId, targetIds, {
-      Connection,
-      ConnectionRequest,
-    }),
-    getUserJobApplicationsStatus(currentUserId, jobIds),
-    getUserEventRegistrationsStatus(currentUserId, eventIds),
-    getLikeCounts(items),
-    getCommentCounts(items),
-    getUserLikeStatus(currentUserId, items)
-  ]);
+      const [statusMap, jobApplicationsMap, eventRegistrationsMap] = await Promise.all([
+        getConnectionStatusMap(currentUserId, targetIds, {
+          Connection,
+          ConnectionRequest,
+        }),
+        getUserJobApplicationsStatus(currentUserId, jobIds),
+        getUserEventRegistrationsStatus(currentUserId, eventIds)
+     ]);
 
-  const withStatus = items.map((it) => {
-    const ownerId =
-      it.kind === "job"
-        ? it.postedByUserId
-        : it.kind === "event"
-        ? it.organizerUserId
-        : it.kind === "service"
-        ? it.providerUserId
-        : it.kind === "product"
-        ? it.sellerUserId
-        : it.kind === "tourism"
-        ? it.authorUserId
-        : it.kind === "funding"
-        ? it.creatorUserId
-        : it.kind === "need"
-        ? it.userId
-        : it.kind === "moment"
-        ? it.userId
-        : null;
+      const withStatus = items.map((it) => {
+        const ownerId =
+          it.kind === "job"
+            ? it.postedByUserId
+            : it.kind === "event"
+            ? it.organizerUserId
+            : it.kind === "service"
+            ? it.providerUserId
+            : it.kind === "product"
+            ? it.sellerUserId
+            : it.kind === "tourism"
+            ? it.authorUserId
+            : it.kind === "funding"
+            ? it.creatorUserId
+            : it.kind === "need"
+            ? it.userId
+            : it.kind === "moment"
+            ? it.userId
+            : null;
 
+        
     if (it.kind === 'job') {
       it.applicationStatus = currentUserId ? (jobApplicationsMap[it.id] || 'not_applied') : 'unauthenticated';
     }
+   
 
     if (it.kind === 'event') {
       it.registrationStatus = currentUserId ? (eventRegistrationsMap[it.id] || 'not_registered') : 'unauthenticated';
     }
-
-    // Add like and comment counts
-    it.likesCount = likeCounts[it.id] || 0;
-    it.commentsCount = commentCounts[it.id] || 0;
-    it.isLiked = currentUserId ? Boolean(userLikes[it.id]) : false;
 
     return {
       ...it,
@@ -2184,7 +2043,6 @@ const createJobLocationFilter = () => {
         profile:e.organizer?.profile || null,
         postedBy:e.organizer || null,
         country: e.country,
-        videoUrl:e.videoUrl,
         createdAt: e.createdAt,
         timeAgo: timeAgo(e.createdAt),
         organizerUserId: e.organizerUserId || null,
@@ -2944,336 +2802,293 @@ const createJobLocationFilter = () => {
     };
 
     if (!currentUserId) {
+      if (tab === "events") {
+        const events = await Event.findAll({
+          subQuery: false,
+          where: { ...whereEvent, moderation_status: "approved" },
+          include: includeEventRefs,
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        const eventsWithAudience = await lazyLoadEventAudienceData(events, currentUserId);
+        const eventsFiltered = filterByAudienceCriteria(eventsWithAudience, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
+         // Only show related needs/moments if no incompatible filters
 
-       if (tab === "events") {
-    const eventsViewOptions = eventsView ? ensureArray(eventsView) : [];
-    const showEvents = eventsViewOptions.length === 0 || eventsViewOptions.includes("Events");
-    const showEventExperiences = eventsViewOptions.length === 0 || eventsViewOptions.includes("Event Experiences");
-    const showEventSeekers = eventsViewOptions.length === 0 || eventsViewOptions.includes("Event Seekers");
+         let relatedNeeds = [];
+         let relatedMomentsRows = []
 
-    let events = [];
-    let relatedNeeds = [];
-    let relatedMomentsRows = [];
+        if (!hasIncompatibleFilters) {
+          relatedNeeds = await Need.findAll({
+            subQuery: false,
+            where: { ...whereNeed, relatedEntityType: 'event', moderation_status: "approved" },
+            include: includeNeedRefs,
+            order: [["createdAt", "DESC"]],
+            limit: lim,
+            offset: off,
+          });
+          relatedMomentsRows = await fetchMomentsPaged({
+            where: { ...whereCommon, relatedEntityType: "event" },
+            include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+            limit: lim,
+            offset: off,
+          });
+        }
 
-    if (showEvents) {
-      events = await Event.findAll({
-        subQuery: false,
-        where: { ...whereEvent, moderation_status: "approved" },
-        include: includeEventRefs,
-        order: [["createdAt", "DESC"]],
-        limit: lim,
-        offset: off,
-      });
-      events = await lazyLoadEventAudienceData(events, currentUserId);
-      events = filterByAudienceCriteria(events, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-    }
+        const mappedEvents = eventsFiltered.map(mapEvent);
+        const mappedMoments = relatedMomentsRows.map(mapMoment);
+        const mappedNeeds = relatedNeeds.map(mapNeed);
+        const combined = [...mappedEvents, ...mappedNeeds, ...mappedMoments];
+        const filtered = applyContentTypeFilter(combined, contentType);
+        sortByMatchThenRecency(filtered);
+        return { items: await getConStatusItems(filtered) };
+      }
 
-    if (showEventSeekers && !hasIncompatibleFilters) {
-      relatedNeeds = await Need.findAll({
-        subQuery: false,
-        where: { ...whereNeed, relatedEntityType: 'event', moderation_status: "approved" },
-        include: includeNeedRefs,
-        order: [["createdAt", "DESC"]],
-        limit: lim,
-        offset: off,
-      });
-    }
+      if (tab === "jobs") {
+        const jobsViewOptions = jobsView ? ensureArray(jobsView) : [];
+        const showJobOffers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Offers");
+        const showJobSeekers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Seekers");
+        let jobs = [];
+        let relatedNeeds = [];
+        let relatedMomentsRows = [];
+        if (showJobOffers) {
+          jobs = await Job.findAll({
+            subQuery: false,
+            where: { ...whereJob, moderation_status: "approved" },
+            include: includeCategoryRefs,
+            order: [["createdAt", "DESC"]],
+            limit: lim,
+            offset: off,
+          });
+          jobs = await lazyLoadJobAudienceData(jobs, currentUserId);
+          // Apply audience filters for unauthenticated users too
+          jobs = filterByAudienceCriteria(
+            jobs,
+            effAudienceIdentityIds,
+            effAudienceCategoryIds,
+            effAudienceSubcategoryIds,
+            effAudienceSubsubCategoryIds
+          );
+        }
+        if (showJobSeekers && !hasIncompatibleFilters) {
+          relatedNeeds = await Need.findAll({
+            subQuery: false,
+            where: { ...whereNeed, relatedEntityType: 'job', moderation_status: "approved" },
+            include: includeNeedRefs,
+            order: [["createdAt", "DESC"]],
+            limit: lim,
+            offset: off,
+          });
+          // Load audience for needs and filter by audience params
+          relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
+          relatedNeeds = filterByAudienceCriteria(
+            relatedNeeds,
+            effAudienceIdentityIds,
+            effAudienceCategoryIds,
+            effAudienceSubcategoryIds,
+            effAudienceSubsubCategoryIds
+          );
 
-    if (showEventExperiences && !hasIncompatibleFilters) {
-      relatedMomentsRows = await fetchMomentsPaged({
-        where: { ...whereCommon, relatedEntityType: "event" },
-        include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-        limit: lim,
-        offset: off,
-      });
-    }
+          if(showJobOffers && showJobSeekers){
+             relatedMomentsRows = await fetchMomentsPaged({
+            where: { ...whereCommon, relatedEntityType: "job" },
+            include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+            limit: lim,
+            offset: off,
+          });
+          
+          }
+          // Load audience for moments and filter by audience params
+          relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
+          relatedMomentsRows = filterByAudienceCriteria(
+            relatedMomentsRows,
+            effAudienceIdentityIds,
+            effAudienceCategoryIds,
+            effAudienceSubcategoryIds,
+            effAudienceSubsubCategoryIds
+          );
+        }
+        const companyMap = await makeCompanyMapById(jobs.map((j) => j.companyId));
+        const mappedJobs = jobs.map((j) => mapJob(j, companyMap));
+        const mappedNeeds = relatedNeeds.map(mapNeed);
+        const mappedMoments = relatedMomentsRows.map(mapMoment);
+        const combined = [...mappedJobs, ...mappedNeeds, ...mappedMoments];
+        const filtered = applyContentTypeFilter(combined, contentType);
+        sortByMatchThenRecency(filtered);
+        return { items: await getConStatusItems(filtered) };
+      }
 
-    const mappedEvents = events.map(mapEvent);
-    const mappedNeeds = relatedNeeds.map(mapNeed);
-    const mappedMoments = relatedMomentsRows.map(mapMoment);
-    const combined = [...mappedEvents, ...mappedNeeds, ...mappedMoments];
-    const filtered = applyContentTypeFilter(combined, contentType);
-    sortByMatchThenRecency(filtered);
-    return { items: await getConStatusItems(filtered) };
-  }
+      if (tab === "services") {
+        const services = await Service.findAll({
+          distinct: true,
+          col: "Service.id",
+          subQuery: false,
+          where: { ...whereService, moderation_status: "approved" },
+          include: makeServiceInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        const servicesWithAudience = await lazyLoadServiceAudienceData(services, currentUserId);
+        const servicesFiltered = filterByAudienceCriteria(servicesWithAudience, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
+       
+        let relatedMomentsRows=[]
+        let relatedNeeds = []
+       
+        if(!hasIncompatibleFilters){
+           relatedNeeds = await Need.findAll({
+          subQuery: false,
+          where: { ...whereNeed, relatedEntityType: 'service', moderation_status: "approved" },
+          include: includeNeedRefs,
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+         relatedMomentsRows = await fetchMomentsPaged({
+          where: { ...whereCommon, relatedEntityType: "service" },
+          include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          limit: lim,
+          offset: off,
+        });
+        }
 
-  
-  if (tab === "jobs") {
-  const jobsViewOptions = jobsView ? ensureArray(jobsView) : [];
-  const showJobOffers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Offers");
-  const showJobSeekers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Seekers");
-  const showJobExperiences = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Experiences");
+        const mappedServices = servicesFiltered.map(mapService);
+        const mappedNeeds = relatedNeeds.map(mapNeed);
+        const mappedMoments = relatedMomentsRows.map(mapMoment);
+        const combined = [...mappedServices, ...mappedNeeds, ...mappedMoments];
+        const filtered = applyContentTypeFilter(combined, contentType);
+        sortByMatchThenRecency(filtered);
+        return { items: await getConStatusItems(filtered) };
+      }
 
-  let jobs = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
+      if (tab === "products") {
+        const products = await Product.findAll({
+          subQuery: false,
+          where: { ...whereProduct, moderation_status: "approved" },
+          include: makeProductInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        const productsWithAudience = await lazyLoadProductAudienceData(products, currentUserId);
+        const productsFiltered = filterByAudienceCriteria(productsWithAudience, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
+          let relatedNeeds = [];
+      let relatedMomentsRows = []
 
-  if (showJobOffers) {
-    jobs = await Job.findAll({
-      subQuery: false,
-      where: { ...whereJob, moderation_status: "approved" },
-      include: includeCategoryRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    jobs = await lazyLoadJobAudienceData(jobs, currentUserId);
-    jobs = filterByAudienceCriteria(jobs, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+      
+       if(!hasIncompatibleFilters){
+          
+        relatedNeeds = await Need.findAll({
+          subQuery: false,
+          where: { ...whereNeed, relatedEntityType: 'product', moderation_status: "approved" },
+          include: includeNeedRefs,
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        relatedMomentsRows = await fetchMomentsPaged({
+          where: { ...whereCommon, relatedEntityType: "product" },
+          include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          limit: lim,
+          offset: off,
+        });
+       }
+        const mappedProducts = productsFiltered.map(mapProduct);
+        const mappedNeeds = relatedNeeds.map(mapNeed);
+        const mappedMoments = relatedMomentsRows.map(mapMoment);
+        const combined = [...mappedProducts, ...mappedNeeds, ...mappedMoments];
+        const filtered = applyContentTypeFilter(combined, contentType);
+        sortByMatchThenRecency(filtered);
+        return { items: await getConStatusItems(filtered) };
+      }
 
-  if (showJobSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: "job", moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+      if (tab === "tourism") {
+        const tourism = await Tourism.findAll({
+          subQuery: false,
+          where: { ...whereTourism, moderation_status: "approved" },
+          include: makeTourismInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        const tourismWithAudience = await lazyLoadTourismAudienceData(tourism, currentUserId);
+        const tourismFiltered = filterByAudienceCriteria(tourismWithAudience, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
+        
+          let relatedNeeds = [];
+      let relatedMomentsRows = []
 
-  if (showJobExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "job" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: bufferLimit,
-      offset: 0,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+     
+       if(!hasIncompatibleFilters){
+         
+        relatedNeeds = await Need.findAll({
+          subQuery: false,
+          where: { ...whereNeed, relatedEntityType: 'tourism', moderation_status: "approved" },
+          include: includeNeedRefs,
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        relatedMomentsRows = await fetchMomentsPaged({
+          where: { ...whereCommon, relatedEntityType: "tourism" },
+          include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          limit: lim,
+          offset: off,
+        });
+       }
+        const mappedTourism = tourismFiltered.map(mapTourism);
+        const mappedNeeds = relatedNeeds.map(mapNeed);
+        const mappedMoments = relatedMomentsRows.map(mapMoment);
+        const combined = [...mappedTourism, ...mappedNeeds, ...mappedMoments];
+        const filtered = applyContentTypeFilter(combined, contentType);
+        sortByMatchThenRecency(filtered);
+        return { items: await getConStatusItems(filtered) };
+      }
 
-  const companyMap = await makeCompanyMapById(jobs.map((j) => j.companyId));
-  const mappedJobs = jobs.map((j) => mapJob(j, companyMap));
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedJobs, ...mappedNeeds, ...mappedMoments];
-  combined.forEach((x) => (x._score = scoreItem(x)));
-  sortByMatchThenRecency(combined);
-  const windowed = combined.slice(off, off + lim);
-  return { items: await getConStatusItems(windowed) };
-}
+      if (tab === "funding") {
+        const funding = await Funding.findAll({
+          subQuery: false,
+          where: { ...whereFunding, moderation_status: "approved" },
+          include: makeFundingInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        const fundingWithAudience = await lazyLoadFundingAudienceData(funding, currentUserId);
+        const fundingFiltered = filterByAudienceCriteria(
+          fundingWithAudience,
+          effAudienceIdentityIds,
+          effAudienceCategoryIds,
+          effAudienceSubcategoryIds,
+          effAudienceSubsubCategoryIds
+        );
 
-  if (tab === "services") {
-    const servicesViewOptions = servicesView ? ensureArray(servicesView) : [];
-    const showServiceOffers = servicesViewOptions.length === 0 || servicesViewOptions.includes("Service Offers");
-    const showServiceRequests = servicesViewOptions.length === 0 || servicesViewOptions.includes("Service Requests");
-    const showServiceExperiences = servicesViewOptions.length === 0 || servicesViewOptions.includes("Service Experiences");
+         let relatedNeeds = [];
+        let relatedMomentsRows = []
 
-    let services = [];
-    let relatedNeeds = [];
-    let relatedMomentsRows = [];
-
-    if (showServiceOffers) {
-      services = await Service.findAll({
-        distinct: true,
-        col: "Service.id",
-        subQuery: false,
-        where: { ...whereService, moderation_status: "approved" },
-        include: makeServiceInclude({ categoryId, subcategoryId, subsubCategoryId }),
-        order: [["createdAt", "DESC"]],
-        limit: lim,
-        offset: off,
-      });
-      services = await lazyLoadServiceAudienceData(services, currentUserId);
-      services = filterByAudienceCriteria(services, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-    }
-
-    if (showServiceRequests && !hasIncompatibleFilters) {
-      relatedNeeds = await Need.findAll({
-        subQuery: false,
-        where: { ...whereNeed, relatedEntityType: 'service', moderation_status: "approved" },
-        include: includeNeedRefs,
-        order: [["createdAt", "DESC"]],
-        limit: lim,
-        offset: off,
-      });
-    }
-
-    if (showServiceExperiences && !hasIncompatibleFilters) {
-      relatedMomentsRows = await fetchMomentsPaged({
-        where: { ...whereCommon, relatedEntityType: "service" },
-        include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-        limit: lim,
-        offset: off,
-      });
-    }
-
-    const mappedServices = services.map(mapService);
-    const mappedNeeds = relatedNeeds.map(mapNeed);
-    const mappedMoments = relatedMomentsRows.map(mapMoment);
-    const combined = [...mappedServices, ...mappedNeeds, ...mappedMoments];
-    const filtered = applyContentTypeFilter(combined, contentType);
-    sortByMatchThenRecency(filtered);
-    return { items: await getConStatusItems(filtered) };
-  }
-
-  if (tab === "products") {
-    const productsViewOptions = productsView ? ensureArray(productsView) : [];
-    const showProducts = productsViewOptions.length === 0 || productsViewOptions.includes("Products");
-    const showProductReviews = productsViewOptions.length === 0 || productsViewOptions.includes("Product Reviews");
-    const showProductSeekers = productsViewOptions.length === 0 || productsViewOptions.includes("Product Seekers");
-
-    let products = [];
-    let relatedNeeds = [];
-    let relatedMomentsRows = [];
-
-    if (showProducts) {
-      products = await Product.findAll({
-        subQuery: false,
-        where: { ...whereProduct, moderation_status: "approved" },
-        include: makeProductInclude({ categoryId, subcategoryId, subsubCategoryId }),
-        order: [["createdAt", "DESC"]],
-        limit: lim,
-        offset: off,
-      });
-      products = await lazyLoadProductAudienceData(products, currentUserId);
-      products = filterByAudienceCriteria(products, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-    }
-
-    if (showProductSeekers && !hasIncompatibleFilters) {
-      relatedNeeds = await Need.findAll({
-        subQuery: false,
-        where: { ...whereNeed, relatedEntityType: 'product', moderation_status: "approved" },
-        include: includeNeedRefs,
-        order: [["createdAt", "DESC"]],
-        limit: lim,
-        offset: off,
-      });
-    }
-
-    if (showProductReviews && !hasIncompatibleFilters) {
-      relatedMomentsRows = await fetchMomentsPaged({
-        where: { ...whereCommon, relatedEntityType: "product" },
-        include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-        limit: lim,
-        offset: off,
-      });
-    }
-
-    const mappedProducts = products.map(mapProduct);
-    const mappedNeeds = relatedNeeds.map(mapNeed);
-    const mappedMoments = relatedMomentsRows.map(mapMoment);
-    const combined = [...mappedProducts, ...mappedNeeds, ...mappedMoments];
-    const filtered = applyContentTypeFilter(combined, contentType);
-    sortByMatchThenRecency(filtered);
-    return { items: await getConStatusItems(filtered) };
-  }
-
-
-  
-  if (tab === "tourism") {
-  const tourismViewOptions = tourismView ? ensureArray(tourismView) : [];
-  const showTourism = tourismViewOptions.length === 0 || tourismViewOptions.includes("Tourism");
-  const showTravelExperiences = tourismViewOptions.length === 0 || tourismViewOptions.includes("Travel Experiences");
-  const showDestinationSeekers = tourismViewOptions.length === 0 || tourismViewOptions.includes("Destination Seekers");
-
-  let tourism = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
-
-  if (showTourism) {
-    tourism = await Tourism.findAll({
-      subQuery: false,
-      where: { ...whereTourism, moderation_status: "approved" },
-      include: makeTourismInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      order: [["createdAt", "DESC"]],
-      limit: lim,
-      offset: off,
-    });
-    tourism = await lazyLoadTourismAudienceData(tourism, currentUserId);
-    tourism = filterByAudienceCriteria(tourism, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showDestinationSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: 'tourism', moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: lim,
-      offset: off,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showTravelExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "tourism" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: lim,
-      offset: off,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  const mappedTourism = tourism.map(mapTourism);
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedTourism, ...mappedNeeds, ...mappedMoments];
-  const filtered = applyContentTypeFilter(combined, contentType);
-  sortByMatchThenRecency(filtered);
-  return { items: await getConStatusItems(filtered) };
-}
-
-
-if (tab === "tourism") {
-  const tourismViewOptions = tourismView ? ensureArray(tourismView) : [];
-  const showTourism = tourismViewOptions.length === 0 || tourismViewOptions.includes("Tourism");
-  const showTravelExperiences = tourismViewOptions.length === 0 || tourismViewOptions.includes("Travel Experiences");
-  const showDestinationSeekers = tourismViewOptions.length === 0 || tourismViewOptions.includes("Destination Seekers");
-
-  let tourism = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
-
-  if (showTourism) {
-    tourism = await Tourism.findAll({
-      subQuery: false,
-      where: { ...whereTourism, moderation_status: "approved" },
-      include: makeTourismInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    tourism = await lazyLoadTourismAudienceData(tourism, currentUserId);
-    tourism = filterByAudienceCriteria(tourism, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showDestinationSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: "tourism", moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showTravelExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "tourism" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: bufferLimit,
-      offset: 0,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  const mappedTourism = tourism.map(mapTourism);
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedTourism, ...mappedNeeds, ...mappedMoments];
-  combined.forEach((x) => (x._score = scoreItem(x)));
-  sortByMatchThenRecency(combined);
-  const windowed = combined.slice(off, off + lim);
-  return { items: await getConStatusItems(windowed) };
-}
-
+       if(!hasIncompatibleFilters){
+         relatedNeeds = await Need.findAll({
+          subQuery: false,
+          where: { ...whereNeed, relatedEntityType: 'funding', moderation_status: "approved" },
+          include: includeNeedRefs,
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        relatedMomentsRows = await fetchMomentsPaged({
+          where: { ...whereCommon, relatedEntityType: "funding" },
+          include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          limit: lim,
+          offset: off,
+        });
+       }
+        const mappedFunding = fundingFiltered.map(mapFunding);
+        const mappedNeeds = relatedNeeds.map(mapNeed);
+        const mappedMoments = relatedMomentsRows.map(mapMoment);
+        const combined = [...mappedFunding, ...mappedNeeds, ...mappedMoments];
+        const filtered = applyContentTypeFilter(combined, contentType);
+        sortByMatchThenRecency(filtered);
+        return { items: await getConStatusItems(filtered) };
+      }
 if (tab === "needs") {
   const needs = await Need.findAll({
     subQuery: false,
@@ -3543,344 +3358,288 @@ if (tab === "needs") {
     const bufferFactor = 2;
     const bufferLimit = lim * bufferFactor;
 
- 
-    // After the unauthenticated section, for logged-in users
-if (tab === "events") {
-  const eventsViewOptions = eventsView ? ensureArray(eventsView) : [];
-  const showEvents = eventsViewOptions.length === 0 || eventsViewOptions.includes("Events");
-  const showEventExperiences = eventsViewOptions.length === 0 || eventsViewOptions.includes("Event Experiences");
-  const showEventSeekers = eventsViewOptions.length === 0 || eventsViewOptions.includes("Event Seekers");
+    if (tab === "events") {
+      const events = await Event.findAll({
+        subQuery: false,
+        where: { ...whereEvent, moderation_status: "approved" },
+        include: includeEventRefs,
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
+      const eventsWithAudience = await lazyLoadEventAudienceData(events, currentUserId);
 
-  let events = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
+      let relatedNeeds = [];
+      let relatedMomentsRows = []
 
-  if (showEvents) {
-    events = await Event.findAll({
-      subQuery: false,
-      where: { ...whereEvent, moderation_status: "approved" },
-      include: includeEventRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    events = await lazyLoadEventAudienceData(events, currentUserId);
-    events = filterByAudienceCriteria(events, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+      if(!hasIncompatibleFilters){
+         relatedNeeds = await Need.findAll({
+        subQuery: false,
+        where: { ...whereNeed, relatedEntityType: "event", moderation_status: "approved" },
+        include: includeNeedRefs,
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
+      relatedMomentsRows = await fetchMomentsPaged({
+        where: { ...whereCommon, relatedEntityType: "event" },
+        include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+        limit: bufferLimit,
+        offset: 0,
+      });
+      }
+      const mappedEvents = eventsWithAudience.map(mapEvent);
+      const mappedNeeds = relatedNeeds.map(mapNeed);
+      const mappedMoments = relatedMomentsRows.map(mapMoment);
+      const combined = [...mappedEvents, ...mappedNeeds, ...mappedMoments];
+      combined.forEach((x) => (x._score = scoreItem(x)));
+      sortByMatchThenRecency(combined);
+      const windowed = combined.slice(off, off + lim);
+      return { items: await getConStatusItems(windowed) };
+    }
 
-  if (showEventSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: "event", moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+    if (tab === "jobs") {
+      const jobsViewOptions = jobsView ? ensureArray(jobsView) : [];
+      const showJobOffers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Offers");
+      const showJobSeekers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Seekers");
 
-  if (showEventExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "event" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: bufferLimit,
-      offset: 0,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+      let jobs = [];
+      let relatedNeeds = [];
+      let relatedMomentsRows = [];
 
-  const mappedEvents = events.map(mapEvent);
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedEvents, ...mappedNeeds, ...mappedMoments];
-  combined.forEach((x) => (x._score = scoreItem(x)));
-  sortByMatchThenRecency(combined);
-  const windowed = combined.slice(off, off + lim);
-  return { items: await getConStatusItems(windowed) };
-}
+      if (showJobOffers) {
+        jobs = await Job.findAll({
+          subQuery: false,
+          where: { ...whereJob, moderation_status: "approved" },
+          include: includeCategoryRefs,
+          order: [["createdAt", "DESC"]],
+          limit: bufferLimit,
+        });
+        jobs = await lazyLoadJobAudienceData(jobs, currentUserId);
+        jobs = filterByAudienceCriteria(jobs, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
+      }
 
+      if (showJobSeekers && !hasIncompatibleFilters) {
+        relatedNeeds = await Need.findAll({
+          subQuery: false,
+          where: { ...whereNeed, relatedEntityType: "job", moderation_status: "approved" },
+          include: includeNeedRefs,
+          order: [["createdAt", "DESC"]],
+          limit: bufferLimit,
+        });
+        // Load audience data for needs and filter by provided audience params
+        relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
+        relatedNeeds = filterByAudienceCriteria(
+          relatedNeeds,
+          effAudienceIdentityIds,
+          effAudienceCategoryIds,
+          effAudienceSubcategoryIds,
+          effAudienceSubsubCategoryIds
+        );
 
-if (tab === "jobs") {
-  const jobsViewOptions = jobsView ? ensureArray(jobsView) : [];
-  const showJobOffers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Offers");
-  const showJobSeekers = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Seekers");
-  const showJobExperiences = jobsViewOptions.length === 0 || jobsViewOptions.includes("Job Experiences");
-  
-  let jobs = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
-  
-  if (showJobOffers) {
-    jobs = await Job.findAll({
-      subQuery: false,
-      where: { ...whereJob, moderation_status: "approved" },
-      include: includeCategoryRefs,
-      order: [["createdAt", "DESC"]],
-      limit: lim,
-      offset: off,
-    });
-    jobs = await lazyLoadJobAudienceData(jobs, currentUserId);
-    jobs = filterByAudienceCriteria(jobs, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-  
-  if (showJobSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: 'job', moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: lim,
-      offset: off,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+         if(showJobOffers && showJobSeekers){
+              relatedMomentsRows = await fetchMomentsPaged({
+          where: { ...whereCommon, relatedEntityType: "job" },
+          include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          limit: bufferLimit,
+          offset: 0,
+        });
+         }
 
-  if (showJobExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "job" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: lim,
-      offset: off,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-  
-  const companyMap = await makeCompanyMapById(jobs.map((j) => j.companyId));
-  const mappedJobs = jobs.map((j) => mapJob(j, companyMap));
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedJobs, ...mappedNeeds, ...mappedMoments];
-  const filtered = applyContentTypeFilter(combined, contentType);
-  sortByMatchThenRecency(filtered);
-  return { items: await getConStatusItems(filtered) };
-}
+       
+        // Load audience data for moments and filter by provided audience params
+        relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
+        relatedMomentsRows = filterByAudienceCriteria(
+          relatedMomentsRows,
+          effAudienceIdentityIds,
+          effAudienceCategoryIds,
+          effAudienceSubcategoryIds,
+          effAudienceSubsubCategoryIds
+        );
+      }
 
+      const companyMap = await makeCompanyMapById(jobs.map((j) => j.companyId));
+      const mappedJobs = jobs.map((j) => mapJob(j, companyMap));
+      const mappedNeeds = relatedNeeds.map(mapNeed);
+      const mappedMoments = relatedMomentsRows.map(mapMoment);
+      const combined = [...mappedJobs, ...mappedNeeds, ...mappedMoments];
+      combined.forEach((x) => (x._score = scoreItem(x)));
+      sortByMatchThenRecency(combined);
+      const windowed = combined.slice(off, off + lim);
+      return { items: await getConStatusItems(windowed) };
+    }
 
-if (tab === "services") {
-  const servicesViewOptions = servicesView ? ensureArray(servicesView) : [];
-  const showServiceOffers = servicesViewOptions.length === 0 || servicesViewOptions.includes("Service Offers");
-  const showServiceRequests = servicesViewOptions.length === 0 || servicesViewOptions.includes("Service Requests");
-  const showServiceExperiences = servicesViewOptions.length === 0 || servicesViewOptions.includes("Service Experiences");
+    if (tab === "services") {
+      const services = await Service.findAll({
+        distinct: true,
+        col: "Service.id",
+        subQuery: false,
+        where: { ...whereService, moderation_status: "approved" },
+        include: makeServiceInclude({ categoryId, subcategoryId, subsubCategoryId }),
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
+      const servicesWithAudience = await lazyLoadServiceAudienceData(services, currentUserId);
 
-  let services = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
-
-  if (showServiceOffers) {
-    services = await Service.findAll({
-      distinct: true,
-      col: "Service.id",
-      subQuery: false,
-      where: { ...whereService, moderation_status: "approved" },
-      include: makeServiceInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    services = await lazyLoadServiceAudienceData(services, currentUserId);
-    services = filterByAudienceCriteria(services, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showServiceRequests && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: "service", moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showServiceExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "service" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: bufferLimit,
-      offset: 0,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  const mappedServices = services.map(mapService);
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedServices, ...mappedNeeds, ...mappedMoments];
-  combined.forEach((x) => (x._score = scoreItem(x)));
-  sortByMatchThenRecency(combined);
-  const windowed = combined.slice(off, off + lim);
-  return { items: await getConStatusItems(windowed) };
-}
-
-if (tab === "products") {
-  const productsViewOptions = productsView ? ensureArray(productsView) : [];
-  const showProducts = productsViewOptions.length === 0 || productsViewOptions.includes("Products");
-  const showProductReviews = productsViewOptions.length === 0 || productsViewOptions.includes("Product Reviews");
-  const showProductSeekers = productsViewOptions.length === 0 || productsViewOptions.includes("Product Seekers");
-
-  let products = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
-
-  if (showProducts) {
-    products = await Product.findAll({
-      subQuery: false,
-      where: { ...whereProduct, moderation_status: "approved" },
-      include: makeProductInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    products = await lazyLoadProductAudienceData(products, currentUserId);
-    products = filterByAudienceCriteria(products, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showProductSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: "product", moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  if (showProductReviews && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "product" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: bufferLimit,
-      offset: 0,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
-
-  const mappedProducts = products.map(mapProduct);
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedProducts, ...mappedNeeds, ...mappedMoments];
-  combined.forEach((x) => (x._score = scoreItem(x)));
-  sortByMatchThenRecency(combined);
-  const windowed = combined.slice(off, off + lim);
-  return { items: await getConStatusItems(windowed) };
-}
+       let relatedMomentsRows=[]
+        let relatedNeeds = []
+       // Only show related needs/moments if no incompatible filters
+      if (!hasIncompatibleFilters) {
+        relatedNeeds = await Need.findAll({
+          subQuery: false,
+          where: { ...whereNeed, relatedEntityType: 'service', moderation_status: "approved" },
+          include: includeNeedRefs,
+          order: [["createdAt", "DESC"]],
+          limit: lim,
+          offset: off,
+        });
+        relatedMomentsRows = await fetchMomentsPaged({
+          where: { ...whereCommon, relatedEntityType: "service" },
+          include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+          limit: lim,
+          offset: off,
+        });
+      }
 
 
-if (tab === "tourism") {
-  const tourismViewOptions = tourismView ? ensureArray(tourismView) : [];
-  const showTourism = tourismViewOptions.length === 0 || tourismViewOptions.includes("Tourism");
-  const showTravelExperiences = tourismViewOptions.length === 0 || tourismViewOptions.includes("Travel Experiences");
-  const showDestinationSeekers = tourismViewOptions.length === 0 || tourismViewOptions.includes("Destination Seekers");
+      const mappedServices = servicesWithAudience.map(mapService);
+      const mappedNeeds = relatedNeeds.map(mapNeed);
+      const mappedMoments = relatedMomentsRows.map(mapMoment);
 
-  let tourism = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
+      const combined = [...mappedServices, ...mappedNeeds, ...mappedMoments];
+      combined.forEach((x) => (x._score = scoreItem(x)));
+      sortByMatchThenRecency(combined);
+      const windowed = combined.slice(off, off + lim);
+      return { items: await getConStatusItems(windowed) };
+    }
 
-  if (showTourism) {
-    tourism = await Tourism.findAll({
-      subQuery: false,
-      where: { ...whereTourism, moderation_status: "approved" },
-      include: makeTourismInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    tourism = await lazyLoadTourismAudienceData(tourism, currentUserId);
-    tourism = filterByAudienceCriteria(tourism, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+    if (tab === "products") {
+      const products = await Product.findAll({
+        subQuery: false,
+        where: { ...whereProduct, moderation_status: "approved" },
+        include: makeProductInclude({ categoryId, subcategoryId, subsubCategoryId }),
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
+      const productsWithAudience = await lazyLoadProductAudienceData(products, currentUserId);
 
-  if (showDestinationSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: "tourism", moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+      let relatedNeeds = [];
+      let relatedMomentsRows = []
 
-  if (showTravelExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "tourism" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: bufferLimit,
-      offset: 0,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
 
-  const mappedTourism = tourism.map(mapTourism);
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedTourism, ...mappedNeeds, ...mappedMoments];
-  combined.forEach((x) => (x._score = scoreItem(x)));
-  sortByMatchThenRecency(combined);
-  const windowed = combined.slice(off, off + lim);
-  return { items: await getConStatusItems(windowed) };
-}
 
-if (tab === "funding") {
-  const fundingViewOptions = fundingView ? ensureArray(fundingView) : [];
-  const showFundingOpportunities = fundingViewOptions.length === 0 || fundingViewOptions.includes("Funding Opportunities");
-  const showFundSeekers = fundingViewOptions.length === 0 || fundingViewOptions.includes("Fund Seekers");
-  const showFundingExperiences = fundingViewOptions.length === 0 || fundingViewOptions.includes("Funding Experiences");
+     if(!hasIncompatibleFilters){
+        relatedNeeds = await Need.findAll({
+        subQuery: false,
+        where: { ...whereNeed, relatedEntityType: "product", moderation_status: "approved" },
+        include: includeNeedRefs,
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
 
-  let funding = [];
-  let relatedNeeds = [];
-  let relatedMomentsRows = [];
+      relatedMomentsRows = await fetchMomentsPaged({
+        where: { ...whereCommon, relatedEntityType: "product" },
+        include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+        limit: bufferLimit,
+        offset: 0,
+      });
+     }
 
-  if (showFundingOpportunities) {
-    funding = await Funding.findAll({
-      subQuery: false,
-      where: { ...whereFunding, moderation_status: "approved" },
-      include: makeFundingInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    funding = await lazyLoadFundingAudienceData(funding, currentUserId);
-    funding = filterByAudienceCriteria(funding, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+      const mappedProducts = productsWithAudience.map(mapProduct);
+      const mappedNeeds = relatedNeeds.map(mapNeed);
+      const mappedMoments = relatedMomentsRows.map(mapMoment);
 
-  if (showFundSeekers && !hasIncompatibleFilters) {
-    relatedNeeds = await Need.findAll({
-      subQuery: false,
-      where: { ...whereNeed, relatedEntityType: "funding", moderation_status: "approved" },
-      include: includeNeedRefs,
-      order: [["createdAt", "DESC"]],
-      limit: bufferLimit,
-    });
-    relatedNeeds = await lazyLoadNeedAudienceData(relatedNeeds, currentUserId);
-    relatedNeeds = filterByAudienceCriteria(relatedNeeds, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+      const combined = [...mappedProducts, ...mappedNeeds, ...mappedMoments];
+      combined.forEach((x) => (x._score = scoreItem(x)));
+      sortByMatchThenRecency(combined);
+      const windowed = combined.slice(off, off + lim);
+      return { items: await getConStatusItems(windowed) };
+    }
 
-  if (showFundingExperiences && !hasIncompatibleFilters) {
-    relatedMomentsRows = await fetchMomentsPaged({
-      where: { ...whereCommon, relatedEntityType: "funding" },
-      include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
-      limit: bufferLimit,
-      offset: 0,
-    });
-    relatedMomentsRows = await lazyLoadMomentAudienceData(relatedMomentsRows, currentUserId);
-    relatedMomentsRows = filterByAudienceCriteria(relatedMomentsRows, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
-  }
+    if (tab === "tourism") {
+      const tourism = await Tourism.findAll({
+        subQuery: false,
+        where: { ...whereTourism, moderation_status: "approved" },
+        include: makeTourismInclude({ categoryId, subcategoryId, subsubCategoryId }),
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
+      const tourismWithAudience = await lazyLoadTourismAudienceData(tourism, currentUserId);
 
-  const mappedFunding = funding.map(mapFunding);
-  const mappedNeeds = relatedNeeds.map(mapNeed);
-  const mappedMoments = relatedMomentsRows.map(mapMoment);
-  const combined = [...mappedFunding, ...mappedNeeds, ...mappedMoments];
-  combined.forEach((x) => (x._score = scoreItem(x)));
-  sortByMatchThenRecency(combined);
-  const windowed = combined.slice(off, off + lim);
-  return { items: await getConStatusItems(windowed) };
-}
+
+      let relatedNeeds = [];
+      let relatedMomentsRows = []
+
+      if(!hasIncompatibleFilters){
+        
+          relatedNeeds = await Need.findAll({
+            subQuery: false,
+            where: { ...whereNeed, relatedEntityType: "tourism", moderation_status: "approved" },
+            include: includeNeedRefs,
+            order: [["createdAt", "DESC"]],
+            limit: bufferLimit,
+          });
+
+          relatedMomentsRows = await fetchMomentsPaged({
+            where: { ...whereCommon, relatedEntityType: "tourism" },
+            include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+            limit: bufferLimit,
+            offset: 0,
+          });
+
+      }
+      const mappedTourism = tourismWithAudience.map(mapTourism);
+      const mappedNeeds = relatedNeeds.map(mapNeed);
+      const mappedMoments = relatedMomentsRows.map(mapMoment);
+
+      const combined = [...mappedTourism, ...mappedNeeds, ...mappedMoments];
+      combined.forEach((x) => (x._score = scoreItem(x)));
+      sortByMatchThenRecency(combined);
+      const windowed = combined.slice(off, off + lim);
+      return { items: await getConStatusItems(windowed) };
+    }
+
+    if (tab === "funding") {
+      const funding = await Funding.findAll({
+        subQuery: false,
+        where: { ...whereFunding, moderation_status: "approved" },
+        include: makeFundingInclude({ categoryId, subcategoryId, subsubCategoryId }),
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
+
+      const fundingWithAudience= await lazyLoadFundingAudienceData(funding, currentUserId);
+      const fundingFiltered = filterByAudienceCriteria(fundingWithAudience, effAudienceIdentityIds, effAudienceCategoryIds, effAudienceSubcategoryIds, effAudienceSubsubCategoryIds);
+
+      let relatedNeeds = [];
+      let relatedMomentsRows = []
+
+     
+      if(!hasIncompatibleFilters){
+         relatedNeeds = await Need.findAll({
+        subQuery: false,
+        where: { ...whereNeed, relatedEntityType: "funding", moderation_status: "approved" },
+        include: includeNeedRefs,
+        order: [["createdAt", "DESC"]],
+        limit: bufferLimit,
+      });
+
+      relatedMomentsRows = await fetchMomentsPaged({
+        where: { ...whereCommon, relatedEntityType: "funding" },
+        include: makeMomentInclude({ categoryId, subcategoryId, subsubCategoryId }),
+        limit: bufferLimit,
+        offset: 0,
+      });
+
+      }
+      const mappedFunding = fundingWithAudience.map(mapFunding);
+      const mappedNeeds = relatedNeeds.map(mapNeed);
+      const mappedMoments = relatedMomentsRows.map(mapMoment);
+
+      const combined = [...mappedFunding, ...mappedNeeds, ...mappedMoments];
+      combined.forEach((x) => (x._score = scoreItem(x)));
+      sortByMatchThenRecency(combined);
+      const windowed = combined.slice(off, off + lim);
+      return { items: await getConStatusItems(windowed) };
+    }
 
     if (tab === "needs") {
       const needs = await Need.findAll({

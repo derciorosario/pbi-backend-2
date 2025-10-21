@@ -21,6 +21,8 @@ exports.createJob = async (req, res) => {
       applicationDeadline, positions, applicationInstructions, contactEmail,
       categoryId, subcategoryId, status,coverImageBase64,companyId, countries,
 
+      videoUrl,
+
       // Industry fields
       industryCategoryId,
       industrySubcategoryId,
@@ -75,6 +77,7 @@ exports.createJob = async (req, res) => {
       title, companyName, department, experienceLevel,
       jobType, workLocation, workSchedule,
       careerLevel, paymentType, description,
+      videoUrl,
       requiredSkills: skills,
       country, city,
       countries, countries,

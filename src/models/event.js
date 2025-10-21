@@ -51,6 +51,8 @@ module.exports = (sequelize, DataTypes) => {
 
       coverImageBase64: { type: DataTypes.TEXT('long'), allowNull: true },
 
+      videoUrl: { type: DataTypes.TEXT('long'), allowNull: true },
+
       // Media
       coverImageUrl: { type: DataTypes.TEXT('long'), allowNull: true },
 

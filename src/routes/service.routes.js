@@ -2,12 +2,13 @@ const router = require("express").Router();
 const C = require("../controllers/service.controller");
 const auth = require("../middleware/auth"); // auth(true) -> requires token
 const upload = require("../utils/multerConfigAttachments");
+const uploadMedia = require("../utils/multerConfigAllMediaAttachments");
 
 // Metadata for form
 router.get("/meta", auth(false), C.getMeta);
 
 // Upload attachments
-router.post("/upload-attachments", auth(true), upload.array('attachments', 20), C.uploadAttachments);
+router.post("/upload-attachments", auth(true), uploadMedia.array('attachments', 20), C.uploadAttachments);
 
 // CRUD
 router.get("/", auth(false), C.list);
