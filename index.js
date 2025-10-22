@@ -235,6 +235,10 @@ const PORT = process.env.PORT || 5000;
 
   //  require('./scripts/create_contacts_table.js')
 
+  //
+  
+   require('./scripts/create_meeting_participants_table.js')
+
 
     // Auto-sync DB tables (use migrations in production)
     // Temporarily disabled to avoid schema issues during development

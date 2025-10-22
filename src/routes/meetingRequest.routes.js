@@ -18,6 +18,11 @@ router.get("/:id",auth(true), meetingRequestController.getMeetingRequest);
 // Respond to a meeting request (accept/reject)
 router.post("/:id/respond",auth(true), meetingRequestController.respondToMeetingRequest);
 
+// Respond to a meeting invitation (for participants)
+router.post("/:id/respond-invitation", auth(true), meetingRequestController.respondToMeetingInvitation);
+
+router.get('/profile/:userId',auth(true), meetingRequestController.getProfileMeetings);
+
 // Cancel a meeting request
 router.post("/:id/cancel", auth(true), meetingRequestController.cancelMeetingRequest);
 

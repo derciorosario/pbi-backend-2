@@ -4092,6 +4092,7 @@ exports.getUserItems = async (req, res) => {
       switch (kind) {
         case 'job':
           mediaFields.coverImage = item.coverImage || item.coverImageBase64 || null;
+          mediaFields.videoUrl = item.videoUrl || null;
           break;
         case 'event':
           mediaFields.coverImage = item.coverImage || item.coverImageBase64 || item.coverImageUrl || null;
@@ -4120,10 +4121,10 @@ exports.getUserItems = async (req, res) => {
       return mediaFields;
     };
 
-    // Fetch jobs for the user
+  // Fetch jobs for the user
     const jobs = await Job.findAll({
       where: { postedByUserId: userId },
-      attributes: ['id', 'coverImageBase64']
+      attributes: ['id', 'coverImageBase64','videoUrl']
     });
     itemCounts.job = jobs.length;
     allItems.push(...jobs.map(job => extractMediaFields(job, 'job')));
@@ -4131,7 +4132,7 @@ exports.getUserItems = async (req, res) => {
     // Fetch events for the user
     const events = await Event.findAll({
       where: { organizerUserId: userId },
-      attributes: ['id', 'coverImageBase64', 'coverImageUrl']
+      attributes: ['id', 'coverImageBase64', 'coverImageUrl','videoUrl']
     });
     itemCounts.event = events.length;
     allItems.push(...events.map(event => extractMediaFields(event, 'event')));
@@ -4196,6 +4197,7 @@ exports.getUserItems = async (req, res) => {
     res.status(500).json({ message: "Failed to get user items" });
   }
 };
+
 
 
 /*exports.getSuggestions = async (req, res) => {

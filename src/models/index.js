@@ -40,6 +40,7 @@ const Contact = require("./contact")(sequelize, DataTypes);
 // Portfolio models
 const WorkSample = require("./workSample")(sequelize, DataTypes);
 const Gallery = require("./gallery")(sequelize, DataTypes);
+const MeetingParticipant= require("./MeetingParticipant")(sequelize, DataTypes);
 
 // Social interaction models
 const Like = require("./like")(sequelize, DataTypes);
@@ -1250,16 +1251,36 @@ if (Moment.associate) {
   });
 }
 
+// MeetingRequest ↔ MeetingParticipant associations
+MeetingRequest.hasMany(MeetingParticipant, { 
+  foreignKey: "meetingRequestId", 
+  as: "participants",
+  onDelete: 'CASCADE'
+});
+MeetingParticipant.belongsTo(MeetingRequest, { 
+  foreignKey: "meetingRequestId", 
+  as: "meetingRequest"
+});
+
+// MeetingParticipant ↔ User associations  
+MeetingParticipant.belongsTo(User, { 
+  foreignKey: "userId", 
+  as: "user"
+});
+User.hasMany(MeetingParticipant, { 
+  foreignKey: "userId", 
+  as: "meetingParticipants"
+});
+
 module.exports = {
    UserIdentityInterest,
   UserCategoryInterest,
   UserSubcategoryInterest,
   UserSubsubCategoryInterest,
 
-    UserIndustryCategory,
+  UserIndustryCategory,
   UserIndustrySubcategory,
   UserIndustrySubsubCategory,
-
 
 
   IndustryCategory,
@@ -1345,6 +1366,8 @@ module.exports = {
   // Portfolio models
   WorkSample,
   Gallery,
+
+  MeetingParticipant,
 
   // Social interaction models
   Like,
