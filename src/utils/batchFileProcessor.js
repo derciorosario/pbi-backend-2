@@ -6,7 +6,7 @@ const db = require('../models'); // Sequelize models
 // List of models to process
 const modelsToProcess = [
   { model: db.User, type: 'user' },
-  { model: db.Job, type: 'job' },
+ /* { model: db.Job, type: 'job' },
   { model: db.Profile, type: 'profile' },
   { model: db.WorkSample, type: 'workSample' },
   { model: db.Event, type: 'event' },
@@ -15,7 +15,7 @@ const modelsToProcess = [
   { model: db.Tourism, type: 'tourism' },
   { model: db.Funding, type: 'funding' },
   { model: db.Moment, type: 'moment' },
-  { model: db.Need, type: 'need' },
+  { model: db.Need, type: 'need' },*/
 ];
 
 async function processAll() {

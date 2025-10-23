@@ -83,7 +83,8 @@ async function processFilesArray(items, key = null, folder = "") {
 async function processModelFiles(model) {
   switch (model.type) {
     case "user":
-      model.avatarUrl = await saveFile(model.avatarUrl, "users");
+      //model.avatarUrl = await saveFile(model.avatarUrl, "users");
+      model.coverImage = await saveFile(model.coverImage, "users");
       break;
 
     case "profile":
