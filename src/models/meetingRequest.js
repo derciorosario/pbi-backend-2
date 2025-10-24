@@ -59,6 +59,5 @@ module.exports = (sequelize, DataTypes) => {
     MeetingRequest.belongsTo(models.User, { foreignKey: "fromUserId", as: "requester" });
     MeetingRequest.belongsTo(models.User, { foreignKey: "toUserId", as: "recipient" });
   };
-
   return MeetingRequest;
 };

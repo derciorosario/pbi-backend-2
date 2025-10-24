@@ -497,7 +497,7 @@ exports.getMeetingRequests = async (req, res) => {
     const invitations = await MeetingParticipant.findAll({
       where: { 
         userId: userId,
-        '$MeetingRequest.toUserId$': { [Op.ne]: userId } // Exclude where user is primary recipient
+        '$meetingRequest.toUserId$': { [Op.ne]: userId } // Exclude where user is primary recipient
       },
       include: [
         { 

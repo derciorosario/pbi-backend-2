@@ -389,12 +389,10 @@ exports.uploadImages = async (req, res) => {
 
     // Return the filenames to be stored in the database
     const filenames = req.files.map(file => file.filename);
-    const filePaths = filenames.map(filename => `/uploads/${filename}`);
 
     res.status(200).json({
       success: true,
-      filenames: filenames,
-      filePaths: filePaths
+      filenames: filenames
     });
   } catch (err) {
     console.error("uploadImages error", err);

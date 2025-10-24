@@ -28,8 +28,9 @@ const localStorage = multer.diskStorage({
     // Create a unique filename with original extension
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const ext = path.extname(file.originalname);
-    const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_'); // Replace spaces with underscores
-    const filename = 'attachment-' + uniqueSuffix + '-' + basename + ext;
+    // leave it here: const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_'); // Replace spaces with underscores
+    // leave it here: const filename = 'attachment-' + uniqueSuffix + '-' + basename + ext;
+    const filename = 'attachment-' + uniqueSuffix + ext;
     cb(null, filename);
   }
 });

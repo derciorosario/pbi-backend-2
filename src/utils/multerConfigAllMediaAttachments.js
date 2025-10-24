@@ -27,8 +27,9 @@ const localStorage = multer.diskStorage({
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const ext = path.extname(file.originalname);
-    const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
-    const filename = 'media-' + uniqueSuffix + '-' + basename + ext;
+    //leave it here: const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
+    //leave it here: const filename = 'media-' + uniqueSuffix + '-' + basename + ext;
+    const filename = 'media-' + uniqueSuffix + ext;
     cb(null, filename);
   }
 });
@@ -43,8 +44,8 @@ const dualStorage = {
 
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       const ext = path.extname(file.originalname);
-      const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
-      const s3Filename = `media/attachment-${uniqueSuffix}-${basename}${ext}`;
+      //const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
+      const s3Filename = `media/attachment-${uniqueSuffix}${ext}`;
 
       const localFilePath = path.join(uploadsDir, fileInfo.filename);
       const fileBuffer = fs.readFileSync(localFilePath);
@@ -72,8 +73,8 @@ const dualStorage = {
         }
 
         cb(null, {
-          filename: fileInfo.filename,
-          path: req.savedFileUrl,
+          name: fileInfo.filename,
+          filename: req.savedFileUrl,
           size: fileInfo.size,
           mimetype: file.mimetype,
           url: req.savedFileUrl
