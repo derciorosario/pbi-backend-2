@@ -182,6 +182,100 @@ app.use("/api/organization", require("./src/routes/organization.routes"))
 // Contact form routes
 app.use("/api/contact", require("./src/routes/contact.routes"))
 
+// Support form routes
+app.use("/api/support", require("./src/routes/support.routes"))
+
+
+
+// Add this route before your 404 handler
+app.get('/api/download', async (req, res) => {
+  try {
+    const { url } = req.query;
+    
+    if (!url) {
+      return res.status(400).json({ error: 'URL parameter is required' });
+    }
+
+    console.log('Download request for URL:', url);
+
+    // Validate URL format
+    try {
+      new URL(url);
+    } catch (error) {
+      return res.status(400).json({ error: 'Invalid URL format' });
+    }
+
+    // Extract filename from URL
+    const urlParts = url.split('/');
+    let filename = urlParts[urlParts.length - 1];
+    
+    // Clean up filename - remove query parameters if any
+    filename = filename.split('?')[0];
+    
+    // If filename is invalid, generate a default one
+    if (!filename || filename.length > 255 || !filename.includes('.')) {
+      const extension = getFileExtensionFromUrl(url);
+      filename = `download-${Date.now()}.${extension}`;
+    }
+
+    // Set headers for download
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Type', 'application/octet-stream');
+
+    // Use axios to proxy the download
+    const axios = require('axios');
+    const response = await axios({
+      method: 'GET',
+      url: url,
+      responseType: 'stream',
+      timeout: 30000, // 30 second timeout
+    });
+
+    // Set content length header if available
+    const contentLength = response.headers['content-length'];
+    if (contentLength) {
+      res.setHeader('Content-Length', contentLength);
+    }
+
+    // Copy other relevant headers
+    if (response.headers['content-type']) {
+      res.setHeader('Content-Type', response.headers['content-type']);
+    }
+
+    console.log(`Starting download: ${filename}, Size: ${contentLength || 'unknown'} bytes`);
+
+    // Pipe the response directly to client
+    response.data.pipe(res);
+
+    response.data.on('error', (error) => {
+      console.error('Download stream error:', error);
+      if (!res.headersSent) {
+        res.status(500).json({ error: 'Download failed' });
+      }
+    });
+
+    res.on('finish', () => {
+      console.log(`Download completed: ${filename}`);
+    });
+
+  } catch (error) {
+    console.error('Download controller error:', error);
+    
+    if (!res.headersSent) {
+      res.status(500).json({ 
+        error: 'Download failed',
+        message: error.message 
+      });
+    }
+  }
+});
+
+// Helper function to get file extension from URL
+function getFileExtensionFromUrl(url) {
+  const match = url.match(/\.([a-zA-Z0-9]+)(?:[?#]|$)/);
+  return match ? match[1] : 'file';
+}
+
 
 app.get('/api/download/:filename', (req, res) => {
   const fileName = req.params.filename;
@@ -237,7 +331,8 @@ const PORT = process.env.PORT || 5000;
 
   //
   
-   require('./scripts/create_meeting_participants_table.js')
+   //require('./scripts/create_meeting_participants_table.js')
+   require('./scripts/create_supports_table.js')
 
 
     // Auto-sync DB tables (use migrations in production)
@@ -907,7 +1002,6 @@ async function pushHeaderCounts(socketOrUserId) {
           if (!conversation) {
             return reply(socket, ack, "mark_read_result", { ok: false, error: "Conversation not found" });
           }
-
           let markedCount = 0;
           if (conversation.user1Id === userId) {
             markedCount = conversation.user1UnreadCount || 0;

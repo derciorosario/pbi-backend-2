@@ -237,10 +237,9 @@ async function sendMessage(req, res, next) {
     // Handle attachments
     let attachments = [];
     if (req.files && req.files.length > 0) {
-      const baseUrl = process.env.BACKEND_URL || `http://localhost:${process.env.PORT || 5000}`;
       attachments = req.files.map(file => ({
-        filename: file.originalname,
-        url: `${baseUrl}/api/uploads/${file.filename}`,
+        filename: file.name,
+        url: file.filename,
         mimetype: file.mimetype,
         size: file.size
       }));
@@ -305,7 +304,7 @@ async function sendMessage(req, res, next) {
       conversationId: conversation.id,
       attachments
     });
-    console.log('2')
+    console.log('2--------------')
 
     // Include sender info in response
     const messageWithSender = await Message.findByPk(message.id, {
@@ -432,11 +431,221 @@ async function getUnreadCount(req, res, next) {
   }
 }
 
+// Delete a message
+async function deleteMessage(req, res, next) {
+  try {
+    const userId = req.user.sub;
+    const { messageId } = req.params;
+
+    // Find the message
+    const message = await Message.findByPk(messageId);
+    if (!message) {
+      return res.status(404).json({ message: "Message not found" });
+    }
+
+    // Check if user is the sender
+    if (message.senderId !== userId) {
+      return res.status(403).json({ message: "You can only delete your own messages" });
+    }
+
+    // Delete the message
+    await message.destroy();
+
+    // Update conversation's last message if this was the last one
+    const conversation = await Conversation.findByPk(message.conversationId);
+    if (conversation) {
+      const lastMessage = await Message.findOne({
+        where: { conversationId: message.conversationId },
+        order: [["createdAt", "DESC"]]
+      });
+      if (lastMessage) {
+        conversation.lastMessageContent = lastMessage.content || "Attachment";
+        conversation.lastMessageTime = lastMessage.createdAt;
+      } else {
+        conversation.lastMessageContent = null;
+        conversation.lastMessageTime = null;
+      }
+      await conversation.save();
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Edit a message
+async function editMessage(req, res, next) {
+  try {
+    const userId = req.user.sub;
+    const { messageId } = req.params;
+    const { content } = req.body;
+
+    if (!content || content.trim().length === 0) {
+      return res.status(400).json({ message: "Content is required" });
+    }
+
+    // Find the message
+    const message = await Message.findByPk(messageId);
+    if (!message) {
+      return res.status(404).json({ message: "Message not found" });
+    }
+
+    // Check if user is the sender
+    if (message.senderId !== userId) {
+      return res.status(403).json({ message: "You can only edit your own messages" });
+    }
+
+    // Update the message
+    message.content = content.trim();
+    await message.save();
+
+    // Update conversation's last message if this was the last one
+    const conversation = await Conversation.findByPk(message.conversationId);
+    if (conversation) {
+      const lastMessage = await Message.findOne({
+        where: { conversationId: message.conversationId },
+        order: [["createdAt", "DESC"]]
+      });
+      if (lastMessage && lastMessage.id === message.id) {
+        conversation.lastMessageContent = message.content;
+        await conversation.save();
+      }
+    }
+
+    // Return updated message
+    const updatedMessage = await Message.findByPk(messageId, {
+      include: [
+        {
+          model: User,
+          as: "sender",
+          attributes: ["id", "name", "avatarUrl"]
+        }
+      ]
+    });
+
+    res.json(updatedMessage);
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Bulk delete messages
+async function bulkDeleteMessages(req, res, next) {
+  try {
+    const userId = req.user.sub;
+    const { data } = req.body;
+
+    let messageIds=data.messageIds || []
+
+    if (!messageIds || !Array.isArray(messageIds) || messageIds.length === 0) {
+      return res.status(400).json({ message: "Message IDs are required" });
+    }
+
+    // Find all messages to ensure they belong to the user
+    const messages = await Message.findAll({
+      where: {
+        id: messageIds,
+        senderId: userId
+      }
+    });
+
+    if (messages.length === 0) {
+      return res.status(404).json({ message: "No messages found" });
+    }
+
+    const foundIds = messages.map(m => m.id);
+    const notFoundIds = messageIds.filter(id => !foundIds.includes(id));
+
+    if (notFoundIds.length > 0) {
+      return res.status(404).json({
+        message: "Some messages not found or you don't have permission to delete them",
+        notFound: notFoundIds
+      });
+    }
+
+    // Delete the messages
+    await Message.destroy({
+      where: {
+        id: messageIds,
+        senderId: userId
+      }
+    });
+
+    // Update conversations' last messages if needed
+    const conversationIds = [...new Set(messages.map(m => m.conversationId))];
+    for (const convId of conversationIds) {
+      const conversation = await Conversation.findByPk(convId);
+      if (conversation) {
+        const lastMessage = await Message.findOne({
+          where: { conversationId: convId },
+          order: [["createdAt", "DESC"]]
+        });
+        if (lastMessage) {
+          conversation.lastMessageContent = lastMessage.content || "Attachment";
+          conversation.lastMessageTime = lastMessage.createdAt;
+        } else {
+          conversation.lastMessageContent = null;
+          conversation.lastMessageTime = null;
+        }
+        await conversation.save();
+      }
+    }
+
+    res.json({
+      success: true,
+      deletedCount: messages.length,
+      deletedIds: foundIds
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Delete a conversation
+async function deleteConversation(req, res, next) {
+  try {
+    const userId = req.user.sub;
+    const { conversationId } = req.params;
+
+    // Find the conversation
+    const conversation = await Conversation.findOne({
+      where: {
+        id: conversationId,
+        [Op.or]: [
+          { user1Id: userId },
+          { user2Id: userId }
+        ]
+      }
+    });
+
+    if (!conversation) {
+      return res.status(404).json({ message: "Conversation not found" });
+    }
+
+    // Delete all messages in the conversation
+    await Message.destroy({
+      where: { conversationId }
+    });
+
+    // Delete the conversation
+    await conversation.destroy();
+
+    res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getConversations,
   getMessages,
   getMessagesWithUser,
   sendMessage,
   markAsRead,
-  getUnreadCount
+  getUnreadCount,
+  deleteMessage,
+  editMessage,
+  bulkDeleteMessages,
+  deleteConversation
 };

@@ -1,0 +1,49 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  New Support Request 📧
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi Admin, you have received a new support request via your website.
+</p>
+
+<div style="margin:16px 0;padding:16px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0 0 12px 0;font-weight:500;">Support Details:</p>
+
+  <p style="margin:4px 0;"><strong>Name:</strong> {{support.fullName}}</p>
+  <p style="margin:4px 0;"><strong>Email:</strong> <a href="mailto:{{support.email}}" style="color:{{BRAND.primary}};">{{support.email}}</a></p>
+  {{#if support.phone}}
+  <p style="margin:4px 0;"><strong>Phone:</strong> {{support.phone}}</p>
+  {{/if}}
+  <p style="margin:4px 0;"><strong>Reason:</strong> {{support.supportReason}}</p>
+  <p style="margin:4px 0;"><strong>Priority:</strong> {{support.priority}}</p>
+
+  {{#if support.attachment}}
+  <p style="margin:4px 0;"><strong>Attachment:</strong> <a href="{{support.attachment.url}}" style="color:{{BRAND.primary}};" target="_blank">{{support.attachment.name}}</a></p>
+  {{/if}}
+
+  <p style="margin:12px 0 4px 0;"><strong>Message:</strong></p>
+  <div style="margin:8px 0;padding:12px;background:{{BRAND.cardBg}};border-radius:6px;border-left:4px solid {{BRAND.primary}};">
+    <p style="margin:0;font-style:italic;">"{{support.message}}"</p>
+  </div>
+
+  <p style="margin:8px 0 4px 0;font-size:12px;color:{{BRAND.muted}};">
+    Submitted: {{support.submittedAt}}
+  </p>
+</div>
+
+<div style="margin:16px 0;padding:12px;background:#e8f5e8;border-radius:8px;border-left:4px solid #10b981;">
+  <p style="margin:0;color:#059669;font-weight:500;">💡 Quick Actions:</p>
+  <p style="margin:4px 0;color:#059669;font-size:14px;">
+    • Reply directly to: <a href="mailto:{{support.email}}" style="color:#10b981;">{{support.email}}</a><br>
+    {{#if support.attachment}}• Download attachment: <a href="{{support.attachment.url}}" style="color:#10b981;" target="_blank">{{support.attachment.name}}</a><br>{{/if}}
+    • Mark as responded in your admin panel
+  </p>
+</div>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You're receiving this because someone submitted a support request on your website. You can manage all support requests in your admin dashboard.
+</p>

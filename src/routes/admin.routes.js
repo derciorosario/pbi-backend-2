@@ -47,4 +47,12 @@ router.get("/admin/contacts/:id", auth(), isAdmin, adminController.getContactByI
 router.patch("/admin/contacts/:id/status", auth(), isAdmin, adminController.updateContactStatus);
 router.delete("/admin/contacts/:id", auth(), isAdmin, adminController.deleteContact);
 
+// Support management routes
+
+router.get("/admin/supports", auth(), isAdmin, adminController.getAllSupports);
+router.get("/admin/supports/export", auth(), isAdmin, adminController.exportSupports);
+router.get("/admin/supports/:id", auth(), isAdmin, adminController.getSupportById);
+router.patch("/admin/supports/:id/status", auth(), isAdmin, adminController.updateSupportStatus);
+router.delete("/admin/supports/:id", auth(), isAdmin, adminController.deleteSupport);
+
 module.exports = router;

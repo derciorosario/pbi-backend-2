@@ -36,6 +36,7 @@ const Need = require("./need")(sequelize, DataTypes);
 const UserBlock = require("./userBlock")(sequelize, DataTypes);
 const Report = require("./report")(sequelize, DataTypes);
 const Contact = require("./contact")(sequelize, DataTypes);
+const Support = require("./support")(sequelize, DataTypes);
 
 // Portfolio models
 const WorkSample = require("./workSample")(sequelize, DataTypes);
@@ -1363,6 +1364,7 @@ module.exports = {
   Report,
   UserBlock,
   Contact,
+  Support,
   // Portfolio models
   WorkSample,
   Gallery,

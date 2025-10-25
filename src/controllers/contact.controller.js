@@ -1,6 +1,6 @@
 const { Contact } = require("../models");
 const { sendTemplatedEmail } = require("../utils/email");
-const upload = require("../utils/multerConfigAttachments");
+const upload = require("../utils/multerConfigAllMediaAttachments");
 
 async function submitContact(req, res, next) {
   try {
@@ -62,7 +62,7 @@ async function submitContact(req, res, next) {
 
     // Send email notification to admin
     try {
-      const adminEmail = process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "updates-noreply@54links.com";
+      const adminEmail = 'derciorosario55@gmail.com' //process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "updates-noreply@54links.com";
 
       await sendTemplatedEmail({
         to: adminEmail,

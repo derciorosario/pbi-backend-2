@@ -7,6 +7,7 @@ const {
   UserIdentityInterest, UserCategoryInterest, UserSubcategoryInterest, UserSubsubCategoryInterest,
   Goal, UserGoal,
   Contact,
+  Support,
   // Company management models
   CompanyInvitation, CompanyRepresentative, CompanyStaff, OrganizationJoinRequest,
   // Content models that reference users
@@ -840,7 +841,7 @@ exports.getAllContacts= async (req, res, next)=> {
       order: [[sortBy, sortOrder.toUpperCase()]],
       attributes: [
         'id', 'fullName', 'email', 'phone', 'contactReason','message',
-        'companyName', 'website', 'status', 'createdAt', 'respondedAt', 'notes'
+        'companyName', 'website', 'status', 'createdAt', 'respondedAt', 'notes','attachment','attachmentName','attachmentType'
       ]
     });
 
@@ -976,6 +977,190 @@ exports.exportContacts=async (req, res, next)=> {
 
     // Default JSON format
     res.json({ contacts });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Get all supports
+exports.getAllSupports = async (req, res, next) => {
+  try {
+    const {
+      page = 1,
+      limit = 20,
+      status,
+      priority,
+      supportReason,
+      search,
+      sortBy = "createdAt",
+      sortOrder = "DESC"
+    } = req.query;
+
+    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const whereClause = {};
+
+    // Apply filters
+    if (status) {
+      whereClause.status = status;
+    }
+
+    if (priority) {
+      whereClause.priority = priority;
+    }
+
+    if (supportReason) {
+      whereClause.supportReason = supportReason;
+    }
+
+    if (search) {
+      whereClause[Op.or] = [
+        { fullName: { [Op.like]: `%${search}%` } },
+        { email: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
+    const { count, rows: supports } = await Support.findAndCountAll({
+      where: whereClause,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      order: [[sortBy, sortOrder.toUpperCase()]],
+      attributes: [
+        'id', 'fullName', 'email', 'phone', 'supportReason', 'priority', 'message',
+        'status', 'createdAt', 'respondedAt', 'notes','attachment','attachmentName','attachmentType'
+      ]
+    });
+
+    res.json({
+      supports,
+      total: count,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      totalPages: Math.ceil(count / parseInt(limit))
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Get support by ID
+exports.getSupportById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const support = await Support.findByPk(id, {
+      attributes: [
+        'id', 'fullName', 'email', 'phone', 'supportReason', 'priority',
+        'message', 'attachment', 'attachmentName',
+        'status', 'createdAt', 'respondedAt', 'notes'
+      ]
+    });
+
+    if (!support) {
+      return res.status(404).json({ message: "Support request not found" });
+    }
+
+    res.json({ support });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Update support status
+exports.updateSupportStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status, notes } = req.body;
+
+    const validStatuses = ["new", "in_progress", "responded", "closed"];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({
+        message: "Invalid status. Must be one of: " + validStatuses.join(", ")
+      });
+    }
+
+    const support = await Support.findByPk(id);
+    if (!support) {
+      return res.status(404).json({ message: "Support request not found" });
+    }
+
+    const updateData = { status };
+    if (notes !== undefined) {
+      updateData.notes = notes;
+    }
+
+    if (status === "responded") {
+      updateData.respondedAt = new Date();
+    }
+
+    await support.update(updateData);
+
+    res.json({
+      message: "Support request updated successfully",
+      support
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Delete support
+exports.deleteSupport = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const support = await Support.findByPk(id);
+    if (!support) {
+      return res.status(404).json({ message: "Support request not found" });
+    }
+
+    await support.destroy();
+
+    res.json({ message: "Support request deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Export supports data
+exports.exportSupports = async (req, res, next) => {
+  try {
+    const { format = 'json' } = req.query;
+
+    const supports = await Support.findAll({
+      attributes: [
+        'id', 'fullName', 'email', 'phone', 'supportReason', 'priority',
+        'message', 'status', 'createdAt', 'respondedAt', 'notes'
+      ],
+      order: [['createdAt', 'DESC']]
+    });
+
+    if (format === 'csv') {
+      // Convert to CSV format
+      const headers = ['ID', 'Name', 'Email', 'Phone', 'Reason', 'Priority', 'Status', 'Message', 'Submitted At', 'Responded At', 'Notes'];
+      const csvRows = [
+        headers.join(','),
+        ...supports.map(support => [
+          support.id,
+          `"${support.fullName}"`,
+          `"${support.email}"`,
+          `"${support.phone || ''}"`,
+          `"${support.supportReason}"`,
+          `"${support.priority}"`,
+          `"${support.status}"`,
+          `"${(support.message || '').replace(/"/g, '""')}"`,
+          `"${support.createdAt}"`,
+          `"${support.respondedAt || ''}"`,
+          `"${(support.notes || '').replace(/"/g, '""')}"`
+        ].join(','))
+      ];
+
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="supports-export.csv"');
+      return res.send(csvRows.join('\n'));
+    }
+
+    // Default JSON format
+    res.json({ supports });
   } catch (error) {
     next(error);
   }
