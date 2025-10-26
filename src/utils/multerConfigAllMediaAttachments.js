@@ -26,7 +26,41 @@ const localStorage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname);
+    let ext = path.extname(file.originalname);
+    if (!ext) {
+      // Infer extension from MIME type if original name lacks one
+      const mimeToExt = {
+        'application/pdf': '.pdf',
+        'application/msword': '.doc',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+        'application/vnd.ms-powerpoint': '.ppt',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation': '.pptx',
+        'application/vnd.ms-excel': '.xls',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
+        'text/plain': '.txt',
+        'text/csv': '.csv',
+        'application/rtf': '.rtf',
+        'image/jpeg': '.jpg',
+        'image/jpg': '.jpg',
+        'image/png': '.png',
+        'image/gif': '.gif',
+        'image/webp': '.webp',
+        'image/bmp': '.bmp',
+        'image/svg+xml': '.svg',
+        'video/mp4': '.mp4',
+        'video/mpeg': '.mpeg',
+        'video/ogg': '.ogg',
+        'video/webm': '.webm',
+        'video/quicktime': '.mov',
+        'video/x-msvideo': '.avi',
+        'video/x-flv': '.flv',
+        'video/3gpp': '.3gp',
+        'video/3gpp2': '.3g2',
+        'video/mp2t': '.ts',
+        'video/x-ms-wmv': '.wmv'
+      };
+      ext = mimeToExt[file.mimetype] || '';
+    }
     //leave it here: const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
     //leave it here: const filename = 'media-' + uniqueSuffix + '-' + basename + ext;
     const filename = 'media-' + uniqueSuffix + ext;
@@ -43,7 +77,41 @@ const dualStorage = {
       }
 
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      const ext = path.extname(file.originalname);
+      let ext = path.extname(file.originalname);
+      if (!ext) {
+        // Infer extension from MIME type if original name lacks one
+        const mimeToExt = {
+          'application/pdf': '.pdf',
+          'application/msword': '.doc',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+          'application/vnd.ms-powerpoint': '.ppt',
+          'application/vnd.openxmlformats-officedocument.presentationml.presentation': '.pptx',
+          'application/vnd.ms-excel': '.xls',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
+          'text/plain': '.txt',
+          'text/csv': '.csv',
+          'application/rtf': '.rtf',
+          'image/jpeg': '.jpg',
+          'image/jpg': '.jpg',
+          'image/png': '.png',
+          'image/gif': '.gif',
+          'image/webp': '.webp',
+          'image/bmp': '.bmp',
+          'image/svg+xml': '.svg',
+          'video/mp4': '.mp4',
+          'video/mpeg': '.mpeg',
+          'video/ogg': '.ogg',
+          'video/webm': '.webm',
+          'video/quicktime': '.mov',
+          'video/x-msvideo': '.avi',
+          'video/x-flv': '.flv',
+          'video/3gpp': '.3gp',
+          'video/3gpp2': '.3g2',
+          'video/mp2t': '.ts',
+          'video/x-ms-wmv': '.wmv'
+        };
+        ext = mimeToExt[file.mimetype] || '';
+      }
       //const basename = path.basename(file.originalname, ext).replace(/\s+/g, '_');
       const s3Filename = `media/attachment-${uniqueSuffix}${ext}`;
 
@@ -79,6 +147,7 @@ const dualStorage = {
           mimetype: file.mimetype,
           url: req.savedFileUrl
         });
+        
       });
     });
   },

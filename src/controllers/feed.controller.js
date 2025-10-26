@@ -81,6 +81,7 @@ const CACHE_TTL = {
   FEED: 300, // 5 minutes for feed data
   META: 3600, // 1 hour for meta data
   SUGGESTIONS: 600, // 10 minutes for suggestions
+  USER_ITEMS: 600, // 10 minutes for user items
 };
 
 // Load identity catalog for taxonomy validation
@@ -327,47 +328,57 @@ async function invalidateUserFeedCache(userId) {
 }
 
 exports.getMeta = async (req, res) => {
-
-  const categories = await Category.findAll({
-    include: [{ model: Subcategory, as: "subcategories" }],
-    order: [
-      ["name", "ASC"],
-      [{ model: Subcategory, as: "subcategories" }, "name", "ASC"],
-    ],
-  });
-
-  const identities = await Identity.findAll({
-    include: [
-      {
-        model: Category,
-        as: "categories",
-        include: [{ model: Subcategory, as: "subcategories" }],
-      },
-    ],
-    order: [
-      ["name", "ASC"],
-      [{ model: Category, as: "categories" }, "name", "ASC"],
-      [
-        { model: Category, as: "categories" },
-        { model: Subcategory, as: "subcategories" },
-        "name",
-        "ASC",
+  const cacheKey = 'meta';
+  return await withCache(cacheKey, CACHE_TTL.META, async () => {
+    const categories = await Category.findAll({
+      include: [{ model: Subcategory, as: "subcategories" }],
+      order: [
+        ["name", "ASC"],
+        [{ model: Subcategory, as: "subcategories" }, "name", "ASC"],
       ],
-    ],
-  });
+    });
 
-  const goals = await Goal.findAll({ order: [["name", "ASC"]] });
+    const identities = await Identity.findAll({
+      include: [
+        {
+          model: Category,
+          as: "categories",
+          include: [{ model: Subcategory, as: "subcategories" }],
+        },
+      ],
+      order: [
+        ["name", "ASC"],
+        [{ model: Category, as: "categories" }, "name", "ASC"],
+        [
+          { model: Category, as: "categories" },
+          { model: Subcategory, as: "subcategories" },
+          "name",
+          "ASC",
+        ],
+      ],
+    });
 
-  const countries = [
-    "Angola","Ghana","Nigeria","Kenya","South Africa","Mozambique","Tanzania","Uganda","Zimbabwe","Zambia",
-    "Namibia","Cameroon","Senegal","Ivory Coast","Rwanda","Ethiopia","Morocco","Egypt","Sudan"
-  ];
+    const goals = await Goal.findAll({ order: [["name", "ASC"]] });
 
-  res.json({
-    goals,
-    identities: identities.map((i) => ({
-      id: String(i.id),
-      name: i.name,
+    const countries = [
+      "Angola","Ghana","Nigeria","Kenya","South Africa","Mozambique","Tanzania","Uganda","Zimbabwe","Zambia",
+      "Namibia","Cameroon","Senegal","Ivory Coast","Rwanda","Ethiopia","Morocco","Egypt","Sudan"
+    ];
+
+    return {
+      goals,
+      identities: identities.map((i) => ({
+        id: String(i.id),
+        name: i.name,
+        categories: categories.map((c) => ({
+          id: String(c.id),
+          name: c.name,
+          subcategories: (c.subcategories || []).map((s) => ({
+            id: String(s.id),
+            name: s.name,
+          })),
+        })),
+      })),
       categories: categories.map((c) => ({
         id: String(c.id),
         name: c.name,
@@ -376,17 +387,9 @@ exports.getMeta = async (req, res) => {
           name: s.name,
         })),
       })),
-    })),
-    categories: categories.map((c) => ({
-      id: String(c.id),
-      name: c.name,
-      subcategories: (c.subcategories || []).map((s) => ({
-        id: String(s.id),
-        name: s.name,
-      })),
-    })),
-    countries,
-  });
+      countries,
+    };
+  }, res);
 };
 
 const like = (v) => ({ [Op.like]: `%${v}%` });
@@ -4063,13 +4066,15 @@ if (tab === "funding") {
 
 // Get all items for a specific user with only id, kind, and image/attachment fields
 exports.getUserItems = async (req, res) => {
-  try {
-    const { userId } = req.params;
+  const { userId } = req.params;
 
-    if (!userId) {
-      return res.status(400).json({ message: "userId parameter is required" });
-    }
+  if (!userId) {
+    return res.status(400).json({ message: "userId parameter is required" });
+  }
 
+  const cacheKey = `userItems:${userId}`;
+
+  return await withCache(cacheKey, CACHE_TTL.USER_ITEMS, async () => {
     const allItems = [];
     const itemCounts = {
       job: 0,
@@ -4121,7 +4126,7 @@ exports.getUserItems = async (req, res) => {
       return mediaFields;
     };
 
-  // Fetch jobs for the user
+    // Fetch jobs for the user
     const jobs = await Job.findAll({
       where: { postedByUserId: userId },
       attributes: ['id', 'coverImageBase64','videoUrl']
@@ -4185,530 +4190,15 @@ exports.getUserItems = async (req, res) => {
     itemCounts.moment = moments.length;
     allItems.push(...moments.map(moment => extractMediaFields(moment, 'moment')));
 
-    res.json({
+    return {
       userId: userId,
       totalItems: allItems.length,
       counts: itemCounts,
       items: allItems
-    });
-
-  } catch (error) {
-    console.error('Error fetching user items:', error);
-    res.status(500).json({ message: "Failed to get user items" });
-  }
-};
-
-
-
-/*exports.getSuggestions = async (req, res) => {
-  try {
-    const {
-      q,
-      country: qCountry,
-      city: qCity,
-      categoryId,
-      cats,
-      subcategoryId,
-      bidirectionalMatch,
-      bidirectionalMatchFormula,
-      limit = 10,
-    } = req.query;
-
-
-
-
-    // Get user's complete profile data for matching (from people controller)
-async function getUserProfileData(userId) {
-  const user = await User.findByPk(userId, {
-    attributes: ['id', 'country', 'city','countryOfResidence'],
-    include: [
-      { 
-        model: UserSubcategory, 
-        as: 'userSubcategories', 
-        attributes: ['subcategoryId'],
-        include: [{ model: Subcategory, as: 'subcategory', attributes: ['id'] }]
-      },
-      { model: UserCategory, as: 'interests', attributes: ['categoryId', 'subcategoryId'] },
-      { model: Goal, as: 'goals', attributes: ['id'] },
-      { model: Identity, as: 'identities', attributes: ['id'], through: { attributes: [] } },
-      { model: UserIdentityInterest, as: 'identityInterests', attributes: ['identityId'], include: [{ model: Identity, as: 'identity', attributes: ['id'] }] },
-      { model: UserCategoryInterest, as: 'categoryInterests', attributes: ['categoryId'], include: [{ model: Category, as: 'category', attributes: ['id'] }] },
-      { model: UserSubcategoryInterest, as: 'subcategoryInterests', attributes: ['subcategoryId'], include: [{ model: Subcategory, as: 'subcategory', attributes: ['id'] }] },
-      { model: UserSubsubCategoryInterest, as: 'subsubInterests', attributes: ['subsubCategoryId'], include: [{ model: SubsubCategory, as: 'subsubCategory', attributes: ['id'] }] },
-      { model: UserSubsubCategory, as: 'userSubsubCategories', attributes: ['subsubCategoryId'], include: [{ model: SubsubCategory, as: 'subsubCategory', attributes: ['id'] }] },
-    ],
-
-  });
-  
-  if (!user) return null;
-  
-  const profileData = {
-    myCountry: user.countryOfResidence || null,
-    myCity: user.city || null,
-    myCategoryIds: (user.interests || []).map((i) => String(i.categoryId)).filter(id => id && id !== 'null'),
-    mySubcategoryIds: (user.userSubcategories || []).map((i) => String(i.subcategoryId)).filter(id => id && id !== 'null'),
-    mySubsubCategoryIds: (user.userSubsubCategories || []).map((i) => String(i.subsubCategoryId)).filter(id => id && id !== 'null'),
-    myGoalIds: (user.goals || []).map((g) => String(g.id)).filter(Boolean),
-    myIdentities: (user.identities || []).map(i => i),
-    myIdentityInterests: (user.identityInterests || []).map(i => i),
-    myCategoryInterests: (user.categoryInterests || []).map(i => i),
-    mySubcategoryInterests: (user.subcategoryInterests || []).map(i => i),
-    mySubsubCategoryInterests: (user.subsubInterests || []).map(i => i),
-  };
-  
-  return profileData;
-}
-
-
-    function calculateBidirectionalConnectionMatch(currentUserProfile, targetUser, useBidirectionalMatch = true, bidirectionalMatchFormula = "reciprocal") {
-  if (!currentUserProfile) return 50;
-
-  // Direction 1: Current user wants -> Target user does
-  const currentUserIdentityInterests = new Set(currentUserProfile.myIdentityInterests.map(i => String(i.identityId)));
-  const currentUserCategoryInterests = new Set(currentUserProfile.myCategoryInterests.map(i => String(i.categoryId)));
-  const currentUserSubcategoryInterests = new Set(currentUserProfile.mySubcategoryInterests.map(i => String(i.subcategoryId)));
-  const currentUserSubsubCategoryInterests = new Set(currentUserProfile.mySubsubCategoryInterests.map(i => String(i.subsubCategoryId)));
-
-  const targetUserIdentities = new Set((targetUser.identities || []).map(i => String(i.id)));
-  const targetUserCategories = new Set((targetUser.interests || []).map(i => String(i.categoryId)));
-  const targetUserSubcategories = new Set((targetUser.userSubcategories || []).map(i => String(i.subcategoryId)));
-  const targetUserSubsubcategories = new Set((targetUser.userSubsubCategories || []).map(i => String(i.subsubCategoryId)));
-
-  const WEIGHTS = { identity: 25, category: 25, subcategory: 25, subsubcategory: 25 };
-  let totalScore = 0;
-  let totalPossibleScore = 0;
-
-  // Track which levels are actually applicable (have valid interests)
-  const applicableLevels = {
-    identity: currentUserIdentityInterests.size > 0,
-    category: false,
-    subcategory: false,
-    subsubcategory: false
-  };
-
-  // Direction 1 matching with taxonomy validation
-  // 1. Identity matching - 100% if at least one match found
-  if (currentUserIdentityInterests.size > 0) {
-    const targetUserMatches = new Set([...currentUserIdentityInterests].filter(x => targetUserIdentities.has(x)));
-    const matchValue = targetUserMatches.size > 0 ? 1 : 0;
-    totalScore += WEIGHTS.identity * matchValue;
-    totalPossibleScore += WEIGHTS.identity;
-  }
-
-  // 2. Category matching - ONLY consider categories that belong to target user's identities
-  if (currentUserCategoryInterests.size > 0) {
-    // Filter current user's category interests to only include those valid for target user's identities
-    const validCurrentUserCategoryInterests = new Set(
-      [...currentUserCategoryInterests].filter(catId => 
-        checkIfBelongs('category', catId, [...targetUserIdentities])
-      )
-    );
-    
-    if (validCurrentUserCategoryInterests.size > 0) {
-      applicableLevels.category = true;
-      
-      // Also filter target user's categories to only include valid ones
-      const validTargetUserCategories = new Set(
-        [...targetUserCategories].filter(catId =>
-          checkIfBelongs('category', catId, [...targetUserIdentities])
-        )
-      );
-      
-      const targetUserMatches = new Set([...validCurrentUserCategoryInterests].filter(x => validTargetUserCategories.has(x)));
-      const matchValue = targetUserMatches.size / validCurrentUserCategoryInterests.size;
-      totalScore += WEIGHTS.category * matchValue;
-      totalPossibleScore += WEIGHTS.category;
-    }
-  }
-
-  // 3. Subcategory matching - ONLY consider subcategories that belong to target user's identities
-  if (currentUserSubcategoryInterests.size > 0) {
-    // Filter current user's subcategory interests to only include those valid for target user's identities
-    const validCurrentUserSubcategoryInterests = new Set(
-      [...currentUserSubcategoryInterests].filter(subId => 
-        checkIfBelongs('subcategory', subId, [...targetUserIdentities])
-      )
-    );
-    
-    if (validCurrentUserSubcategoryInterests.size > 0) {
-      applicableLevels.subcategory = true;
-      
-      // Also filter target user's subcategories to only include valid ones
-      const validTargetUserSubcategories = new Set(
-        [...targetUserSubcategories].filter(subId =>
-          checkIfBelongs('subcategory', subId, [...targetUserIdentities])
-        )
-      );
-      
-      const targetUserMatches = new Set([...validCurrentUserSubcategoryInterests].filter(x => validTargetUserSubcategories.has(x)));
-      const matchValue = targetUserMatches.size / validCurrentUserSubcategoryInterests.size;
-      totalScore += WEIGHTS.subcategory * matchValue;
-      totalPossibleScore += WEIGHTS.subcategory;
-    }
-  }
-
-  // 4. Subsubcategory matching - ONLY consider subsubcategories that belong to target user's identities
-  if (currentUserSubsubCategoryInterests.size > 0) {
-    // Filter current user's subsubcategory interests to only include those valid for target user's identities
-    const validCurrentUserSubsubCategoryInterests = new Set(
-      [...currentUserSubsubCategoryInterests].filter(subsubId => 
-        checkIfBelongs('subsubcategory', subsubId, [...targetUserIdentities])
-      )
-    );
-    
-    if (validCurrentUserSubsubCategoryInterests.size > 0) {
-      applicableLevels.subsubcategory = true;
-      
-      // Also filter target user's subsubcategories to only include valid ones
-      const validTargetUserSubsubcategories = new Set(
-        [...targetUserSubsubcategories].filter(subsubId =>
-          checkIfBelongs('subsubcategory', subsubId, [...targetUserIdentities])
-        )
-      );
-      
-      const targetUserMatches = new Set([...validCurrentUserSubsubCategoryInterests].filter(x => validTargetUserSubsubcategories.has(x)));
-      const matchValue = targetUserMatches.size / validCurrentUserSubsubCategoryInterests.size;
-      totalScore += WEIGHTS.subsubcategory * matchValue;
-      totalPossibleScore += WEIGHTS.subsubcategory;
-    }
-  }
-
-  const unidirectionalPercentage = totalPossibleScore > 0 ? 
-    Math.max(0, Math.min(100, Math.round((totalScore / totalPossibleScore) * 100))) : 0;
-
-  if (!useBidirectionalMatch) {
-    return unidirectionalPercentage;
-  }
-
-  // Direction 2: Target user wants -> Current user does
-  const targetUserIdentityInterests = new Set((targetUser.identityInterests || []).map(i => String(i.identityId)));
-  const targetUserCategoryInterests = new Set((targetUser.categoryInterests || []).map(i => String(i.categoryId)));
-  const targetUserSubcategoryInterests = new Set((targetUser.subcategoryInterests || []).map(i => String(i.subcategoryId)));
-  const targetUserSubsubCategoryInterests = new Set((targetUser.subsubInterests || []).map(i => String(i.subsubCategoryId)));
-
-  const currentUserIdentities = new Set(currentUserProfile.myIdentities.map(i => String(i.id)));
-  const currentUserCategories = new Set(currentUserProfile.myCategoryIds);
-  const currentUserSubcategories = new Set(currentUserProfile.mySubcategoryIds);
-  const currentUserSubsubcategories = new Set(currentUserProfile.mySubsubCategoryIds);
-
-  let reverseTotalScore = 0;
-  let reverseTotalPossibleScore = 0;
-
-  // Track which levels are applicable for reverse matching
-  const reverseApplicableLevels = {
-    identity: targetUserIdentityInterests.size > 0,
-    category: false,
-    subcategory: false,
-    subsubcategory: false
-  };
-
-  // Direction 2 matching with taxonomy validation
-  // 1. Identity matching - 100% if at least one match found
-  if (targetUserIdentityInterests.size > 0) {
-    const currentUserMatches = new Set([...targetUserIdentityInterests].filter(x => currentUserIdentities.has(x)));
-    const matchValue = currentUserMatches.size > 0 ? 1 : 0;
-    reverseTotalScore += WEIGHTS.identity * matchValue;
-    reverseTotalPossibleScore += WEIGHTS.identity;
-  }
-
-  // 2. Category matching with taxonomy validation
-  if (targetUserCategoryInterests.size > 0) {
-    // Filter target user's category interests to only include those valid for current user's identities
-    const validTargetUserCategoryInterests = new Set(
-      [...targetUserCategoryInterests].filter(catId => 
-        checkIfBelongs('category', catId, [...currentUserIdentities])
-      )
-    );
-    
-    if (validTargetUserCategoryInterests.size > 0) {
-      reverseApplicableLevels.category = true;
-      
-      // Use all current user categories (don't filter offerings)
-      const currentUserMatches = new Set([...validTargetUserCategoryInterests].filter(x => currentUserCategories.has(x)));
-      const matchValue = currentUserMatches.size / validTargetUserCategoryInterests.size;
-      reverseTotalScore += WEIGHTS.category * matchValue;
-      reverseTotalPossibleScore += WEIGHTS.category;
-    }
-  }
-
-  // 3. Subcategory matching with taxonomy validation
-  if (targetUserSubcategoryInterests.size > 0) {
-    // Filter target user's subcategory interests to only include those valid for current user's identities
-    const validTargetUserSubcategoryInterests = new Set(
-      [...targetUserSubcategoryInterests].filter(subId => 
-        checkIfBelongs('subcategory', subId, [...currentUserIdentities])
-      )
-    );
-    
-    if (validTargetUserSubcategoryInterests.size > 0) {
-      reverseApplicableLevels.subcategory = true;
-      
-      // Use all current user subcategories (don't filter offerings)
-      const currentUserMatches = new Set([...validTargetUserSubcategoryInterests].filter(x => currentUserSubcategories.has(x)));
-      const matchValue = currentUserMatches.size / validTargetUserSubcategoryInterests.size;
-      reverseTotalScore += WEIGHTS.subcategory * matchValue;
-      reverseTotalPossibleScore += WEIGHTS.subcategory;
-    }
-  }
-
-  // 4. Subsubcategory matching with taxonomy validation
-  if (targetUserSubsubCategoryInterests.size > 0) {
-    // Filter target user's subsubcategory interests to only include those valid for current user's identities
-    const validTargetUserSubsubCategoryInterests = new Set(
-      [...targetUserSubsubCategoryInterests].filter(subsubId => 
-        checkIfBelongs('subsubcategory', subsubId, [...currentUserIdentities])
-      )
-    );
-    
-    if (validTargetUserSubsubCategoryInterests.size > 0) {
-      reverseApplicableLevels.subsubcategory = true;
-      
-      // Use all current user subsubcategories (don't filter offerings)
-      const currentUserMatches = new Set([...validTargetUserSubsubCategoryInterests].filter(x => currentUserSubsubcategories.has(x)));
-      const matchValue = currentUserMatches.size / validTargetUserSubsubCategoryInterests.size;
-      reverseTotalScore += WEIGHTS.subsubcategory * matchValue;
-      reverseTotalPossibleScore += WEIGHTS.subsubcategory;
-    }
-  }
-
-  const reversePercentage = reverseTotalPossibleScore > 0 ? 
-    Math.max(0, Math.min(100, Math.round((reverseTotalScore / reverseTotalPossibleScore) * 100))) : 0;
-
-  // Calculate bidirectional percentage
-  let bidirectionalPercentage;
-  if (bidirectionalMatchFormula === "simple") {
-    bidirectionalPercentage = calculateBidirectionalMatch(unidirectionalPercentage, reversePercentage);
-  } else {
-    bidirectionalPercentage = calculateReciprocalWeightedMatch(unidirectionalPercentage, reversePercentage);
-  }
-
-  return Math.round(bidirectionalPercentage);
-}
-
-    const currentUserId = req.user?.id || null;
-
-    // Set default values for matching configuration
-    let userBidirectionalMatch = bidirectionalMatch !== undefined ? bidirectionalMatch : true;
-    let userBidirectionalMatchFormula = bidirectionalMatchFormula || "reciprocal";
-
-    // Load user settings for matching configuration if not provided in query and user is logged in
-    if (currentUserId && (bidirectionalMatch === undefined || bidirectionalMatchFormula === undefined)) {
-      try {
-        const userSettings = await UserSettings.findOne({
-          where: { userId: currentUserId },
-          attributes: ['bidirectionalMatch', 'bidirectionalMatchFormula']
-        });
-
-        if (userSettings) {
-          if (bidirectionalMatch === undefined) {
-            userBidirectionalMatch = userSettings.bidirectionalMatch;
-          }
-          if (bidirectionalMatchFormula === undefined) {
-            userBidirectionalMatchFormula = userSettings.bidirectionalMatchFormula;
-          }
-        }
-      } catch (error) {
-        console.error("Error loading user settings for matching configuration:", error);
-      }
-    }
-
-    // Get current user profile data using the same function as connection recommendations
-    const currentUserProfile = await getUserProfileData(currentUserId);
-    if (!currentUserProfile && currentUserId) {
-      console.log('No current user profile found');
-    }
-
-    // Existing connections to exclude
-    const connections = await Connection.findAll({
-      where: { [Op.or]: [{ userOneId: currentUserId }, { userTwoId: currentUserId }] },
-      attributes: ['userOneId', 'userTwoId']
-    });
-
-    const excludeIds = new Set([String(currentUserId)]);
-    connections.forEach(c => {
-      excludeIds.add(String(c.userOneId === currentUserId ? c.userTwoId : c.userOneId));
-    });
-
-    // Get blocked users
-    const [iBlock, theyBlock] = await Promise.all([
-      UserBlock.findAll({ where: { blockerId: currentUserId }, attributes: ["blockedId"] }),
-      UserBlock.findAll({ where: { blockedId: currentUserId }, attributes: ["blockerId"] }),
-    ]);
-    
-    const blockedIds = [
-      ...iBlock.map((r) => String(r.blockedId)),
-      ...theyBlock.map((r) => String(r.blockerId)),
-    ];
-    
-    blockedIds.forEach(id => excludeIds.add(id));
-
-    // Build where clause for user search
-    const whereUserBase = {
-      id: { [Op.notIn]: Array.from(excludeIds) },
-      isVerified: true,
-      accountType: { [Op.ne]: 'admin' }
     };
-
-    // Add search filters if provided
-    if (q) {
-      whereUserBase[Op.or] = [
-        { name: { [Op.like]: `%${q}%` } },
-        { email: { [Op.like]: `%${q}%` } },
-        { "$profile.professionalTitle$": { [Op.like]: `%${q}%` } },
-        { "$profile.about$": { [Op.like]: `%${q}%` } },
-      ];
-    }
-
-    if (qCountry) {
-      whereUserBase.country = qCountry;
-    }
-
-    if (qCity) {
-      whereUserBase.city = { [Op.like]: `%${qCity}%` };
-    }
-
-    // Build category filters
-    const qCats = normalizeToArray(cats) || normalizeToArray(categoryId);
-    const qSubcats = normalizeToArray(subcategoryId);
-
-    const interestsWhere = {};
-    if (qCats && qCats.length > 0) interestsWhere.categoryId = { [Op.in]: qCats };
-    if (qSubcats && qSubcats.length > 0) interestsWhere.subcategoryId = { [Op.in]: qSubcats };
-
-    // Candidate users - use the EXACT same include structure as getConnectionRecommendations
-    const suggestedUsers = await User.findAll({
-      where: whereUserBase,
-      include: [
-        {
-          model: UserCategory,
-          as: 'interests',
-          attributes: ['categoryId', 'subcategoryId'],
-          include: [
-            { model: Category, as: 'category', attributes: ['id', 'name'] },
-            { model: Subcategory, as: 'subcategory', attributes: ['id', 'name'] }
-          ]
-        },
-        { model: Goal, as: 'goals', attributes: ['id', 'name'], through: { attributes: [] } },
-        {
-          model: Profile,
-          as: 'profile',
-          attributes: ['categoryId', 'subcategoryId', 'avatarUrl', 'professionalTitle', 'primaryIdentity']
-        },
-        { model: UserSubcategory, as: 'userSubcategories', include: [{ model: Subcategory, as: 'subcategory', attributes: ['id', 'name'] }] },
-        { model: UserSubsubCategory, as: 'userSubsubCategories', include: [{ model: SubsubCategory, as: 'subsubCategory', attributes: ['id', 'name'] }] },
-        { model: UserIdentityInterest, as: 'identityInterests', include: [{ model: Identity, as: 'identity', attributes: ['id', 'name'] }] },
-        { model: UserCategoryInterest, as: 'categoryInterests', include: [{ model: Category, as: 'category', attributes: ['id', 'name'] }] },
-        { model: UserSubcategoryInterest, as: 'subcategoryInterests', include: [{ model: Subcategory, as: 'subcategory', attributes: ['id', 'name'] }] },
-        { model: UserSubsubCategoryInterest, as: 'subsubInterests', include: [{ model: SubsubCategory, as: 'subsubCategory', attributes: ['id', 'name'] }] },
-        { model: Identity, as: 'identities', attributes: ['id', 'name'], through: { attributes: [] } }
-      ],
-      attributes: ['id', 'name', 'email', 'avatarUrl', 'biography', 'country', 'city','countryOfResidence'],
-      limit: 100
-    });
-
-    // Score with bidirectional matching using the SAME function
-    const scoredUsers = suggestedUsers.map(u => {
-      const matchPercentage = currentUserProfile ? calculateBidirectionalConnectionMatch(
-        currentUserProfile, 
-        u, 
-        userBidirectionalMatch === 'true' || userBidirectionalMatch === true,
-        userBidirectionalMatchFormula
-      ) : 0;
-
-      const categories = [
-        ...(u.interests || []).filter(i => i.category).map(i => i.category.name)
-      ];
-
-      const subcategories = [
-        ...(u.interests || []).filter(i => i.subcategory).map(i => i.subcategory.name)
-      ];
-
-      const uniqueCategories = [...new Set(categories)].filter(Boolean);
-      const uniqueSubcategories = [...new Set(subcategories)].filter(Boolean);
-      const goalNames = (u.goals || []).map(g => g.name).filter(Boolean);
-
-      return {
-        id: u.id,
-        name: u.name,
-        avatarUrl: u.avatarUrl || u.profile?.avatarUrl || null,
-        biography: u.biography,
-        professionalTitle: u.profile?.professionalTitle || '',
-        primaryIdentity: u.profile?.primaryIdentity || '',
-        categories: uniqueCategories,
-        subcategories: uniqueSubcategories,
-        goals: goalNames,
-        city:u.city,
-        countryOfResidence:u.countryOfResidence,
-        location: [u.city, u.countryOfResidence].filter(Boolean).join(', '),
-        link: `${process.env.BASE_URL || 'https://54links.com'}/profile/${u.id}`,
-        matchPercentage
-      };
-    });
-
-    // Get connection status for all users
-    const allTargets = scoredUsers.map((u) => u.id).filter(Boolean);
-    const statusMap = await getConnectionStatusMap(currentUserId, allTargets, {
-      Connection,
-      ConnectionRequest,
-    });
-
-    // Add connection status and filter out connected users
-    const usersWithStatus = scoredUsers.map(u => ({
-      ...u,
-      connectionStatus: statusMap[u.id] || (currentUserId ? "none" : "unauthenticated"),
-    }));
-
-    // Filter out connected users and those with no match percentage
-    const filteredUsers = usersWithStatus.filter(u => 
-      (u.connectionStatus === "none" || u.connectionStatus === "unauthenticated") && 
-      u.matchPercentage > 0
-    );
-
-    // Sort by match percentage
-    const sortedUsers = filteredUsers.sort((a, b) => b.matchPercentage - a.matchPercentage);
-
-    // Apply limit
-    const limitedUsers = sortedUsers.slice(0, Number(limit));
-
-    // Split into matches and nearby based on location if needed
-    const userCountry = currentUserProfile?.myCountry;
-    const userCity = currentUserProfile?.myCity;
-    
-    let matches = [];
-    let nearby = [];
-
-    if (userCountry || userCity) {
-      limitedUsers.forEach(user => {
-        const sameCountry = userCountry && user.countryOfResidence === userCountry;
-        const sameCity = userCity && user.city && user.city.toLowerCase() === userCity.toLowerCase();
-     
-        if (sameCity || sameCountry) {
-           nearby.push(user);
-        } else {
-           matches.push(user);
-        }
-      });
-    } else {
-      // If no location info, all are matches
-      matches = limitedUsers;
-    }
-
-    res.json({
-      matchesCount: matches.length,
-      nearbyCount: nearby.length,
-      matches,
-      nearby,
-      matchingConfig: {
-        bidirectionalMatch: userBidirectionalMatch,
-        bidirectionalMatchFormula: userBidirectionalMatchFormula
-      }
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to get suggestions" });
-  }
+  }, res);
 };
-*/
+
 
 
 
