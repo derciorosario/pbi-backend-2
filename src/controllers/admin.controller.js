@@ -841,7 +841,7 @@ exports.getAllContacts= async (req, res, next)=> {
       order: [[sortBy, sortOrder.toUpperCase()]],
       attributes: [
         'id', 'fullName', 'email', 'phone', 'contactReason','message',
-        'companyName', 'website', 'status', 'createdAt', 'respondedAt', 'notes','attachment','attachmentName','attachmentType'
+        'companyName', 'website', 'status', 'createdAt', 'respondedAt', 'notes','attachment','attachmentName','attachmentType','readAt'
       ]
     });
 
@@ -1026,7 +1026,7 @@ exports.getAllSupports = async (req, res, next) => {
       order: [[sortBy, sortOrder.toUpperCase()]],
       attributes: [
         'id', 'fullName', 'email', 'phone', 'supportReason', 'priority', 'message',
-        'status', 'createdAt', 'respondedAt', 'notes','attachment','attachmentName','attachmentType'
+        'status', 'createdAt', 'respondedAt', 'notes','attachment','attachmentName','attachmentType', 'readAt'
       ]
     });
 
@@ -1051,7 +1051,7 @@ exports.getSupportById = async (req, res, next) => {
       attributes: [
         'id', 'fullName', 'email', 'phone', 'supportReason', 'priority',
         'message', 'attachment', 'attachmentName',
-        'status', 'createdAt', 'respondedAt', 'notes'
+        'status', 'createdAt', 'respondedAt', 'notes', 'readAt'
       ]
     });
 
@@ -1121,6 +1121,106 @@ exports.deleteSupport = async (req, res, next) => {
   }
 }
 
+// Mark support as read
+exports.markSupportAsRead = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const support = await Support.findByPk(id);
+    if (!support) {
+      return res.status(404).json({ message: "Support request not found" });
+    }
+
+    await support.update({ readAt: new Date() });
+
+    res.json({
+      message: "Support marked as read",
+      support
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Mark all supports as read
+exports.markAllSupportsAsRead = async (req, res, next) => {
+  try {
+    await Support.update(
+      { readAt: new Date() },
+      { where: { readAt: null } }
+    );
+
+    res.json({
+      message: "All supports marked as read"
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Get unread supports count
+exports.getUnreadSupportsCount = async (req, res, next) => {
+  try {
+    const count = await Support.count({
+      where: { readAt: null }
+    });
+
+    res.json({ count });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Mark contact as read
+exports.markContactAsRead = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const contact = await Contact.findByPk(id);
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    await contact.update({ readAt: new Date() });
+
+    res.json({
+      message: "Contact marked as read",
+      contact
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Mark all contacts as read
+exports.markAllContactsAsRead = async (req, res, next) => {
+  try {
+    await Contact.update(
+      { readAt: new Date() },
+      { where: { readAt: null } }
+    );
+
+    res.json({
+      message: "All contacts marked as read"
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Get unread contacts count
+exports.getUnreadContactsCount = async (req, res, next) => {
+  try {
+    const count = await Contact.count({
+      where: { readAt: null }
+    });
+
+    res.json({ count });
+  } catch (error) {
+    next(error);
+  }
+}
+
 // Export supports data
 exports.exportSupports = async (req, res, next) => {
   try {
@@ -1129,14 +1229,14 @@ exports.exportSupports = async (req, res, next) => {
     const supports = await Support.findAll({
       attributes: [
         'id', 'fullName', 'email', 'phone', 'supportReason', 'priority',
-        'message', 'status', 'createdAt', 'respondedAt', 'notes'
+        'message', 'status', 'createdAt', 'respondedAt', 'notes', 'readAt'
       ],
       order: [['createdAt', 'DESC']]
     });
 
     if (format === 'csv') {
       // Convert to CSV format
-      const headers = ['ID', 'Name', 'Email', 'Phone', 'Reason', 'Priority', 'Status', 'Message', 'Submitted At', 'Responded At', 'Notes'];
+      const headers = ['ID', 'Name', 'Email', 'Phone', 'Reason', 'Priority', 'Status', 'Message', 'Submitted At', 'Responded At', 'Read At', 'Notes'];
       const csvRows = [
         headers.join(','),
         ...supports.map(support => [
@@ -1150,6 +1250,7 @@ exports.exportSupports = async (req, res, next) => {
           `"${(support.message || '').replace(/"/g, '""')}"`,
           `"${support.createdAt}"`,
           `"${support.respondedAt || ''}"`,
+          `"${support.readAt || ''}"`,
           `"${(support.notes || '').replace(/"/g, '""')}"`
         ].join(','))
       ];

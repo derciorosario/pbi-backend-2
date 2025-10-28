@@ -86,6 +86,11 @@ module.exports = (sequelize, DataTypes) => {
       notes: {
         type: DataTypes.TEXT,
         allowNull: true
+      },
+      readAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null
       }
     },
     {

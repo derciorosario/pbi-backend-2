@@ -201,10 +201,63 @@ async function updateSupportStatus(req, res, next) {
   }
 }
 
+// Mark support as read (admin function)
+async function markSupportAsRead(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const support = await Support.findByPk(id);
+    if (!support) {
+      return res.status(404).json({ message: "Support request not found" });
+    }
+
+    await support.update({ readAt: new Date() });
+
+    res.json({
+      message: "Support marked as read",
+      support
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Mark all supports as read (admin function)
+async function markAllSupportsAsRead(req, res, next) {
+  try {
+    await Support.update(
+      { readAt: new Date() },
+      { where: { readAt: null } }
+    );
+
+    res.json({
+      message: "All supports marked as read"
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Get unread supports count (admin function)
+async function getUnreadSupportsCount(req, res, next) {
+  try {
+    const count = await Support.count({
+      where: { readAt: null }
+    });
+
+    res.json({ count });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   submitSupport,
   getAllSupports,
   getSupportById,
   updateSupportStatus,
+  markSupportAsRead,
+  markAllSupportsAsRead,
+  getUnreadSupportsCount,
   upload // Export multer upload middleware
 };

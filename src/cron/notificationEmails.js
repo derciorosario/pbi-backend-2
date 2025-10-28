@@ -1277,3 +1277,4 @@ module.exports = {
   sendNotificationEmails,
   sendNewPostNotifications
 };
+

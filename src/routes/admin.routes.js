@@ -45,6 +45,9 @@ router.get("/admin/contacts", auth(), isAdmin, adminController.getAllContacts);
 router.get("/admin/contacts/export", auth(), isAdmin, adminController.exportContacts);
 router.get("/admin/contacts/:id", auth(), isAdmin, adminController.getContactById);
 router.patch("/admin/contacts/:id/status", auth(), isAdmin, adminController.updateContactStatus);
+router.patch("/admin/contacts/:id/read", auth(), isAdmin, adminController.markContactAsRead);
+router.patch("/admin/contacts/read-all", auth(), isAdmin, adminController.markAllContactsAsRead);
+router.get("/admin/contacts/unread/count", auth(), isAdmin, adminController.getUnreadContactsCount);
 router.delete("/admin/contacts/:id", auth(), isAdmin, adminController.deleteContact);
 
 // Support management routes
@@ -53,6 +56,9 @@ router.get("/admin/supports", auth(), isAdmin, adminController.getAllSupports);
 router.get("/admin/supports/export", auth(), isAdmin, adminController.exportSupports);
 router.get("/admin/supports/:id", auth(), isAdmin, adminController.getSupportById);
 router.patch("/admin/supports/:id/status", auth(), isAdmin, adminController.updateSupportStatus);
+router.patch("/admin/supports/:id/read", auth(), isAdmin, adminController.markSupportAsRead);
+router.patch("/admin/supports/read-all", auth(), isAdmin, adminController.markAllSupportsAsRead);
+router.get("/admin/supports/unread/count", auth(), isAdmin, adminController.getUnreadSupportsCount);
 router.delete("/admin/supports/:id", auth(), isAdmin, adminController.deleteSupport);
 
 module.exports = router;

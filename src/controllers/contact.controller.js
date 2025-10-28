@@ -188,10 +188,63 @@ async function updateContactStatus(req, res, next) {
   }
 }
 
+// Mark contact as read (admin function)
+async function markContactAsRead(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const contact = await Contact.findByPk(id);
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    await contact.update({ readAt: new Date() });
+
+    res.json({
+      message: "Contact marked as read",
+      contact
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Mark all contacts as read (admin function)
+async function markAllContactsAsRead(req, res, next) {
+  try {
+    await Contact.update(
+      { readAt: new Date() },
+      { where: { readAt: null } }
+    );
+
+    res.json({
+      message: "All contacts marked as read"
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Get unread contacts count (admin function)
+async function getUnreadContactsCount(req, res, next) {
+  try {
+    const count = await Contact.count({
+      where: { readAt: null }
+    });
+
+    res.json({ count });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   submitContact,
   getAllContacts,
   getContactById,
   updateContactStatus,
+  markContactAsRead,
+  markAllContactsAsRead,
+  getUnreadContactsCount,
   upload // Export multer upload middleware
 };

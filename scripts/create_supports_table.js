@@ -23,6 +23,7 @@ async function createSupportsTable() {
         status ENUM('new', 'in_progress', 'responded', 'closed') NOT NULL DEFAULT 'new',
         respondedAt DATETIME NULL,
         notes TEXT NULL,
+        readAt DATETIME NULL DEFAULT NULL,
         createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         PRIMARY KEY (id),
