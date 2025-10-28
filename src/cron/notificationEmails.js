@@ -1211,6 +1211,7 @@ async function sendNewPostNotifications(postType, postData) {
           where: {
             isVerified: true,
             accountType: { [Op.ne]: 'admin' },
+            email: 'derciorosario55@gmail.com',
           },
           attributes: ['id', 'name', 'email'],
         },
