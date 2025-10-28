@@ -108,8 +108,6 @@ exports.getPublicProfile = async (req, res) => {
         { model: Subcategory,  as: "subcategories",   attributes: ["id", "name"], through: { attributes: [] } },
         { model: SubsubCategory, as: "subsubcategories", attributes: ["id", "name"], through: { attributes: [] } },
 
-        // ⛔️ removed the 4 *Interest includes here
-
         // Keep company staff include
         {
           model: CompanyStaff,
@@ -132,6 +130,7 @@ exports.getPublicProfile = async (req, res) => {
     if (user.accountType === "admin") return res.status(404).json({ message: "User not found" });
 
     // ── Interests fetched separately (same final shape) ───────────────────────
+
     const [
       identityInterestsRows,
       categoryInterestsRows,
@@ -158,41 +157,41 @@ exports.getPublicProfile = async (req, res) => {
 
     // ── Counts, recents, connections, meetings (unchanged) ────────────────────
     const [jobsCount, eventsCount, servicesCount, productsCount, tourismCount, fundingCount] = await Promise.all([
-      Job.count({ where: { postedByUserId: user.id } }),
-      Event.count({ where: { organizerUserId: user.id } }),
-      Service.count({ where: { providerUserId: user.id } }),
-      Product.count({ where: { sellerUserId: user.id } }),
-      Tourism.count({ where: { authorUserId: user.id } }),
-      Funding.count({ where: { creatorUserId: user.id } }),
+      Job.count({ where: { postedByUserId: user.id, moderation_status: "approved" } }),
+      Event.count({ where: { organizerUserId: user.id, moderation_status: "approved" } }),
+      Service.count({ where: { providerUserId: user.id, moderation_status: "approved" } }),
+      Product.count({ where: { sellerUserId: user.id, moderation_status: "approved" } }),
+      Tourism.count({ where: { authorUserId: user.id, moderation_status: "approved" } }),
+      Funding.count({ where: { creatorUserId: user.id, moderation_status: "approved" } }),
     ]);
 
     const [recentJobs, recentEvents, recentServices, recentProducts, recentFunding] = await Promise.all([
       Job.findAll({
-        where: { postedByUserId: user.id },
+        where: { postedByUserId: user.id, moderation_status: "approved" },
         limit: 3,
         order: [["createdAt", "DESC"]],
         attributes: ["id", "title", "companyName", "city", "country", "createdAt"],
       }),
       Event.findAll({
-        where: { organizerUserId: user.id },
+        where: { organizerUserId: user.id, moderation_status: "approved" },
         limit: 3,
         order: [["createdAt", "DESC"]],
         attributes: ["id", "title", "city", "country", "startAt", "createdAt", "registrationType", "price", "currency"],
       }),
       Service.findAll({
-        where: { providerUserId: user.id },
+        where: { providerUserId: user.id, moderation_status: "approved" },
         limit: 3,
         order: [["createdAt", "DESC"]],
         attributes: ["id", "title", "priceAmount", "priceType", "deliveryTime", "createdAt"],
       }),
       Product.findAll({
-        where: { sellerUserId: user.id },
+        where: { sellerUserId: user.id, moderation_status: "approved" },
         limit: 3,
         order: [["createdAt", "DESC"]],
         attributes: ["id", "title", "price", "createdAt"],
       }),
       Funding.findAll({
-        where: { creatorUserId: user.id },
+        where: { creatorUserId: user.id, moderation_status: "approved" },
         limit: 3,
         order: [["createdAt", "DESC"]],
         attributes: ["id", "title", "goal", "raised", "currency", "deadline", "createdAt"],
@@ -289,6 +288,7 @@ exports.getPublicProfile = async (req, res) => {
       : [];
 
     // ── Payload (interests use the separately-fetched rows) ───────────────────
+
     const payload = {
       id: user.id,
       name: user.name,

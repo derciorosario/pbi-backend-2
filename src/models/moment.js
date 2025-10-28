@@ -27,19 +27,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
 
-      // Moment type and classification
       type: {
-        type: DataTypes.ENUM(
-          "Achievement",
-          "Milestone",
-          "Learning",
-          "Challenge",
-          "Opportunity"
-        ),
+        type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "Achievement",
       },
 
-      // When the moment occurred
       date: {
         type: DataTypes.DATEONLY,
         allowNull: true,

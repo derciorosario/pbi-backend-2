@@ -2,6 +2,7 @@ const { Service, Category, Subcategory, SubsubCategory, User } = require("../mod
 const { Op } = require("sequelize");
 const { toIdArray, normalizeIdentityIds, validateAudienceHierarchy, setServiceAudience } = require("./_serviceAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const SERVICE_CACHE_TTL = 300;
 
@@ -168,13 +169,31 @@ exports.create = async (req, res) => {
     });
 
      await cache.deleteKeys([
-      ["feed", "services", req.user.id] 
-    ]);
-    await cache.deleteKeys([
-      ["feed","all",req.user.id] 
-    ]);
-
-    res.status(201).json(created);
+       ["feed", "services", req.user.id]
+     ]);
+     await cache.deleteKeys([
+       ["feed","all",req.user.id]
+     ]);
+ 
+     // Send new post notifications
+     try {
+       const provider = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
+       await sendNewPostNotifications('service', {
+         id: service.id,
+         title: service.title,
+         description: service.description,
+         createdByName: provider.name,
+         createdByAvatarUrl: provider.avatarUrl,
+         createdAt: service.createdAt,
+         creatorUserId: uid,
+         link: `${process.env.BASE_URL || 'https://54links.com'}/service/${service.id}`
+       });
+     } catch (error) {
+       console.error('Error sending new post notifications for service:', error);
+       // Don't fail the service creation if notifications fail
+     }
+ 
+     res.status(201).json(created);
   } catch (err) {
     console.error("createService error:", err);
     res.status(400).json({ message: err.message || "Could not create service" });

@@ -15,5 +15,6 @@ router.get("/my", auth(true), C.getMyPosts); // Get tourism posts created by the
 router.get("/:id", auth(false), C.getOne);
 router.post("/", auth(true), C.create);
 router.put("/:id", auth(true), C.update);
+router.delete("/:id", auth(true), C.deleteTourism);
 
 module.exports = router;

@@ -1,13 +1,13 @@
-const { Job, Category, Subcategory, SubsubCategory } = require("../models");
+const { Job, Category, Subcategory, SubsubCategory, User } = require("../models");
 const { toIdArray, normalizeIdentityIds, validateAudienceHierarchy, setJobAudience } = require("./_jobAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const JOB_CACHE_TTL = 300;
 
 function generateJobCacheKey(jobId) {
   return `job:${jobId}`;
 }
-
 
 exports.createJob = async (req, res) => {
   try {
@@ -110,13 +110,31 @@ exports.createJob = async (req, res) => {
     });
 
     await cache.deleteKeys([
-      ["feed", "jobs", req.user.id] 
+      ["feed", "jobs", req.user.id]
     ]);
-    
+
     await cache.deleteKeys([
-      ["feed","all",req.user.id] 
+      ["feed","all",req.user.id]
     ]);
-    
+
+    // Send new post notifications
+    try {
+      const postedBy = await User.findByPk(req.user.id, { attributes: ['name', 'avatarUrl'] });
+      await sendNewPostNotifications('job', {
+        id: job.id,
+        title: job.title,
+        description: job.description,
+        createdByName: postedBy.name,
+        createdByAvatarUrl: postedBy.avatarUrl,
+        createdAt: job.createdAt,
+        creatorUserId: req.user.id,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/job/${job.id}`
+      });
+    } catch (error) {
+      console.error('Error sending new post notifications for job:', error);
+      // Don't fail the job creation if notifications fail
+    }
+
     res.status(201).json({ job });
   } catch (err) {
     console.error("createJob error", err);

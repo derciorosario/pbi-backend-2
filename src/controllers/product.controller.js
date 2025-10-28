@@ -2,6 +2,7 @@ const { Product, Category, Subcategory, SubsubCategory, User } = require("../mod
 const { Op } = require("sequelize");
 const { toIdArray, normalizeIdentityIds, validateAudienceHierarchy, setProductAudience } = require("./_productAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const PRODUCT_CACHE_TTL = 300;
 
@@ -156,12 +157,30 @@ exports.create = async (req, res) => {
     });
 
     await cache.deleteKeys([
-      ["feed", "products", req.user.id] 
+      ["feed", "products", req.user.id]
     ]);
 
     await cache.deleteKeys([
-      ["feed","all",req.user.id] 
+      ["feed","all",req.user.id]
     ]);
+
+    // Send new post notifications
+    try {
+      const seller = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
+      await sendNewPostNotifications('product', {
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        createdByName: seller.name,
+        createdByAvatarUrl: seller.avatarUrl,
+        createdAt: product.createdAt,
+        creatorUserId: uid,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/product/${product.id}`
+      });
+    } catch (error) {
+      console.error('Error sending new post notifications for product:', error);
+      // Don't fail the product creation if notifications fail
+    }
 
     res.status(201).json(created);
   } catch (err) {

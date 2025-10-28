@@ -62,8 +62,8 @@ async function submitContact(req, res, next) {
 
     // Send email notification to admin
     try {
-      const adminEmail = 'derciorosario55@gmail.com' //process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "updates-noreply@54links.com";
-
+      const adminEmail = 'support@54links.com' //process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "updates-noreply@54links.com";
+      const baseUrl = process.env.WEBSITE_URL || "https://54links.com";
       await sendTemplatedEmail({
         to: adminEmail,
         subject: `New Contact Form Submission - ${contactReason}`,
@@ -80,6 +80,7 @@ async function submitContact(req, res, next) {
             message,
             companyName,
             website,
+            link:`${baseUrl}/admin/contacts`,
             attachment: req.file ? {
               name: req.file.originalname,
               url: req.savedFileUrl,

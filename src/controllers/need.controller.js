@@ -1,7 +1,8 @@
-const { Need, Category, Subcategory, SubsubCategory, GeneralCategory, GeneralSubcategory, IndustryCategory, IndustrySubcategory } = require("../models");
+const { Need, Category, Subcategory, SubsubCategory, GeneralCategory, GeneralSubcategory, IndustryCategory, IndustrySubcategory, User } = require("../models");
 const { Op } = require("sequelize");
 const { toIdArray, normalizeIdentityIds, validateAudienceHierarchy, setNeedAudience } = require("./_needAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const NEED_CACHE_TTL = 300;
 
@@ -164,6 +165,24 @@ exports.create = async (req, res) => {
         subcategoryIds: audienceSubcategoryIds,
         subsubCategoryIds: audienceSubsubCategoryIds,
       });
+    }
+
+    // Send new post notifications
+    try {
+      const user = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
+      await sendNewPostNotifications('interest / question', {
+        id: need.id,
+        title: need.title,
+        description: need.description,
+        createdByName: user.name,
+        createdByAvatarUrl: user.avatarUrl,
+        createdAt: need.createdAt,
+        creatorUserId: uid,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/need/${need.id}`
+      });
+    } catch (error) {
+      console.error('Error sending new post notifications for need:', error);
+      // Don't fail the need creation if notifications fail
     }
 
     const created = await Need.findByPk(need.id);

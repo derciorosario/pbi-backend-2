@@ -51,6 +51,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'all',
       comment: 'Type of content to display: all, text only, or images only'
     },
+    notifyOnNewPost: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      comment: 'Whether to notify the user when someone posts new content',
+    },
     bidirectionalMatch: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

@@ -2,6 +2,7 @@ const { Funding, Category, Subcategory, SubsubCategory, User } = require("../mod
 const { Op } = require("sequelize");
 const { toIdArray, normalizeIdentityIds, validateAudienceHierarchy, setFundingAudience } = require("./_fundingAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const FUNDING_CACHE_TTL = 300;
 
@@ -164,11 +165,30 @@ exports.create = async (req, res) => {
     });
 
     await cache.deleteKeys([
-      ["feed", "funding", req.user.id] 
+      ["feed", "funding", req.user.id]
     ]);
      await cache.deleteKeys([
-          ["feed","all",req.user.id] 
+          ["feed","all",req.user.id]
         ]);
+
+    // Send new post notifications
+    try {
+      const creator = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
+      await sendNewPostNotifications('funding investment', {
+        id: funding.id,
+        title: funding.title,
+        description: funding.pitch,
+        createdByName: creator.name,
+        createdByAvatarUrl: creator.avatarUrl,
+        createdAt: funding.createdAt,
+        creatorUserId: uid,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/funding/${funding.id}`
+      });
+    } catch (error) {
+      console.error('Error sending new post notifications for funding:', error);
+      // Don't fail the funding creation if notifications fail
+    }
+
     res.status(201).json(created);
   } catch (err) {
     console.error("createFunding error:", err);

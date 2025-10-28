@@ -1,7 +1,8 @@
 
-const { Moment, Category, Subcategory, SubsubCategory } = require("../models");
+const { Moment, Category, Subcategory, SubsubCategory, User } = require("../models");
 const { toIdArray, validateAudienceHierarchy, setJobAudience } = require("./_jobAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const MOMENT_CACHE_TTL = 300;
 
@@ -120,6 +121,24 @@ exports.createMoment = async (req, res) => {
         subcategoryIds: audienceSubcategoryIds,
         subsubCategoryIds: audienceSubsubCategoryIds,
       });
+    }
+
+    // Send new post notifications
+    try {
+      const user = await User.findByPk(req.user.id, { attributes: ['name', 'avatarUrl'] });
+      await sendNewPostNotifications('experience', {
+        id: moment.id,
+        title: moment.title,
+        description: moment.description,
+        createdByName: user.name,
+        createdByAvatarUrl: user.avatarUrl,
+        createdAt: moment.createdAt,
+        creatorUserId: req.user.id,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/moment/${moment.id}`
+      });
+    } catch (error) {
+      console.error('Error sending new post notifications for moment:', error);
+      // Don't fail the moment creation if notifications fail
     }
 
     res.status(201).json({ moment });

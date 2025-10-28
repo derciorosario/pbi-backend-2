@@ -2,6 +2,7 @@ const { Tourism, Category, Subcategory, SubsubCategory, User } = require("../mod
 const { Op } = require("sequelize");
 const { toIdArray, normalizeIdentityIds, validateAudienceHierarchy, setTourismAudience } = require("./_tourismAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const TOURISM_CACHE_TTL = 300;
 
@@ -138,12 +139,30 @@ exports.create = async (req, res) => {
       ],
     });
 
-     await cache.deleteKeys([
-      ["feed", "tourism", req.user.id] 
+    await cache.deleteKeys([
+      ["feed", "tourism", req.user.id]
     ]);
     await cache.deleteKeys([
-      ["feed","all",req.user.id] 
+      ["feed","all",req.user.id]
     ]);
+
+    // Send new post notifications
+    try {
+      const author = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
+      await sendNewPostNotifications('tourism Activity', {
+        id: tourism.id,
+        title: tourism.title,
+        description: tourism.description,
+        createdByName: author.name,
+        createdByAvatarUrl: author.avatarUrl,
+        createdAt: tourism.createdAt,
+        creatorUserId: uid,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/experience/${tourism.id}`
+      });
+    } catch (error) {
+      console.error('Error sending new post notifications for tourism:', error);
+      // Don't fail the tourism creation if notifications fail
+    }
 
     res.status(201).json(created);
   } catch (err) {
@@ -353,4 +372,29 @@ exports.getMyPosts = async (req, res) => {
   });
 
   res.json(posts);
+};
+
+
+exports.deleteTourism = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const item = await Tourism.findByPk(id);
+    if (!item) return res.status(404).json({ message: "Post not found" });
+    if (String(item.authorUserId) !== String(req.user?.id) && req.user?. accountType!="admin") {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    await item.destroy();
+     await cache.deleteKeys([
+      ["feed", "tourism", req.user.id] 
+    ])
+    
+    await cache.deleteKeys([
+      ["feed","all",req.user.id] 
+    ]);
+    res.json({ message: "Post deleted successfully" });
+  } catch (err) {
+    console.error("delete post error", err);
+    res.status(400).json({ message: err.message });
+  }
 };

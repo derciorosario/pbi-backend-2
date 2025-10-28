@@ -1,7 +1,8 @@
-const { Event, Category, Subcategory, SubsubCategory } = require("../models");
+const { Event, Category, Subcategory, SubsubCategory, User } = require("../models");
 const { Op } = require("sequelize");
 const { toIdArray, normalizeIdentityIds, validateAudienceHierarchy, setEventAudience } = require("./_eventAudienceHelpers");
 const { cache } = require("../utils/redis");
+const { sendNewPostNotifications } = require("../cron/notificationEmails");
 
 const EVENT_CACHE_TTL = 300;
 
@@ -622,8 +623,26 @@ exports.create = async (req, res) => {
     });
     
     await cache.deleteKeys([
-      ["feed", "events", req.user.id] 
+      ["feed", "events", req.user.id]
     ]);
+
+    // Send new post notifications
+    try {
+      const organizer = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
+      await sendNewPostNotifications('event', {
+        id: event.id,
+        title: event.title,
+        description: event.description,
+        createdByName: organizer.name,
+        createdByAvatarUrl: organizer.avatarUrl,
+        createdAt: event.createdAt,
+        creatorUserId: uid,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/event/${event.id}`
+      });
+    } catch (error) {
+      console.error('Error sending new post notifications for event:', error);
+      // Don't fail the event creation if notifications fail
+    }
 
     res.status(201).json(created);
   } catch (err) {

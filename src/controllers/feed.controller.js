@@ -1222,6 +1222,9 @@ exports.getFeed = async (req, res) => {
     const lim = pickNumber(limit) ?? 20;
     const off = pickNumber(offset) ?? 0;
 
+    const bufferFactor = 2;
+    const bufferLimit = lim * bufferFactor;
+
     const effAudienceIdentityIds = ensureArray(audienceIdentityIds).filter(Boolean);
     const effAudienceCategoryIds = ensureArray(audienceCategoryIds).filter(Boolean);
     const effAudienceSubcategoryIds = ensureArray(audienceSubcategoryIds).filter(Boolean);
@@ -3543,10 +3546,6 @@ if (tab === "needs") {
       return { items: await getConStatusItems(windowed) };
     }
 
-    const bufferFactor = 2;
-    const bufferLimit = lim * bufferFactor;
-
- 
     // After the unauthenticated section, for logged-in users
 if (tab === "events") {
   const eventsViewOptions = eventsView ? ensureArray(eventsView) : [];

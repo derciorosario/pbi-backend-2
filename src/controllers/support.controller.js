@@ -69,8 +69,8 @@ async function submitSupport(req, res, next) {
 
     // Send email notification to admin
     try {
-      const adminEmail = 'derciorosario55@gmail.com'//process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "updates-noreply@54links.com";
-
+      const adminEmail = 'support@54links.com' //|| process.env.ADMIN_EMAIL || process.env.SUPPORT_EMAIL || "updates-noreply@54links.com";
+      const baseUrl = process.env.WEBSITE_URL || "https://54links.com";
       await sendTemplatedEmail({
         to: adminEmail,
         subject: `New Support Request - ${priority} Priority - ${supportReason}`,
@@ -86,6 +86,7 @@ async function submitSupport(req, res, next) {
             supportReason,
             priority,
             message,
+            link:`${baseUrl}/admin/supports`,
             attachment: req.file ? {
               name: req.file.originalname,
               url: req.savedFileUrl,

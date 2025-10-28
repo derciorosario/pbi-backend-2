@@ -39,11 +39,13 @@ const emailTemplatesDir = path.join(__dirname, '../emails/templates');
 const connectionUpdateTemplate = fs.readFileSync(path.join(emailTemplatesDir, 'connection-update.hbs'), 'utf8');
 const recommendationTemplate = fs.readFileSync(path.join(emailTemplatesDir, 'connection-recommendation.hbs'), 'utf8');
 const jobOpportunityTemplate = fs.readFileSync(path.join(emailTemplatesDir, 'job-opportunity.hbs'), 'utf8');
+const newPostTemplate = fs.readFileSync(path.join(emailTemplatesDir, 'new-post.hbs'), 'utf8');
 
 // Compile templates
 const connectionUpdateHtml = handlebars.compile(connectionUpdateTemplate);
 const recommendationHtml = handlebars.compile(recommendationTemplate);
 const jobOpportunityHtml = handlebars.compile(jobOpportunityTemplate);
+const newPostHtml = handlebars.compile(newPostTemplate);
 
 // Create email transporter
 const transporter = nodemailer.createTransport({
@@ -1091,7 +1093,6 @@ async function sendNotificationEmails(frequency) {
       // Connection updates (feed-based matching)
       if (notifications?.connectionUpdates?.email) {
         const updates = await getConnectionUpdates(user.id, since);
-        console.log({since})
         if (updates.length > 0) {
           const html = connectionUpdateHtml({
             name: user.name,
@@ -1182,9 +1183,96 @@ async function sendEmail(options) {
   }
 }
 
+
+
+/**
+ * Send notifications to users who have notifyOnNewPost enabled
+ * @param {string} postType - Type of post ('job', 'event', etc.)
+ * @param {Object} postData - Post data including id, title, description, etc.
+ */
+
+
+
+/* ----------------------- new post notifications ---------------------- */
+async function sendNewPostNotifications(postType, postData) {
+  try {
+    console.log(`Sending new post notifications for ${postType}...`);
+
+    // Get all users who have notifyOnNewPost enabled
+   
+    const userSettings = await UserSettings.findAll({
+      where: {
+        notifyOnNewPost: true,
+      },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          where: {
+            isVerified: true,
+            accountType: { [Op.ne]: 'admin' },
+          },
+          attributes: ['id', 'name', 'email'],
+        },
+      ],
+    });
+
+
+    if (userSettings.length === 0) {
+      console.log('No users have new post notifications enabled');
+      return;
+    }
+
+    // Prepare post data for email template
+    const postForEmail = {
+      type: postType,
+      title: postData.title,
+      description: postData.description || '',
+      createdByName: postData.createdByName || postData.author?.name || postData.organizer?.name || postData.creator?.name || 'Unknown',
+      createdByAvatarUrl: postData.createdByAvatarUrl || postData.author?.avatarUrl || postData.organizer?.avatarUrl || postData.creator?.avatarUrl,
+      createdAt: postData.createdAt,
+      link: postData.link || `${process.env.BASE_URL || 'https://54links.com'}/${postType}/${postData.id}`
+    };
+
+    // Filter out the user who created the post
+    const filteredUserSettings = userSettings.filter(setting => setting.user.id !== postData.creatorUserId);
+
+    // Send emails to all users with notifyOnNewPost enabled (excluding the creator)
+    const emailPromises = filteredUserSettings.map(async (setting) => {
+      const user = setting.user;
+      if (!user || !user.email) return;
+
+      try {
+        const html = newPostHtml({
+          name: user.name,
+          post: postForEmail,
+          baseUrl: process.env.BASE_URL || 'https://54links.com'
+        });
+
+        await sendEmail({
+          to: user.email,
+          subject: `New ${postType} posted by ${postForEmail.createdByName} on 54Links`,
+          html
+        });
+
+        console.log(`New post notification sent to ${user.email} for ${postType}`);
+      } catch (error) {
+        console.error(`Error sending new post notification to ${user.email}:`, error);
+      }
+    });
+
+    await Promise.all(emailPromises);
+    console.log(`Finished sending new post notifications for ${postType} to ${userSettings.length} users`);
+
+  } catch (error) {
+    console.error(`Error sending new post notifications for ${postType}:`, error);
+  }
+}
+
 module.exports = {
   startNotificationCronJobs,
   stopNotificationCronJobs,
   runNotificationEmailsNow,
-  sendNotificationEmails
+  sendNotificationEmails,
+  sendNewPostNotifications
 };
