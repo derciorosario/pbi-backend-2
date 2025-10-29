@@ -57,6 +57,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: true,
       comment: 'Whether to notify the user when someone posts new content',
     },
+    notifyOnComments: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      comment: 'Whether to notify the user when someone comments on their posts',
+    },
     bidirectionalMatch: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

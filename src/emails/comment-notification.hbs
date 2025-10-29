@@ -1,0 +1,39 @@
+{{!-- layout variables --}}
+{{!-- subject, preheader provided from server --}}
+<h1 style="margin:0 0 8px 0;color:{{BRAND.text}};font-size:22px;">
+  New Comment 💬
+</h1>
+
+<p style="margin:0 0 14px 0;color:{{BRAND.muted}};">
+  Hi {{comment.commenterName}}, someone commented on your {{comment.postType}}.
+</p>
+
+<div style="margin:16px 0;padding:16px;background:{{BRAND.bg}};border-radius:8px;color:{{BRAND.text}};">
+  <p style="margin:0 0 12px 0;font-weight:500;">Comment Details:</p>
+
+  <p style="margin:4px 0;"><strong>Post:</strong> {{comment.postTitle}}</p>
+  <p style="margin:4px 0;"><strong>Commenter:</strong> {{comment.commenterName}}</p>
+
+  <p style="margin:12px 0 4px 0;"><strong>Comment:</strong></p>
+  <div style="margin:8px 0;padding:12px;background:{{BRAND.cardBg}};border-radius:6px;border-left:4px solid {{BRAND.primary}};">
+    <p style="margin:0;font-style:italic;">"{{comment.commentText}}"</p>
+  </div>
+
+  <p style="margin:8px 0 4px 0;font-size:12px;color:{{BRAND.muted}};">
+    Commented: {{comment.commentedAt}}
+  </p>
+</div>
+
+<div style="margin:16px 0;padding:12px;background:#e8f5e8;border-radius:8px;border-left:4px solid #10b981;">
+  <p style="margin:0;color:#059669;font-weight:500;">💡 Quick Actions:</p>
+  <p style="margin:4px 0;color:#059669;font-size:14px;">
+    • <a target="_blank" href="{{comment.link}}" style="color:#10b981; font-weight:500;text-decoration:underline">View post</a><br>
+    • <a target="_blank" href="{{comment.message_link}}" style="color:#10b981; font-weight:500;text-decoration:underline">Message {{comment.commenterName}}</a><br>
+  </p>
+</div>
+
+<hr style="border:none;border-top:1px solid {{BRAND.border}};margin:22px 0;" />
+
+<p style="margin:0;color:{{BRAND.muted}};font-size:13px;">
+  You're receiving this because you have comment notifications enabled. You can change your notification preferences in your account settings.
+</p>

@@ -170,7 +170,7 @@ exports.create = async (req, res) => {
     // Send new post notifications
     try {
       const user = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
-      await sendNewPostNotifications('interest / question', {
+      await sendNewPostNotifications('interest', {
         id: need.id,
         title: need.title,
         description: need.description,

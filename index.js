@@ -333,7 +333,7 @@ const PORT = process.env.PORT || 5000;
   
    //require('./scripts/create_meeting_participants_table.js')
    //require('./scripts/create_supports_table.js')
-    require('./scripts/create_admin_settings_table.js')
+   // require('./scripts/create_admin_settings_table.js')
 
 
     // Auto-sync DB tables (use migrations in production)
@@ -431,7 +431,7 @@ const { isEmailNotificationEnabled } = require("./src/utils/notificationSettings
 async function getHeaderBadgeCounts(userId) {
   const { Notification } = require("./src/models");
 
-  const [connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending, customNotificationsPending] = await Promise.all([
+  const [connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending, customNotificationsPending, commentsPending] = await Promise.all([
     // Count unread connection notifications (connection.request)
     Notification.count({
       where: {
@@ -498,10 +498,18 @@ async function getHeaderBadgeCounts(userId) {
         type: 'custom_notification',
         readAt: null
       }
+    }),
+    // Count unread comment notifications (comment.new)
+    Notification.count({
+      where: {
+        userId,
+        type: 'comment.new',
+        readAt: null
+      }
     })
   ]);
 
-  return { connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending, customNotificationsPending };
+  return { connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending, customNotificationsPending, commentsPending };
 }
 
 // push counts to this socket (or all user sockets if you prefer)
@@ -514,6 +522,7 @@ async function pushHeaderCounts(socketOrUserId) {
 
   const userId = typeof socketOrUserId === "string" ? socketOrUserId : socketOrUserId.userId;
   const counts = await getHeaderBadgeCounts(userId);
+
   sockets.forEach(s => s.emit("header_badge_counts", counts));
 }
 
@@ -599,6 +608,7 @@ async function pushHeaderCounts(socketOrUserId) {
       socket.on("get_header_badge_counts", async (ack) => {
         try {
           const counts = await getHeaderBadgeCounts(socket.userId);
+         
           if (typeof ack === "function") ack(counts);
           socket.emit("header_badge_counts", counts);
         } catch (e) {
@@ -1236,6 +1246,13 @@ async function pushHeaderCounts(socketOrUserId) {
                         [Op.or]: [
                           { [Op.like]: 'system%' },
                           { [Op.eq]: 'custom_notification' }
+                        ]
+                   };
+                  } else if (type === "new_post") {
+                    whereClause.type = {
+                        [Op.or]: [
+                          { [Op.like]: 'comment.%' },
+                          { [Op.eq]: 'new_post' }
                         ]
                    };
                   } else {

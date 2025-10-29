@@ -29,7 +29,8 @@ exports.getSettings = async (req, res) => {
         hideMainFeed: false,
         connectionsOnly: false,
         contentType: "all",
-        notifyOnNewPost: true
+        notifyOnNewPost: true,
+        notifyOnComments: true
       }
     });
   
@@ -50,7 +51,7 @@ exports.getSettings = async (req, res) => {
 exports.updateSettings = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { notifications, emailFrequency, hideMainFeed, connectionsOnly, contentType, notifyOnNewPost, bidirectionalMatch, bidirectionalMatchFormula } = req.body;
+    const { notifications, emailFrequency, hideMainFeed, connectionsOnly, contentType, notifyOnNewPost, notifyOnComments, bidirectionalMatch, bidirectionalMatchFormula } = req.body;
 
     // Validate input
     if (!notifications || !emailFrequency) {
@@ -84,6 +85,11 @@ exports.updateSettings = async (req, res) => {
       return res.status(400).json({ message: "notifyOnNewPost must be a boolean" });
     }
 
+    // Validate notifyOnComments
+    if (typeof notifyOnComments !== 'boolean') {
+      return res.status(400).json({ message: "notifyOnComments must be a boolean" });
+    }
+
     // Validate bidirectionalMatch
     if (typeof bidirectionalMatch !== 'boolean') {
       return res.status(400).json({ message: "bidirectionalMatch must be a boolean" });
@@ -112,6 +118,7 @@ exports.updateSettings = async (req, res) => {
         connectionsOnly: false,
         contentType: "all",
         notifyOnNewPost: true,
+        notifyOnComments: true,
         bidirectionalMatch: true,
         bidirectionalMatchFormula: "reciprocal"
       }
@@ -134,6 +141,7 @@ exports.updateSettings = async (req, res) => {
     settings.connectionsOnly = connectionsOnly;
     settings.contentType = contentType;
     settings.notifyOnNewPost = notifyOnNewPost;
+    settings.notifyOnComments = notifyOnComments;
     settings.bidirectionalMatch = bidirectionalMatch;
     settings.bidirectionalMatchFormula = bidirectionalMatchFormula;
 

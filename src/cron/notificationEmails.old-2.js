@@ -453,7 +453,7 @@ async function getConnectionUpdates(userId, since) {
         matchPercentage: calculateConnectionUpdateMatchPercentage(userProfile, m)
       })),
       ...needs.map(n => ({
-        type: 'interest / question',
+        type: 'interest',
         title: n.title,
         description: n.description,
         createdByName: n.user.name,

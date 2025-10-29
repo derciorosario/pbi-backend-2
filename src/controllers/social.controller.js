@@ -1,6 +1,7 @@
-const { Like, Comment, Repost, User, Profile } = require("../models");
+const { Like, Comment, Repost, User, Profile, Notification } = require("../models");
 const { Op } = require("sequelize");
 const { cache } = require("../utils/redis");
+const { sendTemplatedEmail } = require("../utils/email");
 // ==================== LIKES ====================
 
 
@@ -287,8 +288,16 @@ exports.createComment = async (req, res) => {
     });
 
     await cache.deleteKeys([
-        ["feed", req.user.id] 
+        ["feed", req.user.id]
     ]);
+
+
+    const user=await User.findByPk(req.user.id,{
+      attributes: ['id', 'name']
+    })
+
+    // Send notifications to relevant users
+    await sendCommentNotifications(comment, user);
 
     res.status(201).json(commentWithUser);
   } catch (err) {
@@ -533,4 +542,221 @@ exports.getReposts = async (req, res) => {
     console.error("Error getting reposts:", err);
     res.status(500).json({ message: "Failed to get reposts" });
   }
+};
+
+// Helper function to send comment notifications
+async function sendCommentNotifications(comment, commenter) {
+  try {
+    // Get the post/item that was commented on
+    let postData = null;
+    let postOwnerId = null;
+    let postTitle = null;
+    let postType = null;
+    let description=null
+
+    // Determine post type and get post data
+    switch (comment.targetType) {
+      case 'job':
+        const Job = require('../models').Job;
+        postData = await Job.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'postedByUserId','description'],
+          include: [{ model: require('../models').User, as: 'postedBy', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.postedByUserId;
+          postTitle = postData.title;
+          postType = 'job';
+          description= postData.description
+        }
+        break;
+      case 'event':
+        const Event = require('../models').Event;
+        postData = await Event.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'organizerUserId','description'],
+          include: [{ model: require('../models').User, as: 'organizer', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.organizerUserId;
+          postTitle = postData.title;
+          postType = 'event';
+          description= postData.description
+        }
+        break;
+      case 'service':
+        const Service = require('../models').Service;
+        postData = await Service.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'providerUserId','description'],
+          include: [{ model: require('../models').User, as: 'provider', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.providerUserId;
+          postTitle = postData.title;
+          postType = 'service';
+          description= postData.description
+        }
+        break;
+      case 'product':
+        const Product = require('../models').Product;
+        postData = await Product.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'sellerUserId','description'],
+          include: [{ model: require('../models').User, as: 'seller', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.sellerUserId;
+          postTitle = postData.title;
+          postType = 'product';
+          description= postData.description
+        }
+        break;
+      case 'tourism':
+      case 'experience':
+        const Tourism = require('../models').Tourism;
+        postData = await Tourism.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'authorUserId','description'],
+          include: [{ model: require('../models').User, as: 'author', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.authorUserId;
+          postTitle = postData.title;
+          postType = 'tourism activity';
+          description= postData.description
+        }
+        break;
+      case 'funding':
+      case 'crowdfunding':
+        const Funding = require('../models').Funding;
+        postData = await Funding.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'creatorUserId','pitch'],
+          include: [{ model: require('../models').User, as: 'creator', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.creatorUserId;
+          postTitle = postData.title;
+          postType = 'funding investiment';
+          description= postData.pitch
+        }
+        break;
+      case 'moment':
+        const Moment = require('../models').Moment;
+        postData = await Moment.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'userId','description'],
+          include: [{ model: require('../models').User, as: 'user', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.userId;
+          postTitle = postData.title;
+          postType = 'experience';
+          description= postData.description
+        }
+        break;
+      case 'need':
+        const Need = require('../models').Need;
+        postData = await Need.findByPk(comment.targetId, {
+          attributes: ['id', 'title', 'userId','description'],
+          include: [{ model: require('../models').User, as: 'user', attributes: ['id', 'name', 'email'] }]
+        });
+        if (postData) {
+          postOwnerId = postData.userId;
+          postTitle = postData.title;
+          postType = 'interest';
+          description= postData.description
+        }
+        break;
+    }
+
+    if (!postData || !postOwnerId) {
+      console.log('No post data found for comment notification');
+      return;
+    }
+
+    // Don't notify if user commented on their own post
+    if (postOwnerId === commenter.id) {
+      return;
+    }
+
+    // Get post owner's user data
+    const postOwner = await User.findByPk(postOwnerId, {
+      attributes: ['id', 'name', 'email'],
+      include: [{
+        model: require('../models').UserSettings,
+        as: 'settings',
+        attributes: ['notifyOnComments']
+      }]
+    });
+
+    if (!postOwner || !postOwner.email) {
+      return;
+    }
+
+    // Check if user wants comment notifications
+    if (!postOwner.settings?.notifyOnComments) {
+      return;
+    }
+
+
+    // Create in-app notification
+    await Notification.create({
+      userId: postOwnerId,
+      type: "comment.new",
+      title: "New Comment",
+      message:postTitle ?  `${commenter.name} commented on your ${postType} post: "${postTitle}"` :  `${commenter.name} commented on your ${postType} post`,
+      payload: {
+        commenterId: commenter.id,
+        commenterName: commenter.name,
+        commentId: comment.id,
+        commentDescription:description,
+        commentText: comment.text,
+        postId: comment.targetId,
+        postType: postType,
+        postTitle: postTitle,
+        link: `${process.env.BASE_URL || 'https://54links.com'}/${comment.targetType}/${comment.targetId}`
+      }
+    });
+
+    // Send email notification
+    try {
+      const baseUrl = process.env.WEBSITE_URL || "https://54links.com";
+      sendTemplatedEmail({
+        to: postOwner.email,
+        subject: `New Comment on Your ${postType.charAt(0).toUpperCase() + postType.slice(1)} post`,
+        template: "comment-notification",
+        context: {
+          subject: `New Comment on Your ${postType.charAt(0).toUpperCase() + postType.slice(1)} post`,
+          preheader: `${commenter.name} commented on your ${postType}`,
+          comment: {
+            commenterName: commenter.name,
+            commenterId: commenter.id,
+            commentText: comment.text,
+            commentDescription:description,
+            postTitle: postTitle || (description.length > 200 ? description.slice(0,200)+'...':description),
+            postType: postType,
+            postId: comment.targetId,
+            message_link:`${baseUrl}/messages?userId=${commenter.id}`,
+            link: `${baseUrl}/${comment.targetType}/${comment.targetId}`,
+            commentedAt: comment.createdAt
+          }
+        },
+      });
+    } catch (emailError) {
+      console.error("Failed to send comment notification email:", emailError);
+    }
+
+  } catch (error) {
+    console.error("Error sending comment notifications:", error);
+  }
+}
+
+module.exports = {
+  getLikes: exports.getLikes,
+  getLikesPaginated: exports.getLikesPaginated,
+  checkUserLikes: exports.checkUserLikes,
+  toggleLike: exports.toggleLike,
+  getLikeStatus: exports.getLikeStatus,
+  createComment: exports.createComment,
+  getComments: exports.getComments,
+  updateComment: exports.updateComment,
+  deleteComment: exports.deleteComment,
+  createRepost: exports.createRepost,
+  deleteRepost: exports.deleteRepost,
+  getReposts: exports.getReposts
 };
