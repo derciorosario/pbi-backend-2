@@ -19,6 +19,20 @@ module.exports = (sequelize, DataTypes) => {
       },
       comment: 'Settings for new post notifications sent to users'
     },
+    customNotificationSettings: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: {
+        enabled: true,
+        audienceType: 'all', // 'all', 'selectedUsers', 'newUsers'
+        audienceOptions: ['all'], // array of selected options
+        selectedUsers: [], // array of user IDs when audienceType is 'selectedUsers'
+        message: '', // rich text message content
+        emailSubject: 'Important Update from 54Links',
+        emailTemplate: 'custom-notification'
+      },
+      comment: 'Settings for custom notifications sent by admin to users'
+    },
     createdBy: {
       type: DataTypes.UUID,
       allowNull: false,

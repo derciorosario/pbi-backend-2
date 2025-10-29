@@ -888,7 +888,7 @@ exports.updateAdminSettings = async (req, res, next) => {
       return res.status(403).json({ message: "Unauthorized: Admin access required" });
     }
 
-    const { newPostNotificationSettings } = req.body;
+    const { newPostNotificationSettings, customNotificationSettings } = req.body;
 
     // Get or create admin settings
     let settings = await AdminSettings.findOne();
@@ -901,6 +901,7 @@ exports.updateAdminSettings = async (req, res, next) => {
     // Update the settings
     await settings.update({
       newPostNotificationSettings,
+      customNotificationSettings,
       createdBy: req.user.id
     });
 

@@ -12,6 +12,7 @@ async function createAdminSettingsTable() {
       CREATE TABLE admin_settings (
         id INT AUTO_INCREMENT PRIMARY KEY,
         newPostNotificationSettings JSON NOT NULL,
+        customNotificationSettings JSON NOT NULL,
         createdBy CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
         createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -22,7 +23,7 @@ async function createAdminSettingsTable() {
     await sequelize.query(createQuery);
 
     // Insert default settings
-    const defaultSettings = {
+    const newPostSettings = {
       enabled: true,
       audienceType: 'all',
       audienceOptions: ['all'],
@@ -31,13 +32,23 @@ async function createAdminSettingsTable() {
       emailTemplate: 'new-post'
     };
 
+    const customSettings = {
+      enabled: true,
+      audienceType: 'all',
+      audienceOptions: ['all'],
+      selectedUsers: [],
+      message: '',
+      emailSubject: 'Important Update from 54Links',
+      emailTemplate: 'custom-notification'
+    };
+
     const insertQuery = `
-      INSERT INTO admin_settings (newPostNotificationSettings, createdBy)
-      VALUES (?, ?)
+      INSERT INTO admin_settings (newPostNotificationSettings, customNotificationSettings, createdBy)
+      VALUES (?, ?, ?)
     `;
 
     await sequelize.query(insertQuery, {
-      replacements: [JSON.stringify(defaultSettings), '00000000-0000-0000-0000-000000000000']
+      replacements: [JSON.stringify(newPostSettings), JSON.stringify(customSettings), '00000000-0000-0000-0000-000000000000']
     });
 
     console.log("✅ admin_settings table created successfully with default settings");
