@@ -26,7 +26,8 @@ const {
   ConnectionRequest,
   UserBlock,
   Need,
-  Moment
+  Moment,
+  Notification
 } = require('../models');
 const { Op, Sequelize } = require('sequelize');
 const nodemailer = require('nodemailer');
@@ -1198,29 +1199,256 @@ async function sendNewPostNotifications(postType, postData) {
   try {
     console.log(`Sending new post notifications for ${postType}...`);
 
-    // Get all users who have notifyOnNewPost enabled
-   
-    const userSettings = await UserSettings.findAll({
-      where: {
-        notifyOnNewPost: true,
-      },
-      include: [
-        {
-          model: User,
-          as: 'user',
-          where: {
-            isVerified: true,
-            accountType: { [Op.ne]: 'admin' },
-            email: 'derciorosario55@gmail.com',
-          },
-          attributes: ['id', 'name', 'email'],
-        },
-      ],
+    // Get admin settings for notification configuration
+    const adminSettings = await require('../models').AdminSettings.findOne();
+    const notificationSettings = adminSettings?.newPostNotificationSettings || {
+      enabled: true,
+      audienceType: 'all',
+      audienceOptions: ['all'],
+      excludeCreator: true
+    };
+
+    // Check if notifications are enabled
+    if (!notificationSettings.enabled) {
+      console.log('New post notifications are disabled in admin settings');
+      return;
+    }
+
+    // Build user query based on admin settings
+    const userWhereClause = {
+      isVerified: true,
+      accountType: { [Op.ne]: 'admin' }
+    };
+
+    // Apply audience filtering based on admin settings
+    if (notificationSettings.audienceOptions && notificationSettings.audienceOptions.length > 0) {
+      if (!notificationSettings.audienceOptions.includes('all')) {
+        // Build complex where clause for specific audience types
+        const audienceConditions = [];
+
+        if (notificationSettings.audienceOptions.includes('connections')) {
+          // Users connected to the post creator
+          const connections = await require('../models').Connection.findAll({
+            where: {
+              [Op.or]: [
+                { userOneId: postData.creatorUserId },
+                { userTwoId: postData.creatorUserId }
+              ]
+            },
+            attributes: ['userOneId', 'userTwoId']
+          });
+
+          const connectedUserIds = connections.map(c =>
+            c.userOneId === postData.creatorUserId ? c.userTwoId : c.userOneId
+          );
+
+          if (connectedUserIds.length > 0) {
+            audienceConditions.push({ id: { [Op.in]: connectedUserIds } });
+          }
+        }
+
+        if (notificationSettings.audienceOptions.includes('newUsers')) {
+          // New users (created within last 30 days)
+          const thirtyDaysAgo = new Date();
+          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+          audienceConditions.push({ createdAt: { [Op.gte]: thirtyDaysAgo } });
+        }
+
+        if (notificationSettings.audienceOptions.includes('matchingInterests')) {
+          // Users with matching interests - get users who have matching audience data with the post
+          try {
+            // Get the post data with audience information based on postType
+            let postWithAudience;
+            const postId = postData.id;
+
+            switch (postType) {
+              case 'job':
+                postWithAudience = await Job.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              case 'event':
+                postWithAudience = await Event.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              case 'service':
+                postWithAudience = await Service.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              case 'product':
+                postWithAudience = await Product.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              case 'tourism':
+              case 'experience':
+                postWithAudience = await Tourism.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              case 'funding':
+              case 'crowdfunding':
+                postWithAudience = await Funding.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              case 'moment':
+                postWithAudience = await Moment.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              case 'need':
+                postWithAudience = await Need.findByPk(postId, {
+                  include: [
+                    { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                    { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                    { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+                  ]
+                });
+                break;
+              default:
+                console.log(`Unsupported postType for matching interests: ${postType}`);
+                break;
+            }
+
+            if (postWithAudience) {
+              // Get post's audience data
+              const postAudience = {
+                categories: (postWithAudience.audienceCategories || []).map(c => String(c.id)),
+                subcategories: (postWithAudience.audienceSubcategories || []).map(s => String(s.id)),
+                subsubcategories: (postWithAudience.audienceSubsubs || []).map(s => String(s.id)),
+                identities: (postWithAudience.audienceIdentities || []).map(i => String(i.id))
+              };
+
+              // Find users who have matching interests (users whose interests overlap with post audience)
+              const matchingUsers = await User.findAll({
+                where: {
+                  isVerified: true,
+                  accountType: { [Op.ne]: 'admin' }
+                },
+                include: [
+                  {
+                    model: UserSettings,
+                    as: 'settings',
+                    where: { notifyOnNewPost: true },
+                    required: true,
+                    attributes: []
+                  },
+                  {
+                    model: UserCategoryInterest,
+                    as: 'categoryInterests',
+                    attributes: ['categoryId'],
+                    include: [{ model: Category, as: 'category', attributes: ['id'] }]
+                  },
+                  {
+                    model: UserSubcategoryInterest,
+                    as: 'subcategoryInterests',
+                    attributes: ['subcategoryId'],
+                    include: [{ model: Subcategory, as: 'subcategory', attributes: ['id'] }]
+                  },
+                  {
+                    model: UserSubsubCategoryInterest,
+                    as: 'subsubInterests',
+                    attributes: ['subsubCategoryId'],
+                    include: [{ model: SubsubCategory, as: 'subsubCategory', attributes: ['id'] }]
+                  },
+                  {
+                    model: UserIdentityInterest,
+                    as: 'identityInterests',
+                    attributes: ['identityId'],
+                    include: [{ model: Identity, as: 'identity', attributes: ['id'] }]
+                  }
+                ],
+                attributes: ['id']
+              });
+
+              // Filter users who have at least some matching interests with the post
+              const usersWithMatchingInterests = matchingUsers.filter(user => {
+                const userInterests = {
+                  categories: (user.categoryInterests || []).map(ci => String(ci.categoryId)),
+                  subcategories: (user.subcategoryInterests || []).map(si => String(si.subcategoryId)),
+                  subsubcategories: (user.subsubInterests || []).map(ssi => String(ssi.subsubCategoryId)),
+                  identities: (user.identityInterests || []).map(ii => String(ii.identityId))
+                };
+
+                // Check for overlaps
+                const hasCategoryMatch = userInterests.categories.some(cat => postAudience.categories.includes(cat));
+                const hasSubcategoryMatch = userInterests.subcategories.some(sub => postAudience.subcategories.includes(sub));
+                const hasSubsubMatch = userInterests.subsubcategories.some(subsub => postAudience.subsubcategories.includes(subsub));
+                const hasIdentityMatch = userInterests.identities.some(id => postAudience.identities.includes(id));
+
+                return hasCategoryMatch || hasSubcategoryMatch || hasSubsubMatch || hasIdentityMatch;
+              });
+
+              if (usersWithMatchingInterests.length > 0) {
+                const matchingUserIds = usersWithMatchingInterests.map(u => u.id);
+                audienceConditions.push({ id: { [Op.in]: matchingUserIds } });
+              }
+            }
+          } catch (error) {
+            console.error('Error finding users with matching interests:', error);
+          }
+        }
+
+        if (audienceConditions.length > 0) {
+          userWhereClause[Op.or] = audienceConditions;
+        }
+      }
+    }
+
+    // Get users based on the constructed query
+    const users = await User.findAll({
+      where: userWhereClause,
+      attributes: ['id', 'name', 'email'],
+      include: [{
+        model: UserSettings,
+        as: 'settings',
+        where: { notifyOnNewPost: true },
+        required: true,
+        attributes: []
+      }]
     });
 
-
-    if (userSettings.length === 0) {
-      console.log('No users have new post notifications enabled');
+    if (users.length === 0) {
+      console.log('No users match the notification criteria');
       return;
     }
 
@@ -1235,35 +1463,165 @@ async function sendNewPostNotifications(postType, postData) {
       link: postData.link || `${process.env.BASE_URL || 'https://54links.com'}/${postType}/${postData.id}`
     };
 
-    // Filter out the user who created the post
-    const filteredUserSettings = userSettings.filter(setting => setting.user.id !== postData.creatorUserId);
+    // Filter out the user who created the post if excludeCreator is enabled
+    let filteredUsers = users;
+    if (notificationSettings.excludeCreator) {
+      filteredUsers = users.filter(user => user.id !== postData.creatorUserId);
+    }
 
-    // Send emails to all users with notifyOnNewPost enabled (excluding the creator)
-    const emailPromises = filteredUserSettings.map(async (setting) => {
-      const user = setting.user;
+    // Send emails to filtered users and create in-app notifications
+    const emailPromises = filteredUsers.map(async (user) => {
       if (!user || !user.email) return;
 
       try {
+        // Calculate match percentage for this user (always include, regardless of audience options)
+        let matchPercentage = 50; // Default
+
+        // Get the post data with audience information based on postType (always fetch for match percentage)
+        let postWithAudienceForMatch;
+        const postId = postData.id;
+
+        switch (postType) {
+          case 'job':
+            postWithAudienceForMatch = await Job.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          case 'event':
+            postWithAudienceForMatch = await Event.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          case 'service':
+            postWithAudienceForMatch = await Service.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          case 'product':
+            postWithAudienceForMatch = await Product.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          case 'tourism':
+          case 'experience':
+            postWithAudienceForMatch = await Tourism.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          case 'funding':
+          case 'crowdfunding':
+            postWithAudienceForMatch = await Funding.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          case 'moment':
+            postWithAudienceForMatch = await Moment.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          case 'need':
+            postWithAudienceForMatch = await Need.findByPk(postId, {
+              include: [
+                { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
+                { model: Subcategory, as: 'audienceSubcategories', attributes: ['id'], through: { attributes: [] } },
+                { model: SubsubCategory, as: 'audienceSubsubs', attributes: ['id'], through: { attributes: [] } },
+                { model: Identity, as: 'audienceIdentities', attributes: ['id'], through: { attributes: [] } }
+              ]
+            });
+            break;
+          default:
+            console.log(`Unsupported postType for match percentage: ${postType}`);
+            break;
+        }
+
+        if (postWithAudienceForMatch) {
+          // Get user's profile data for matching
+          const userProfile = await getUserProfileData(user.id);
+          if (userProfile) {
+            // Use the same matching logic as connection updates
+            matchPercentage = calculateConnectionUpdateMatchPercentage(userProfile, postWithAudienceForMatch);
+          }
+        }
+
+        // Create in-app notification for the user
+        await Notification.create({
+          userId: user.id,
+          type: "new_post",
+          title: `New ${postType} posted`,
+          message: `${postData.createdByName || postData.author?.name || postData.organizer?.name || postData.creator?.name || 'Someone'} posted a new ${postType}: "${postData.title}"`,
+          payload: {
+            item_id: postData.id,
+            postType,
+            title: postData.title,
+            description: postData.description || '',
+            createdByName: postData.createdByName || postData.author?.name || postData.organizer?.name || postData.creator?.name || 'Unknown',
+            createdById: postData.creatorUserId,
+            matchPercentage: matchPercentage > 0 ? matchPercentage : null,
+            link: postData.link || `${process.env.BASE_URL || 'https://54links.com'}/${postType}/${postData.id}`
+          }
+        });
+
+        // Add match percentage to post data for this user
+        const postForUser = {
+          ...postForEmail,
+          matchPercentage: matchPercentage > 0 ? matchPercentage : null
+        };
+
         const html = newPostHtml({
           name: user.name,
-          post: postForEmail,
+          post: postForUser,
           baseUrl: process.env.BASE_URL || 'https://54links.com'
         });
 
-        await sendEmail({
+        sendEmail({
           to: user.email,
           subject: `New ${postType} posted by ${postForEmail.createdByName} on 54Links`,
           html
         });
 
-        console.log(`New post notification sent to ${user.email} for ${postType}`);
+        console.log(`New post notification sent to ${user.email} for ${postType} (${matchPercentage}% match)`);
       } catch (error) {
         console.error(`Error sending new post notification to ${user.email}:`, error);
       }
     });
 
     await Promise.all(emailPromises);
-    console.log(`Finished sending new post notifications for ${postType} to ${userSettings.length} users`);
+    console.log(`Finished sending new post notifications for ${postType} to ${filteredUsers.length} users`);
 
   } catch (error) {
     console.error(`Error sending new post notifications for ${postType}:`, error);

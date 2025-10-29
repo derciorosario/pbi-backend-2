@@ -8,6 +8,7 @@ const {
   Goal, UserGoal,
   Contact,
   Support,
+  AdminSettings,
   // Company management models
   CompanyInvitation, CompanyRepresentative, CompanyStaff, OrganizationJoinRequest,
   // Content models that reference users
@@ -852,6 +853,58 @@ exports.getAllContacts= async (req, res, next)=> {
       limit: parseInt(limit),
       totalPages: Math.ceil(count / parseInt(limit))
     });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Get admin settings
+exports.getAdminSettings = async (req, res, next) => {
+  try {
+    // Check if user is admin
+    if (req.user.accountType !== "admin") {
+      return res.status(403).json({ message: "Unauthorized: Admin access required" });
+    }
+
+    // Get or create admin settings (there should only be one record)
+    let settings = await AdminSettings.findOne();
+    if (!settings) {
+      settings = await AdminSettings.create({
+        createdBy: req.user.id
+      });
+    }
+
+    res.json(settings);
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Update admin settings
+exports.updateAdminSettings = async (req, res, next) => {
+  try {
+    // Check if user is admin
+    if (req.user.accountType !== "admin") {
+      return res.status(403).json({ message: "Unauthorized: Admin access required" });
+    }
+
+    const { newPostNotificationSettings } = req.body;
+
+    // Get or create admin settings
+    let settings = await AdminSettings.findOne();
+    if (!settings) {
+      settings = await AdminSettings.create({
+        createdBy: req.user.id
+      });
+    }
+
+    // Update the settings
+    await settings.update({
+      newPostNotificationSettings,
+      createdBy: req.user.id
+    });
+
+    res.json({ message: "Admin settings updated successfully", settings });
   } catch (error) {
     next(error);
   }

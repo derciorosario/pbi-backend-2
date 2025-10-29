@@ -333,6 +333,7 @@ const PORT = process.env.PORT || 5000;
   
    //require('./scripts/create_meeting_participants_table.js')
    //require('./scripts/create_supports_table.js')
+   //require('./scripts/create_admin_settings_table.js')
 
 
     // Auto-sync DB tables (use migrations in production)
@@ -430,7 +431,7 @@ const { isEmailNotificationEnabled } = require("./src/utils/notificationSettings
 async function getHeaderBadgeCounts(userId) {
   const { Notification } = require("./src/models");
 
-  const [connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending] = await Promise.all([
+  const [connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending] = await Promise.all([
     // Count unread connection notifications (connection.request)
     Notification.count({
       where: {
@@ -481,10 +482,18 @@ async function getHeaderBadgeCounts(userId) {
         ]},
         readAt: null
       }
+    }),
+    // Count unread post notifications (new_post)
+    Notification.count({
+      where: {
+        userId,
+        type: 'new_post',
+        readAt: null
+      }
     })
   ]);
 
-  return { connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending };
+  return { connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending };
 }
 
 // push counts to this socket (or all user sockets if you prefer)

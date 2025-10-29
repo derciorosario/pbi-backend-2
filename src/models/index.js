@@ -29,6 +29,7 @@ const Message = require("./message")(sequelize, DataTypes);
 const Conversation = require("./conversation")(sequelize, DataTypes);
 const MeetingRequest = require("./meetingRequest")(sequelize, DataTypes);
 const UserSettings = require("./userSettings")(sequelize, DataTypes);
+const AdminSettings = require("./adminSettings")(sequelize, DataTypes);
 
 const Moment = require("./moment")(sequelize, DataTypes);
 const Need = require("./need")(sequelize, DataTypes);
@@ -1361,6 +1362,7 @@ module.exports = {
   MeetingRequest,
   // Export user settings model
   UserSettings,
+  AdminSettings,
   Report,
   UserBlock,
   Contact,
