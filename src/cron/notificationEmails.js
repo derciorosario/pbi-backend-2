@@ -427,7 +427,7 @@ async function getConnectionUpdates(userId, since) {
         matchPercentage: calculateConnectionUpdateMatchPercentage(userProfile, p)
       })),
       ...tourismPosts.map(t => ({
-        type: 'tourism Activity',
+        type: 'tourism activity',
         title: t.title,
         description: t.description,
         createdByName: t.author.name,
@@ -1523,7 +1523,7 @@ async function sendNewPostNotifications(postType, postData) {
             });
             break;
           case 'tourism':
-          case 'experience':
+          case 'tourism activity':
             postWithAudienceForMatch = await Tourism.findByPk(postId, {
               include: [
                 { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
@@ -1534,7 +1534,7 @@ async function sendNewPostNotifications(postType, postData) {
             });
             break;
           case 'funding':
-          case 'crowdfunding':
+          case 'funding investment':
             postWithAudienceForMatch = await Funding.findByPk(postId, {
               include: [
                 { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
@@ -1545,6 +1545,7 @@ async function sendNewPostNotifications(postType, postData) {
             });
             break;
           case 'moment':
+          case 'experience':
             postWithAudienceForMatch = await Moment.findByPk(postId, {
               include: [
                 { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
@@ -1555,6 +1556,7 @@ async function sendNewPostNotifications(postType, postData) {
             });
             break;
           case 'need':
+          case 'interest / question':
             postWithAudienceForMatch = await Need.findByPk(postId, {
               include: [
                 { model: Category, as: 'audienceCategories', attributes: ['id'], through: { attributes: [] } },
@@ -1587,7 +1589,7 @@ async function sendNewPostNotifications(postType, postData) {
           payload: {
             item_id: postData.id,
             postType,
-            title: postData.title,
+            title: postData.title || postData.description,
             description: postData.description || '',
             createdByName: postData.createdByName || postData.author?.name || postData.organizer?.name || postData.creator?.name || 'Unknown',
             createdById: postData.creatorUserId,
@@ -1608,9 +1610,21 @@ async function sendNewPostNotifications(postType, postData) {
           baseUrl: process.env.BASE_URL || 'https://54links.com'
         });
 
+        // Get admin settings for email subject template
+        const adminSettings = await require('../models').AdminSettings.findOne();
+        const notificationSettings = adminSettings?.newPostNotificationSettings || {};
+
+        // Use custom email subject template if available, otherwise use default
+        let emailSubject = `New ${postType} posted by ${postForEmail.createdByName} on 54Links`;
+        if (notificationSettings.emailSubject) {
+          emailSubject = notificationSettings.emailSubject
+            .replace(/\{\{postType\}\}/g, postType)
+            .replace(/\{\{authorName\}\}/g, postForEmail.createdByName);
+        }
+
         sendEmail({
           to: user.email,
-          subject: `New ${postType} posted by ${postForEmail.createdByName} on 54Links`,
+          subject: emailSubject,
           html
         });
 

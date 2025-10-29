@@ -880,6 +880,132 @@ exports.getAdminSettings = async (req, res, next) => {
   }
 }
 
+// Send custom notification
+exports.sendCustomNotification = async (req, res, next) => {
+  try {
+    // Check if user is admin
+    if (req.user.accountType !== "admin") {
+      return res.status(403).json({ message: "Unauthorized: Admin access required" });
+    }
+
+    const { message, subject } = req.body;
+
+    if (!message || !subject) {
+      return res.status(400).json({ message: "Message and subject are required" });
+    }
+
+    // Get admin settings for notification configuration
+    const adminSettings = await AdminSettings.findOne();
+    const customSettings = adminSettings?.customNotificationSettings || {
+      enabled: true,
+      audienceType: 'all',
+      audienceOptions: ['all'],
+      selectedUsers: [],
+      emailSubject: 'Important Update from 54Links',
+      emailTemplate: 'custom-notification'
+    };
+
+    // Check if notifications are enabled
+    if (!customSettings.enabled) {
+      return res.status(400).json({ message: "Custom notifications are disabled in admin settings" });
+    }
+
+    // Build user query based on admin settings
+    const userWhereClause = {
+      isVerified: true,
+      accountType: { [Op.ne]: 'admin' }
+    };
+
+    // Apply audience filtering based on admin settings
+    if (customSettings.audienceOptions && customSettings.audienceOptions.length > 0) {
+      if (!customSettings.audienceOptions.includes('all')) {
+        // Build complex where clause for specific audience types
+        const audienceConditions = [];
+
+        if (customSettings.audienceOptions.includes('newUsers')) {
+          // New users (created within last 30 days)
+          const thirtyDaysAgo = new Date();
+          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+          audienceConditions.push({ createdAt: { [Op.gte]: thirtyDaysAgo } });
+        }else if (customSettings.audienceOptions.includes('selectedUsers') && customSettings.selectedUsers && customSettings.selectedUsers.length > 0) {
+          // Specific selected users
+          audienceConditions.push({ id: { [Op.in]: customSettings.selectedUsers } });
+        }
+
+        if (audienceConditions.length > 0) {
+          userWhereClause[Op.or] = audienceConditions;
+        }
+      }
+    }
+
+    // Get users based on the constructed query
+    const users = await User.findAll({
+      where: userWhereClause,
+      attributes: ['id', 'name', 'email'],
+      include: [{
+        model: UserSettings,
+        as: 'settings',
+        // where: { notifyOnNewPost: true }, // Using existing setting, might want to add a separate custom notification setting
+        required: true,
+        attributes: []
+      }]
+    });
+
+    if (users.length === 0) {
+      return res.status(400).json({ message: "No users match the notification criteria" });
+    }
+
+    // Send emails and create in-app notifications
+    const emailPromises = users.map(async (user) => {
+      if (!user || !user.email) return;
+
+      try {
+        // Create in-app notification for the user
+        await Notification.create({
+          userId: user.id,
+          type: "custom_notification",
+          title: subject,
+          message: message,
+          payload: {
+            subject,
+            message,
+            sentBy: req.user.id,
+            sentByName: req.user.name
+          }
+        });
+
+        // Send email using the existing email system
+        const { sendTemplatedEmail } = require("../utils/email");
+        sendTemplatedEmail({
+          to: user.email,
+          subject: subject,
+          template: "custom-notification",
+          context: {
+            subject,
+            message,
+            name: user.name,
+            baseUrl: process.env.BASE_URL || 'https://54links.com'
+          }
+        });
+
+        console.log(`Custom notification sent to ${user.email}`);
+      } catch (error) {
+        console.error(`Error sending custom notification to ${user.email}:`, error);
+      }
+    });
+
+    await Promise.all(emailPromises);
+
+    res.json({
+      message: `Custom notification sent to ${users.length} users`,
+      userCount: users.length
+    });
+  } catch (error) {
+    console.error("Error sending custom notification:", error);
+    next(error);
+  }
+}
+
 // Update admin settings
 exports.updateAdminSettings = async (req, res, next) => {
   try {

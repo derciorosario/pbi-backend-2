@@ -61,6 +61,9 @@ router.patch("/admin/supports/read-all", auth(), isAdmin, adminController.markAl
 router.get("/admin/supports/unread/count", auth(), isAdmin, adminController.getUnreadSupportsCount);
 router.delete("/admin/supports/:id", auth(), isAdmin, adminController.deleteSupport);
 
+// Custom notification routes
+router.post("/admin/notifications/send-custom", auth(), isAdmin, adminController.sendCustomNotification);
+
 // Admin settings routes
 router.get("/admin/settings", auth(), isAdmin, adminController.getAdminSettings);
 router.put("/admin/settings", auth(), isAdmin, adminController.updateAdminSettings);

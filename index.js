@@ -333,7 +333,7 @@ const PORT = process.env.PORT || 5000;
   
    //require('./scripts/create_meeting_participants_table.js')
    //require('./scripts/create_supports_table.js')
-  // require('./scripts/create_admin_settings_table.js')
+    require('./scripts/create_admin_settings_table.js')
 
 
     // Auto-sync DB tables (use migrations in production)
@@ -431,7 +431,7 @@ const { isEmailNotificationEnabled } = require("./src/utils/notificationSettings
 async function getHeaderBadgeCounts(userId) {
   const { Notification } = require("./src/models");
 
-  const [connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending] = await Promise.all([
+  const [connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending, customNotificationsPending] = await Promise.all([
     // Count unread connection notifications (connection.request)
     Notification.count({
       where: {
@@ -490,10 +490,18 @@ async function getHeaderBadgeCounts(userId) {
         type: 'new_post',
         readAt: null
       }
+    }),
+    // Count unread custom notifications (custom_notification)
+    Notification.count({
+      where: {
+        userId,
+        type: 'custom_notification',
+        readAt: null
+      }
     })
   ]);
 
-  return { connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending };
+  return { connectionsPending, meetingsPending, messagesPending, jobApplicationsPending, eventRegistrationsPending, companyInvitationsPending, postsPending, customNotificationsPending };
 }
 
 // push counts to this socket (or all user sockets if you prefer)
@@ -1223,6 +1231,13 @@ async function pushHeaderCounts(socketOrUserId) {
                   } else if (type === "message") {
                     // Special case: message notifications are exactly "message.new"
                     whereClause.type = 'message.new';
+                  } else if (type === "system") {
+                    whereClause.type = {
+                        [Op.or]: [
+                          { [Op.like]: 'system%' },
+                          { [Op.eq]: 'custom_notification' }
+                        ]
+                   };
                   } else {
                     whereClause.type = { [Op.like]: `${type}%` };
                   }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Notification</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f2ef;font-family:Arial,sans-serif;line-height:1.5;color:#333;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td align="center" style="padding:20px 10px;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;background:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+
+          <!-- HEADER -->
+          <tr>
+            <td>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #ddd;">
+                <tr>
+                  <td align="left" style="padding:16px;">
+                    <h1 style="font-size:16px;margin:0;color:#0a66c2;">54Links Notification</h1>
+                  </td>
+                  <td align="right" style="padding:16px;font-size:13px;color:#666;">
+                    Important Update
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CONTENT -->
+          <tr>
+            <td style="padding:20px;">
+              <p style="margin:0 0 15px;">Hello {{name}},</p>
+
+              <!-- Custom Message -->
+              <div style="margin:20px 0;padding:15px;background:#f8f9fa;border-left:4px solid #0a66c2;border-radius:4px;">
+                {{{message}}}
+              </div>
+
+              <p style="margin:20px 0 0;">Thank you for being part of the 54Links community!</p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="border-top:1px solid #ddd;padding:15px;font-size:12px;color:#666;text-align:center;">
+              <p style="margin:0 0 5px;">You're receiving this email because you're a valued member of 54Links.</p>
+              <p style="margin:0 0 5px;"><a href="{{baseUrl}}/settings" style="color:#0a66c2;">Update preferences</a></p>
+              <p style="margin:0;">&copy; 2025 54Links. All rights reserved.</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -149,7 +149,7 @@ exports.create = async (req, res) => {
     // Send new post notifications
     try {
       const author = await User.findByPk(uid, { attributes: ['name', 'avatarUrl'] });
-      await sendNewPostNotifications('tourism Activity', {
+      await sendNewPostNotifications('tourism activity', {
         id: tourism.id,
         title: tourism.title,
         description: tourism.description,
